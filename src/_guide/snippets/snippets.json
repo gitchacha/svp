@@ -1,0 +1,456 @@
+{    
+    "page_main" : {
+        "prefix": "pageMain",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html>",
+            "<head>",
+            "    @@include('fragment/config.html', { \"screen\": \"$1\" })",
+            "</head>",
+            "<body>",
+            "    <div class=\"root__container\">",
+            "        @@include('fragment/header.html')",
+            "        <div class=\"contents__container\">",
+            "            @@include('fragment/left-aside.html')",
+            "            @@include('view/.html')",
+            "        </div>",
+            "    </div>    ",
+            "</body>",
+            "</html>"
+        ],
+        "description": "Page - 메인화면 Page"
+    },
+
+    "page_popup" : {
+        "prefix": "pagePopup",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html>",
+            "<head>",
+            "    @@include('fragment/config.html', { \"screen\":\"(팝업)$1\" })",
+            "</head>",
+            "<body class=\"popup__primary\">",
+            "    <div class=\"popup__container\">",
+            "        @@include('view/.html')",
+            "    </div>",
+            "</body>",
+            "</html>"
+        ],
+        "description": "Page - 팝업 Page"
+    },
+
+    "page_popupC" : {
+        "prefix": "pagePopupC",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html>",
+            "<head>",
+            "    @@include('fragment/config.html', { \"screen\":\"(팝업)$1\" })",
+            "    ",
+            "</head>",
+            "<body class=\"popup__primary\">",
+            "    <div class=\"popup__container\">",
+            "        @@include('view/')",
+            "    </div> ",
+            "    <script>/** (퍼블) Contents Popup 전용 스크립트 **/",
+            "    var _isMainPopup = true; // ui 에서는 함수로 받아옴",
+            "    ",
+            "    if ( _isMainPopup ) {",
+            "        $('.popup__primary').addClass('type--main');",
+            "        var $popup = $(top.document).find('.af-dialog');",
+"",
+            "        $popup.each(function(idx){",
+            "            var _this = $(this)[0];",
+            "            if ( _this.alias === 'contents-popup' ) $(this).addClass('popup__main--type');",
+            "        });            ",
+            "    }    ",
+            "    </script>",
+            "</body>",
+            "</html>"
+        ],
+        "description": "Page - 컨텐츠 (메인형) 팝업 Page"
+    },
+
+    "template_main" : {
+        "prefix": "templateMain",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\" xmlns:th=\"http://www.thymeleaf.org\" layout:decorate=\"~{view/layout/layout-default}\">",
+            "<div layout:fragment=\"content\" th:remove=\"tag\">",
+            "    <!--/* [ Page ] ",
+            "    @menu   : $1",
+            "    @page   : ",
+            "    */-->",
+            "    <h1 class=\"page__title\"></h1>",
+            "    <div class=\"scroll-wrap\">",
+            "        <div class=\"contents\"><!--/* 업무화면 (S) */-->",
+            "        </div><!--/* 업무화면 (E) */-->",
+            "    </div>",
+            "    <th:block layout:fragment=\"script\"><script th:inline=\"javascript\">/* 퍼블 Script */",
+            "    $(function(){",
+            "    ",
+            "    });",
+            "    </script></th:block>",
+            "    </div>",
+            "</html>"
+        ],
+        "description": "Template - 메인화면 템플릿"
+    },
+
+    "template_popup" : {
+        "prefix": "templatePopup",
+        "body": [
+            "<!DOCTYPE html>",
+            "<html xmlns:layout=\"http://www.ultraq.net.nz/thymeleaf/layout\" xmlns:th=\"http://www.thymeleaf.org\" layout:decorate=\"~{view/layout/layout-iframe-popup}\">",
+            "<div layout:fragment=\"content\" th:remove=\"tag\">",
+            "<!--/* [ Page(Popup) ] ",
+            "@menu   : ",
+            "@page   : ",
+            "*/-->",
+            "",
+            "<!--/* 업무화면 (S) */-->",
+            "",
+            "<div id=\"divisionSticky\" class=\"division__btn\">",
+            "    <div class=\"right\">",
+            "        <button class=\"Button btn__page-task\"><i>취소</i></button>",
+            "        <button class=\"Button btn__page-task strong\"><i>저장</i></button>",
+            "    </div>",
+            "</div>",
+            "<!--/* 업무화면 (E) */-->",
+            "<th:block layout:fragment=\"script\"><script th:inline=\"javascript\">/* 퍼블 Script */",
+            "$(function(){",
+            "",
+            "});",
+            "</script></th:block>",
+            "</div>",
+            "</html>"
+        ],
+        "description": "Template - 팝업 템플릿"
+    },
+
+    "grid": {
+        "prefix": "agrid",
+        "body": [
+            "<div id=\"$1\" class=\"gridInitClass\"><!--/* Grid */--></div>"
+        ],
+        "description": "Grid - utils(하단행추가영역) / hide-pager(건수만 출력)"
+    },
+
+    "gridHeadingCount": {
+        "prefix": "gridHeadingCount",
+        "body": [
+            "<div class=\"grid__heading count\">",
+            "    <strong class=\"heading\">$1</strong>",
+            "    <span class=\"total\">총 건수<span class=\"cnt\">0</span>",
+            "</div>"
+        ],
+        "description": "Grid - 상단 소제목 + 건수"
+    },
+
+    "btn__page-action": {
+        "prefix": "btnt",
+        "body": [
+            "<button class=\"Button btn__page-task\"><i>$1</i></button>"
+        ],
+        "description": "Button - 화면 Task action"
+    },
+    "btn__page-action_A": {
+        "prefix": "abtnt",
+        "body": [
+            "<a class=\"Button btn__page-task\"><il>$1</i></a>"
+        ],
+        "description": "Anchor - 화면 Task action"
+    },
+
+
+    "btn__section": {
+        "prefix": "btns",
+        "body": [
+            "<button class=\"Button btn__section\"><i>$1</i></button>"
+        ],
+        "description": "Button - 컨텐츠 단락 (article) 버튼"
+    },
+    "btn__section_A": {
+        "prefix": "abtns",
+        "body": [
+            "<a class=\"Button btn__section\"><i>$1</i></a>"
+        ],
+        "description": "Anchor - 컨텐츠 단락 (article) 버튼"
+    },
+
+    "btn__grid": {
+        "prefix": "btng",
+        "body": [
+            "<button class=\"Button btn__grid\">$1</button>"
+        ],
+        "description": "Button - 그리드/테이블 버튼"
+    },
+    "btn__grid_A": {
+        "prefix": "abtng",
+        "body": [
+            "<a class=\"Button btn__grid\">$1</a>"
+        ],
+        "description": "Anchor - 그리드/테이블 버튼"
+    },
+
+    "btn__unit": {
+        "prefix": "btnu",
+        "body": [
+            "<button class=\"Button btn__unit\">$1</button>"
+        ],
+        "description": "Button - 단위 버튼"
+    },
+
+    
+    "btn__icon": {
+        "prefix": "btna",
+        "body": [
+            "<button class=\"Button btn__icon\" type=\"button\"><i class=\"icon i-$1\"></i><span>삭제</span></button>"
+        ],
+        "description": "Button - 아이콘버튼"
+    },
+
+
+    "btn__unit_A": {
+        "prefix": "abtnu",
+        "body": [
+            "<a class=\"Button btn__unit\">$1</a>"
+        ],
+        "description": "Anchor - 단위 버튼"
+    },
+
+    "btn__forms": {
+        "prefix": "btnf",
+        "body": [
+            "<button class=\"Button btn__forms\">$1</button>"
+        ],
+        "description": "Button - Forms"
+    },
+    "btn__forms_A": {
+        "prefix": "abtnf",
+        "body": [
+            "<a class=\"Button btn__forms\">$1</a>"
+        ],
+        "description": "Anchor - Forms"
+    },
+
+
+    "icon" : {
+        "prefix" : "ico",
+        "body": [
+            "<i class=\"icon i-$1\"></i>"
+        ],
+        "decription" : "Icon (상세 타입은 guide 참고)"
+    },
+    "icon-xls" : {
+        "prefix" : "ico",
+        "body": [
+            "<i class=\"icon i-xls\"><b class=\"path1\"></b><bclass=\"path2\"></b></i>"
+        ],
+        "decription" : "엑셀"
+    },
+    "icon-grid-rowadd" : {
+        "prefix" : "ico",
+        "body": [
+            "<i class=\"icon i-grid-rowadd\"><b class=\"path1\"></b><bclass=\"path2\"></b></i>"
+        ],
+        "decription" : "그리드 행추가"
+    },
+    "icon-chk-unchk-dis" : {
+        "prefix" : "ico",
+        "body": [
+            "<i class=\"icon i-chk-unchk-dis\"><b class=\"path1\"></b><bclass=\"path2\"></b></i>"
+        ],
+        "decription" : "체크박스(언체크+disabled)"
+    },
+    "icon-radio-chk-dis" : {
+        "prefix" : "ico",
+        "body": [
+            "<i class=\"icon i-radio-chk-dis\"><b class=\"path1\"></b><bclass=\"path2\"></b></i>"
+        ],
+        "decription" : "라디오(체크+disabled)"
+    },
+    "icon-radio-unchk-dis" : {
+        "prefix" : "ico",
+        "body": [
+            "<i class=\"icon i-radio-unchk-dis\"><b class=\"path1\"></b><bclass=\"path2\"></b></i>"
+        ],
+        "decription" : "라디오(언체크+disabled)"
+    },
+
+
+    "tab" : {
+        "prefix" : "tab",
+        "body": [
+            "<div class=\"Tabs tab__primary\" id=\"\">",
+            "    <ul>",
+            "        <li data-content=\"#tab1\">$1</li>",
+            "        <li data-content=\"#tab2\">$2</li>",
+            "    </ul>",
+            "    <div id=\"tab1\"></div>",
+            "    <div id=\"tab2\"></div>",
+            "</div>"
+        ]
+    },
+
+
+    "box__article" : {
+        "prefix" : "boxarti",
+        "body": [
+            "<div class=\"box__article\">",
+            "    <h2 class=\"title__article\">$1</h2>",
+            "</div>"
+        ],
+        "decription" : "Box Article - 본문 박싱 흰박스"
+    },
+
+
+    "box__sub" : {
+        "prefix" : "boxsub",
+        "body": [
+            "<div class=\"box__sub\">",
+            "    <h3 class=\"title__sub\">$1</h3>",
+            "    <div class=\"article__sub\">",
+            "        <ul class=\"condition__list\">",
+            "            <li style=\"width:90%\">",
+            "                <input class=\"Textinput full\" />",
+            "            </li>",
+            "            <li>",
+            "                <button class=\"Button btn__icon small\"><i class=\"icon i-reset\"></i>초기화</button>",
+            "                <button class=\"Button btn__forms\">검색</button>",
+            "            </li>",
+            "        </ul>",
+            "    </div> ",
+            "</div>"
+        ],
+        "decription" : "Box Sub - Article 박스 내부 검색조건영역"
+    },
+
+    "box__sub2" : {
+        "prefix" : "boxsub2",
+        "body": [
+            "<div class=\"box__sub\">",
+            "    <div class=\"article__sub\">",
+            "        <ul class=\"condition__list\">",
+            "            <li style=\"width:90%\">",
+            "                <strong class=\"title__sub\">$1</strong>",
+            "                <input class=\"Textinput full\" />",
+            "            </li>",
+            "            <li class=\"no-title\">",
+            "                <strong class=\"title__sub\">$2</strong>",
+            "                <button class=\"Button btn__icon small\"><i class=\"icon i-reset\"></i>초기화</button>",
+            "                <button class=\"Button btn__forms\">검색</button>",
+            "            </li>",
+            "        </ul>",
+            "    </div> ",
+            "</div>"
+        ],
+        "decription" : "Box Sub 2 - 다중 컬럼"
+    },
+
+    "table__primary": {
+        "prefix" : "tablepri",        
+        "body": [
+            "<table class=\"Table table__primary\">",
+            "    <colgroup>",
+            "        <col style=\"width: 51%\"/>",
+            "        <col style=\"width: 49%\"/>",
+            "    </colgroup>",
+            "    <tbody>",
+            "        <tr>",
+            "            <th>$1</th>",
+            "            <th></th>",
+            "        </tr>",
+            "        <tr>",
+            "            <td>GDL201906</td>",
+            "            <td>2019년</td>",
+            "        </tr>",
+            "    </tbody>",
+            "</table>"
+        ],
+        "decription" : "Table primay - 기본 Table"
+    },    
+
+
+    "division__btn" : {
+        "prefix" : "divi",
+        "body": [
+            "<div id=\"divisionSticky\" class=\"division__btn\">",
+            "    <div class=\"actions\">",
+                "    <div class=\"left\">$1",
+                "    </div>",
+                "    <div class=\"right\">",
+                "        <button id=\"\" class=\"Button btn__page-task\"><i>취소</i></button>",
+                "        <button id=\"\" class=\"Button btn__page-task strong\"><i>저장</i></button>",
+                "    </div>",
+                "</div>",
+            "</div>"
+        ]
+    },
+
+
+    "attr__disabled" : {
+        "prefix" : "dis",
+        "body": [
+            "data-disabled=\"true\""
+        ],
+        "decription" : "disabled 설정(Alopex)"
+    },
+
+    "form__input" : {
+        "prefix" : "inputA",
+        "body" : [
+            "<input id=\"\" class=\"Textinput full\" />"
+        ],
+        "description" : "Inputbox(form)"
+    },
+
+
+    "input-search" : {
+        "prefix" : "inputSearch",
+        "body" : [
+            "<span class=\"func__input-search\" id=\"$1\">",
+            "    <input id=\"\" class=\"Textinput\" data-disabled=\"true\" />",
+            "    <i class=\"icon i-input-search\"></i>",
+            "</span>"
+        ],
+        "description" : "Input + 돋보기(팝업)"
+    },
+    
+    "form__radio" : {
+        "prefix" : "radioA",
+        "body" : [
+            "<label class=\"ImageRadio\"><input class=\"Radio\" type=\"radio\" name=\"\" value=\"\" />$1</label>"
+        ],
+        "description" : "Radio button(form)"
+    },
+
+    "form__checkbox" : {
+        "prefix" : "checkA",
+        "body" : [
+            "<label class=\"ImageCheckbox\"><input class=\"Checkbox\" type=\"checkbox\" name=\"\" value=\"\" />$1</label>"
+        ],
+        "description" : "Checkbox(form)"
+    },
+
+    "form__multiselect" : {
+        "prefix" : "multiSelect",
+        "body" : [
+            "<div class=\"multiselect__primary\">",
+            "    <select class=\"Multiselect\" id=\"$1\" data-bind=\"options: selectOptions, selectedOptions: selected\"></select>",
+            "</div>",
+            "<script>",
+            "// 멀티셀렉트 data set",
+            "var _data = [",
+            "    {value: 1, text:''},",
+            "    {value: 2, text:''}  ",
+            "];",
+            "$('#').setData({",
+            "    selectOptions: _data",
+            "});",
+            "</script>"
+        ],
+        "description" : "멀티셀렉트 (다건선택)"
+    }
+    
+}

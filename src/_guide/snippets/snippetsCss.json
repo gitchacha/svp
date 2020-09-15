@@ -1,0 +1,11 @@
+{
+    "ms11": {
+    "prefix": "ms",
+    "body": [
+        "@media all and (-ms-high-contrast:none) {$1}",
+        "@supports (-ms-ime-align:auto) {}"
+        ],
+    "description": "IE11,Edge Trick",
+    "scope": "text.scss"
+    }    
+}

@@ -1,0 +1,962 @@
+/* [ Page ] _form.scss :  Form element(Select, Input...) - 라디오,체크박스 제외 */
+// form variables
+$input-radius : 5px;
+$h-default : 50;
+$h-small : 34;
+
+$bdr-default: #cacaca;
+$bdr-active: #464c52;
+$bdr-error: #e63d3d;
+
+$dis-bdr: #e9ebed;
+$dis-fill : #f7f8f9;
+$dis-color : #73787e;
+
+$fill-optionH: #fff1f0;
+
+$color: #73787e;
+$colorH: #1b1d1f;
+
+// Alopex form component 공통 Override (Dropdownbutton)
+@mixin selectCommon {
+    position: relative;max-width: 100%;
+    display: inline-block;
+    min-width:80px;
+    z-index: 40;
+    
+    &[data-autowidth] {min-width:0}
+    &.full {
+        width:100%
+    }
+    &:hover .button, .ui-multiselect {        
+        color:$colorH;
+    }
+
+    .button, .ui-multiselect {
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width:100%;
+        height:#{$h-default}px;        
+        font: inherit;
+        background-color:#fff;
+        border:1px solid $bdr-default;
+        transition:none;
+        text-align: left;
+        color:$color;
+
+        &::after {
+            @include sprite(35, 195);
+            right:20px;
+            display: inline-block;
+            width:13px;height:7px;
+        }
+
+        &.Disabled, &.Dropdownbutton.Disabled {
+            border-color:$dis-bdr;
+            background-color:$dis-fill;
+            color:$dis-color;
+        }        
+    }
+
+    .option {
+        display:none;
+        overflow: hidden;
+        box-sizing: border-box;
+        min-width:100%;max-width:100%;
+        margin-top:7px;
+        padding:7px 0;
+        background-color: #fff;
+        border:1px solid $bdr-active;        
+        text-align: left;white-space:nowrap;
+        li {
+            padding:6px 20px;
+            cursor:pointer;
+            &:hover {
+                background-color:#fbece0;
+            }
+        }
+    }
+
+    // on
+    &.on {
+        .button {
+            color:$colorH;            
+        }
+
+        .option {display: block!important;}
+        &.error {
+            .button.Dropdownbutton {border-color:$bdr-error}
+        }
+    }
+
+
+    // error
+    &.error {
+        .button.Dropdownbutton {border-color:$bdr-error}        
+    }
+
+    
+    &.small { // small(height- 34) (S)
+        .button, .ui-multiselect {
+            height:#{$h-small}px;
+            &::after {
+                right:11px;
+                width:9px;height:5px;
+                background-position:-69px -196px;
+            }
+        }
+
+        .button.Dropdownbutton {
+            padding: {
+                right:35px;
+                left:11px;
+            }
+        }
+        .option {
+            li {
+                padding:4px 11px;
+                min-height: #{$h-small - 4}px;
+                line-height: 21px;
+            }
+        }
+    } // small(height- 34) (E)
+}
+
+
+/* [ Select ] - 기본  Select (Native) */
+.Select {
+    width:100%;height:#{$h-default}px;
+    font: inherit;
+    background-color:#fff;
+    border:1px dis-$dis-bdr;
+    border-radius:$input-radius;    
+
+    &.Disabled {
+        background-color:$dis-fill;
+        color:$dis-color;
+    }
+}
+
+// /* [ select__primary ]
+//     @description : Select
+//     @custom class : .select__primary
+// */
+// .select__primary { 
+//     @include selectCommon;
+//     z-index:inherit;
+//     min-width: 80px;
+    
+//     .button { &.Dropdownbutton {
+//         padding:0 38px 0 15px;
+//         border-radius:50px;
+//         line-height: #{$h-default - 2}px;
+//         color:#333;
+//     }}
+
+//     //on
+//     &.on {        
+//         .button {
+//             border: {
+//                 radius: 20px;                
+//                 bottom-left-radius: 0;bottom-right-radius: 0;
+//             }        
+//             &:after {
+//                 top:8px;right:10px;                
+//             }
+//         }
+//         .option {display: block!important;z-index:50}
+
+//         &.top {
+//             .button {
+//                 border: {
+//                     radius:0 0 17px 17px;
+//                     color: #e3e3e3 $hoverColor $hoverColor;
+//                 }
+//             }
+
+//             .option {
+//                 margin-top:4px;
+//                 border: {
+//                     radius:17px 17px 0 0;
+//                     color:#ccc #ccc #e3e3e3;
+//                 } 
+//             }
+//         }
+//     }
+
+//     .option {
+//         border-radius:0 0 17px 17px;        
+//     } 
+// }
+
+
+/* [ select__form ]
+    @description : Select
+    @custom class : .select__form, .select__form-option
+*/
+.select__form {
+    @include selectCommon;
+    .button { &.Dropdownbutton {
+        position: relative;
+        padding:0 55px 0 21px;
+        letter-spacing: -.5px;
+        border-radius:5px;        
+
+        &[value]:not(.Disabled) {color:$color} // 선택값 O
+
+        // disabled
+        &.Disabled {
+            background-color:$dis-fill;
+            color:$dis-color;
+        }
+    }}
+    
+    
+    //on
+    &.on {
+        z-index:60;
+        .option {display: block!important;}
+    }
+
+    .option {
+        overflow:auto;        
+        max-height:53vh;max-width:100%;
+        width:100%;
+        border-radius:5px;
+        li {
+            box-sizing: border-box;
+            min-height:#{$h-default}px;
+            box-sizing: border-box;
+            padding:8px 15px;
+            line-height: #{$h-default - 16}px;
+            a {
+                display: inline-block;
+                min-width: 100%;max-width: 100%;
+                white-space: pre-wrap;
+                line-height: #{$font-size}px;
+            }
+            &:hover {
+                background-color:$fill-optionH;
+            }
+        }
+    }
+
+    &.mandatory , &.on.mandatory{ // 필수입력 누락
+        .Dropdownbutton {
+            border-color:red
+        }
+        .option {
+            border: {
+                left-color:red;
+                right-color:red;
+                bottom-color:red;
+            }
+            &[data-position="top"] {
+                border-top-color:red;
+                border-bottom-color:#e3e3e3;
+            }
+        }
+    }
+
+    &.selectOption { // option - max-height 처리
+        .option {max-height:200px;}
+
+    }
+}
+
+
+
+// Alopex form component 공통 Override (Textinput, Dateinput)
+
+@mixin inputCommon {
+    max-width:100%;height:#{$h-default}px;
+    line-height: #{$h-default - 2}px;
+    padding-left:21px;
+
+    &.small {
+        height:#{$h-small}px;
+        padding-left:8px;
+        font-size:14px;
+    }
+    font: {
+        size:#{$font-size}px;
+        weight:400;
+    }
+    border: {
+        width:1px;
+        radius:$input-radius;
+        color:$bdr-default
+    }
+    color:$colorH;
+
+    &:hover, &:active {
+        border-color:$bdr-default;
+    }
+
+    &.Disabled {
+        border-color:$dis-bdr;
+        background-color:$dis-fill;
+        color:$dis-color;
+    }
+
+    &.error {
+        border-color:$bdr-error;
+    }
+
+    &:-ms-input-placeholder {font-weight:300;text-align:left;color:$color}
+    &::-ms-input-placeholder {font-weight:300;text-align:left;color:$color}
+    &::placeholder {font-weight:300;text-align:left;color:$color}
+}
+.Textinput, .Dateinput > input,
+.Dateinput > input,
+.Daterange .Startdate > input, .Daterange .Enddate > input,
+.Textarea, textarea,
+.alopexgrid .cell.bodycell.cell-type-alopexui-textinput .Textinput {
+    @include inputCommon;
+    transition:none;
+
+    // Text-align
+    &[data-align="left"] {text-align: left;}
+}
+
+.alopexgrid .cell.bodycell.cell-type-alopexui-textinput .Textinput {
+    margin-top:0
+}
+.Select {    
+    transition:none;
+}
+
+textarea {
+    height:auto;
+    line-height:24px;
+}
+
+
+/* [ Textinput ]
+    @description : 기본 Input (textbox)
+*/
+.Textinput {
+    &.full {width:100%}
+    &.inline {margin-left:8px}
+    &.number {
+        padding-right:21px;
+        text-align:right;
+        &::placeholder {text-align: right;}
+        &:-ms-input-placeholder {text-align: right;}
+        &::-ms-input-placeholder {text-align: right;}
+    }
+    &:hover,&:active,&:focus {border-color:$bdr-default}
+    &.center {
+        padding-left:8px;
+        text-align:center;
+        &::placeholder {text-align: center;}
+        &:-ms-input-placeholder {text-align: center;}
+        &::-ms-input-placeholder {text-align: center;}
+    }
+}
+.align-center .Textinput {text-align:center;}
+
+/* IE input type="password" 스타일*/
+@media all and (-ms-high-contrast:none) {
+    input[type="password"] { font-size: 6px; letter-spacing: 4px; }
+}
+@supports (-ms-ime-align:auto) {
+    input[type="password"] { font-size: 6px; letter-spacing: 4px; }
+}
+input[type="password"] {
+    &:-ms-input-placeholder {font-size: 13px;letter-spacing: normal; }
+}
+
+
+/* [ Textarea ]
+    @description : 기본 Textarea (multiline input)
+*/
+.Textarea {
+    width:100%;max-width:100%;height:auto;
+    padding: 13px 20px;
+    // padding-left:15px;
+    line-height:23px;
+}
+
+/* [ Dateinput ]
+    @description : Datepicker input
+*/
+.Dateinput,
+.Daterange .Startdate, .Daterange .Enddate {
+    width:130px;
+
+    &[data-pickertype="monthly"] {
+        width: 110px;
+    }
+
+    &:after {text-indent: -2px;}
+
+    > input {
+        height:#{$h-default}px;width: 100%;
+        padding-right:30px;
+        text-transform: uppercase;
+        padding-bottom:2px;
+        &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            font-weight:400;
+            color: $color;
+        }
+    }
+    
+    &.error > input {
+        border-color:$bdr-error;
+    }
+
+    &.Disabled {
+        > input {
+            background-color:$dis-fill;
+            color:$dis-color;
+        }                
+    }
+
+    > .Calendar {
+        position: absolute;right:0;top:0;
+        height:#{$h-default}px;width:#{$h-default}px;
+        border:0;background:none;
+        
+        &:hover {background:none;border:0;}
+    }
+    
+    // daterange wrapper 없이 쓰는 경우
+    &.Startdate, &.Enddate {
+        max-width:100%;
+    }
+}
+.Daterange { 
+    white-space: nowrap;
+    .Startdate, .Enddate {
+        position: relative;
+        &:after {            
+            position: absolute;right:0;left:auto;
+            height:#{$h-default}px;width:#{$h-default}px;
+            line-height:#{$h-default - 2}px;
+            transform: translate(0,-50%);
+            cursor:pointer;
+        }
+    }
+    .Startdate {margin-right:3px;}
+    .Enddate {margin-left:3px;}
+
+    &[data-pickertype] {
+        .Startdate, .Enddate {width:100px;}
+    }
+}
+
+.dateinput__period {
+    white-space:nowrap;
+}
+.dash {
+    display:inline-block;
+    margin:0 4px;
+    vertical-align: bottom;
+    line-height:#{$h-default}px;
+}
+
+
+/* [ mandatory ]
+    @description : 필수입력값 누락 class
+*/
+.mandatory {
+    &.Textinput ,
+    &.Dateinput.mandatory input,
+    &.cell .Textinput {
+        border-color:$bdr-error!important;
+    }
+}
+
+
+
+
+/* [ Multiselect ]
+    @description : 멀티 Select
+*/
+.multiselect__primary {
+    @include selectCommon;
+    font-size:13px;
+
+    .ui-multiselect {
+        margin-left:0;
+        padding-left:10px;
+        border-color:$bdr-default;
+        &:after {
+            font-size:10px;
+            right:15px;top:10px;
+        }
+
+        // active (open)
+        &.ui-state-active {            
+            border-radius:$input-radius;
+            &:after {transform:rotate(-90deg)}
+        }
+        &[disabled] {
+            border-color: $dis-bdr;
+            background-color: $dis-fill;
+            color:$dis-color;
+            cursor: not-allowed;
+        }
+    }
+    
+    .ui-icon {
+        display:none;
+        & + span { // selected value
+            display:inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width:calc(100% - 30px);
+        }
+    }
+
+    &.error + .ui-multiselect { // Error
+        border-color:red
+    }
+
+}
+.Multiselect.ui-corner-all {  
+    border-radius: 5px;
+}
+button.Multiselect.ui-widget { // 멀티셀렉트 버튼
+    min-width:100%;
+}
+
+.Multiselect.ui-widget { // 멀티셀렉트 options
+    max-width:100%;
+}
+.Multiselect.ui-widget-content { // 멀티셀렉트 options
+    margin-top:-1px;
+    font:inherit;
+    border: {
+        radius:$input-radius;        
+        top-color:#eee;
+    }
+    .ui-widget-header { // 전체선택/해제 영역
+        box-sizing: border-box;
+        position:absolute;bottom:0;left:0;right:0;
+        z-index:1;
+        height:33px;
+        margin:0;padding: { top:6px; left:14px; }
+        border: {
+            width:1px 0 0;
+            color:#e3e3e3;
+            style:solid;
+        }
+        border-radius: 0 0 $input-radius $input-radius;
+        background-color:#fff;
+
+        li {width:92%}
+
+        .ui-multiselect-all, .ui-multiselect-none {
+            display: inline-block;box-sizing: border-box;
+            position: relative;
+            width:100%;
+            font:inherit;font-size:0;
+            padding-left:25px;
+            &:hover {text-decoration: none;}
+
+            &:before {
+                display:inline-block;
+                position: absolute;left:0;top:2px;
+                // @include iconInitialize;
+                // font-size:#{$checkSize}px;
+            }
+            &:after {
+                font: {size:13px; weight:400; family:inherit}
+                content:"전체선택";
+                line-height: 18px;
+            }
+        }
+
+        .ui-multiselect-all {// 전체선택
+            &:before {content:"\e923";color:#ddd;}
+        }
+        .ui-multiselect-none {// 전체해제
+            display:none;
+            &:before {content:"\e921";color:orange;}
+        }
+
+    }
+    
+    // 전체선택 On
+    &[data-allchkstatus="true"]  {
+        .ui-multiselect-all {display:none}
+        .ui-multiselect-none {display:inline-block}
+    }    
+
+    &[data-allchkstatus="part"]  {
+        .ui-multiselect-all {
+            display:inline-block;
+            &:before {
+                content:"\e922";
+                color:orange;
+            }
+        }        
+    }    
+
+    &.error {
+        border: {
+            left-color:red;
+            right-color:red;
+            bottom-color:red;
+        }
+    }
+
+    .ui-multiselect-checkboxes { // 체크박스 List
+        max-height:178px;
+        margin-bottom:35px;
+        padding: {bottom:7px; top:7px;}
+        li {padding:0;}
+        label {
+            padding:6px 0 6px 37px;
+            font-size:13px;
+            text-indent:0;
+
+            &:hover { background-color:#fbece0; cursor: pointer;}
+            input {margin:0 7px 0 0}
+        }
+    }
+
+    .ui-icon-circle-close {display:none;}
+    .ui-icon {display:none}
+}
+
+
+// 각종 단위
+[data-unit="percentage"] {
+    display:inline-block;
+    position:relative;
+    
+    line-height:normal!important;
+
+    &:after {
+        position:absolute;right:12px;top:50%;
+        transform:translateY(-55%);
+        // @include iconInitialize;
+        font-size:15px;content:"\e90a";
+        color:#888;
+    }
+
+    .Textinput {
+        padding-right:30px;
+    }
+}
+
+
+
+
+/* [ func__input-search ]
+@description : input + 팝업 버튼
+@custom class : .func__input-search
+*/
+$inputSearchIconWidth: 36;
+.func__input-search {
+    position: relative;
+    display:inline-block;
+    box-sizing: border-box;
+    height:#{$h-default}px;max-width:100%;
+    white-space: nowrap;
+    cursor: pointer;
+
+    &.small {
+        height:#{$h-small}px;
+        &::after {right:0;}
+        .Textinput {
+            height:#{$h-small}px;
+            font-size:14px;
+            padding: {left:8px;right:35px}
+
+        }
+    }
+    
+    .Textinput {
+        width:100%;        
+        cursor:pointer;
+        &.Disabled {
+            background-color:#fff;
+            cursor:pointer!important;
+            color:$dis-color;
+            &:-ms-input-placeholder {color:$color}
+        }
+    }
+    &::after {
+        width:20px;height:20px;
+        @include spritePseudo(195,111);
+        left:auto;right:10px;
+    }
+
+
+    // input 삭제 버튼
+    &.empty {        
+        .Textinput {
+            padding-right:45px
+        }
+        .inputEmpty {
+            position: absolute;right:47px;top:50%;
+            overflow:hidden;
+            z-index: 1;
+            width:16px;height:16px;
+            transform: translateY(-50%);
+            border-radius:50%;
+            background-color:#aeb4bd;
+            font-size:0;
+        }
+    }
+
+    // empty - 입력값 있기 전에는 보여지지 않아야 함
+    &.emptyValue {
+        .inputEmpty, &::after {display:none}
+    }
+
+    // disabled
+    &.disabled {    
+        .Textinput {
+            background-color:$dis-fill;
+            border-color:$dis-bdr;
+            cursor: default!important;
+        }        
+    }
+
+    &.result {
+        .Textinput {
+            padding-right: 110px;
+            cursor: text;
+        }
+    }
+    .total { //검색리스트 내 키워드 검색 결과
+        position: absolute; top: 10px; right: 10px;
+        font-size: 12px;
+    }
+
+    // full
+    &.full {
+        width:100%;
+    }
+
+    // write (입력가능 search input)
+    &.write {
+        cursor:auto;
+        .Textinput {padding-right:55px}
+        .Textinput:hover {cursor:text}
+        .i-input-search {
+            display:block;
+            position:absolute;right:0;top:0;z-index:1;
+            height:100%;
+            width:55px;
+            cursor:pointer;
+        }
+    }
+}
+
+.number {
+    padding-right:7px;
+    text-align: right;
+}
+
+
+// input + 우측 unit (단위, 검색결과 count ...)
+.input__with-unit {
+    position:relative;
+    display:inline-block;
+    &.full {
+        width:100%;
+    }
+
+
+    .Textinput {
+        width:100%;
+    }
+
+    .unit {
+        position:absolute;right:1px;top:1px;
+        padding:0 15px;
+        height:#{$h-default - 2}px;
+        font-size:12px;
+        line-height:#{$h-default - 2}px;
+        background-color:#fff;
+        border-radius:$input-radius;
+        color:#666;
+
+        .cnt {padding-left:5px;color:orange}
+
+    }
+}
+
+
+/* [ divide__forms ]
+@description : form 요소 width % 처리
+@custom class : .divide__forms
+*/
+.divide__forms {
+    display: table;width:100%;
+    table-layout: fixed;
+    .cell {
+        display:table-cell;
+        padding-left:5px;
+        &:first-child {padding-left:0;}
+    }
+}
+
+
+
+// form 요소 여백처리
+.select__form, .select__primary {
+    + .Button {margin-left:4px}
+    + .select__form {margin-left:2px}
+}
+
+
+/* [ autocomplete ]
+@description : 자동완성 검색어 input
+@custom class : .Autocomplete
+*/
+.Autocomplete {
+    .Autocomplete {
+        &-textinput, &-wrapper {
+            width:100%;
+        }
+        
+        &-textinput {
+            @include inputCommon;
+        }
+
+        &-dropdown {
+            margin-top:-4px;
+            li {
+                padding:0 20px;                
+                &:hover, &.Focused, &.Selected {
+                    background:#eee;
+                    a {font-size:#{$font-size}px;color:$color;}
+                }
+            }
+            [data-role="empty"] { // 검색결과 없습니다 li
+                color:$color;
+            }
+        }
+
+        &-wrapper { // 검색 list
+            margin-top:-4px;
+            border: {
+                width:1px;
+                radius:$input-radius;
+            }
+        }
+    }
+
+    &.full, &.full .Autocomplete-textinput {width:100%;}
+
+    &[class*="type--"] {
+        .Autocomplete-textinput {padding-right:35px;}
+        
+        &:after {
+            // @include iconInitialize;
+            display:block;
+            position: absolute;right:10px;top:50%;
+            transform: translateY(-55%);
+            font-size:20px;
+            color:#000;
+        }
+    }
+
+    &.type--search { // 돋보기 Button
+        &:after {content:"\e930";
+            top: calc(50% + 1px); right: 11px;
+            font-size: 14px;
+        }        
+    }
+
+    &.type--select { // select design
+        &:after {
+            content:"\e93c";
+            right:15px;
+            margin-top:-4px;
+            font-size:10px;
+            transform:rotate(90deg);
+        }
+    }
+
+    // 상단으로 펼쳐지는 Autocomplete
+    &.option-top {
+        .Autocomplete-wrapper {
+            margin-top:4px;            
+            border-radius:5px 5px 0 0;
+        }
+    }
+}
+
+
+/* [ Spinner ]
+    @description : 버튼으로 숫자를 증감 시키는 컴포넌트
+*/
+.Spinner {
+    border-radius: 5px;
+    border-color: #ccc;
+    & > input {
+        width: 100%;
+        color:#333;
+    }
+    .Up, .Down {
+        border-left:0;
+        background:none;
+        text: {
+            align:center;
+            indent: 0;
+        }
+        &::before {
+            // @include iconInitialize;content:"\e990";
+            position: absolute;right:0;top:6px;left:0;
+            font-size:15px;
+            color:#aaa;
+        }
+        &:hover {
+            background:none;            
+        }
+    }
+
+    .Up {
+        text-indent: 1px;
+        @media all and (-ms-high-contrast:none) {top:1px}
+        &::after { // 스피너 버튼 사이 Bar
+            display:block;content:"";
+            position:absolute;bottom:0;left:50%;
+            width:8px;height:1px;
+            margin-left:-4px;
+            background-color:#ccc;
+        }
+    }
+    .Down {
+        @media all and (-ms-high-contrast:none) {bottom:-1px}
+        text-indent: -1px;
+        &::before {
+            bottom:7px;
+            transform: rotate(180deg)
+        }
+    }
+
+
+
+} 
+
+
+// grid inner form element
+.alopexgrid {
+    select {
+        -webkit-appearance: none; /* Webkit */
+        -moz-appearance: none; /* FF */
+        -ms-appearance: none; /* Edge */
+        appearance: none; /* Future */
+        
+        background: {
+            repeat:no-repeat;
+            position: right 5px center;
+            image: url('data:image/png;base64,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');
+        }
+    }
+    
+    select::-ms-expand { /* IE11 */
+        display: none;
+    }
+}
+

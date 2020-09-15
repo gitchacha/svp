@@ -1,0 +1,152 @@
+{    
+    "aPopup": {
+        "prefix": "apopup",
+        "body": [
+            "$('#$1').on('click', function() {",
+            "    $a.popup({",
+            "        url: \"../system/\", ",
+            "        title:\"\",",
+            "        width: 1050,height:864,",
+            "        data:{},",
+            "        callback: function(data){",
+            "            //callback",
+            "        }",
+            "    });",
+            "});"
+        ],
+        "description": "Popup - 알로펙스 popup"
+    },
+
+    "dummy": {
+        "prefix": "dummy",
+        "body": [
+            "// system > 메뉴조회 dummy data",
+            "dummy.$1 = [",
+            "    {",
+            "        \"ruleCode\": \"GDL201802\",",
+            "        \"ruleName\": {",
+            "            \"name\" : \"2018년 하반기 측정원칙\",",
+            "            \"desc\": \"2018년 물가상승률 등을 적용한 측정원칙입니다. 그룹사별로 측정원칙이 다르게 적용 어쩌구저쩌구\",",
+            "            \"new\" : true",
+            "        },",
+            "        \"status\": \"작성중\"",
+            "    }, ",
+            "]"
+        ],
+        "description": "dummy Data 기입"
+    },
+
+    
+    "renderHoverHide": {
+        "prefix": "renderHoverHide",
+        "body" : [
+            "// ColumnMapping 에 추가",
+            "{",
+            "    key: '$1', width: 100, title: '권한', sorting: false, align: 'center',",
+            "    render : function(value,data) {                    ",
+            "        return '<span class=\"rowHoverHide\">권한 <strong class=\"colorPoint-type2\">'+ value +'</strong></span>'",
+            "            + '<button class=\"Button btn__forms btnHoverEdit authorize\" data-rowidx=\"'+ data._index.row +'\">권한부여</button>'",
+            "    },",
+            "    editable:false,",
+            "},"
+        ],
+        "description": "Grid hover - Text Hide, Btn Show"
+    },
+
+    "renderHoverHideEll": {
+        "prefix": "renderHoverHideEll",
+        "body" : [
+            "// ColumnMapping 에 추가",
+            "{",
+            "    key: '$1', width: 100, title: '권한', sorting: false, align: 'center',",
+            "    render : function(value,data) {                    ",
+            "        return '<div class=\"rowHoverHideEll\">'",
+            "            + '<span class=\"desc\">'+ value +'</span>'",
+            "            + '<span class=\"actions\"><button class=\"Button btn__forms\" data-rowidx=\"'+ data._index.row +'\">권한부여</button></span>'",
+            "            + '</div>'",
+            "    },",
+            "    editable:false,",
+            "},"
+        ],
+        "description": "Grid hover - Text Ell, Btn Show"
+    },
+
+    "renderNew": {
+        "prefix": "new",
+        "body" : [
+            "// ColumnMapping 에 추가, JSON data에 'new':true / false 데이터 추가해야 동작.",
+            "{ key: '$1', width: 280, title: '',",
+            "    render : function(value,data){",
+            "        var _newArticle = data.new ? '<i class=\"new\">N</i>' : '';",
+            "        return '<div class=\"dataBoard\">'",
+            "            + '<p>'+ value + '</p>' + _newArticle",
+            "        +'</div>'",
+            "    },",
+            "},"
+        ],
+        "description": "Grid hover - Text Ell, Btn Show"
+    },
+
+    
+
+
+    "gridInit": {
+        "prefix": "gridinit",
+        "body": [
+            "$('#$1').alopexGrid({",
+            "    columnMapping : [",
+            "        { key: 'check', width : 60, selectorColumn : true, align: 'center', },",
+            "        { key:'', width:100, title:'', },",
+            "    ],",
+            "    data: dummy.",
+            "});"            
+        ],
+        "description": "Grid 초기 셋팅"
+    },
+
+    "columnYn": {
+        "prefix": "columnYn",
+        "body": [
+            "{",
+            "    key : 'use',",
+            "    title : '사용여부',",
+            "    width : 110,",
+            "    sorting: true,",
+            "    render : function(value,data) {",
+            "        if ( data.use === \"Y\" ){",
+            "            return '<span class=\"status type6\">사용</span>'",
+            "        }",
+            "        return '<span class=\"status type7\">미사용</span>';",
+            "    },",
+            "},"
+        ],
+        "description" : "컬럼 - 사용여부 사용/미사용"
+    },
+
+    "rowclass" : {
+        "prefix": "rowclass",
+        "body": [
+            "rowOption : { ",
+            "    styleclass : function(data, rowOption){",
+            "        if(data[\"type\"] > 5)",
+            "            return '$1'",
+            "    }",
+            "},"
+        ],
+        "description": "Row - class adding(data)"
+    },
+    
+    "cellyn" : {
+        "prefix": "columnclass",
+        "body": [
+            "styleclass : function(value,data) {",
+            "    if ( data.use === \"예\" ){",
+            "        return \"status type6\"",
+            "    }",
+            "    return \"status type7\";",
+            "}"
+        ],
+        "description": "Column - 예/아니요"
+    }
+
+}

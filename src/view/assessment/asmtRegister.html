@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{view/layout/layout-login-asmt}">
+<head>
+	<title>평가기본정보등록</title>	
+</head>
+<body>
+    <section class="login-asmt register">
+        <div class="welcome">
+            <h1 class="logo-asmt"><i>SV</i><b>평가모델</b></h1>
+            <div class="copy">
+                <span>회사 SV평가를 위한<br />
+                기본정보를 입력 해주세요.</span>
+            </div>
+            <i class="bg"></i>
+        </div>
+        <div class="contents">
+            <div class="form">
+                <h2 class="title__section">평가 기본 정보 등록</h2>
+        
+        
+                <table class="table__primary">
+                    <tbody>
+                        <tr>
+                            <th colspan="2">회사 평가 기본정보</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="divide">
+                                    <div class="col"><input id="" class="Textinput full" placeholder="회사명" /></div>
+                                    <div class="col"><input id="" class="Textinput full" placeholder="회사 영문명" /></div>
+                                </div>
+                                <div class="full"><input id="" class="Textinput full" placeholder="홈페이지 주소" /></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="2">회사 위치</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="divide">
+                                    <div class="col">
+                                        <div class="select__form full"><!--/* 국가 */-->
+                                            <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">국가</button>
+                                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="select__form full"><!--/* 지역(시/도) */-->
+                                            <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">지역(시/도)</button>
+                                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="full">
+                                    <input id="" class="Textinput full" placeholder="상세 주소" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>구성원 수</th>
+                            <th>매출액</th>
+                        </tr>
+                        <tr>
+                            <td><input id="" class="Textinput number full" placeholder="명" /></td>
+                            <td><input id="" class="Textinput number full" placeholder="원" /></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">사업자번호</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="biznum">
+                                    <input id="" class="Textinput num1" maxlength="3" />
+                                    <span class="dash">-</span>
+                                    <input id="" class="Textinput num2" maxlength="2" />
+                                    <span class="dash">-</span>
+                                    <input id="" class="Textinput num3" maxlength="5" />
+                                    <div class="select__form"><!--/* 기업분류 */-->
+                                        <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">기업분류</button>
+                                        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">산업군</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2">                            
+                                <div class="divide">
+                                    <div class="col">
+                                        <div class="select__form full">
+                                            <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">대분류</button>
+                                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="select__form full">
+                                            <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">중분류</button>
+                                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="select__form full">
+                                            <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">소분류</button>
+                                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+    
+                <div class="btns">
+                    <button id="" class="Button btn__page-task"><i>취소</i></button>
+                    <button id="" class="Button btn__page-task strong"><i>저장</i></button>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>

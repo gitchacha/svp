@@ -1,0 +1,95 @@
+/**
+ * Alopex Grid Ui Plugin v1.0.3
+ * http://grid.alopex.io
+ *
+ * Copyright (c) 2018 SK Holdings C&C. All rights reserved.
+ * 
+ * This software is the confidential and proprietary information of SK Holdings C&C.
+ * You shall not disclose such confidential information and shall use it only in
+ * accordance with the terms of the license agreement you entered into with SK Holdings C&C.
+ *
+ * Date : 2019-08-23 17:54:07 GMT+0900 (대한민국 표준시)
+ **/
+@charset "UTF-8";
+/* ui variables */
+/* Autocomplete 컴포넌트가 그리드에 렌더링될 때 header, cell 위에 뜰 수 있도록 z-index조절 */
+.Autocomplete-wrapper {
+	z-index: 41;
+}
+
+/* Combobox 컴포넌트가 그리드에 렌더링될 때 header, cell 위에 뜰 수 있도록 z-index조절 */
+.Combobox-wrapper {
+	z-index: 41;
+}
+
+/* Carousel 컴포넌트가 그리드에 렌더링될 때 layout 깨지지 않도록 style 적용 */
+.cell-type-alopexui-carousel .Carousel {
+	width: 283px;
+	height: 200px;
+}
+
+.cell-type-alopexui-carousel .Carousel img {
+	width: 283px;
+	height: 200px;
+}
+
+.alopexgrid .cell-type-alopexui-carousel {
+	padding: 0;
+}
+
+/* Dropdown 컴포넌트가 그리드에 렌더링될 때 header, cell 위에 뜰 수 있도록 z-index조절 */
+.Dropdown {
+	z-index: 41;
+}
+
+/* Panel, Table 컴포넌트가 그리드에 렌더링될 때 layout 깨지지 않도록 style 적용 */
+.alopexgrid .cell-type-alopexui-panel.wraptext {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.alopexgrid .cell-type-alopexui-table .Table {
+	line-height: initial;
+	color: #666666;
+}
+
+.alopexgrid .cell-type-alopexui-panel .Panel {
+	line-height: initial;
+	color: #666666;
+}
+
+/* TextInput, Textarea 컴포넌트가 그리드에 렌더링될 때 layout 깨지지 않도록 style 적용 */
+.alopexgrid .cell.bodycell.wraptext {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+/* DivSelect 컴포넌트가 그리드에 렌더링될 때 layout 깨지지 않도록 style 적용 */
+.alopexgrid .cell-type-alopexui-select .Divselect {
+	padding: 0 4px;
+}
+
+/* Textinput 컴포넌트가 그리드에 렌더링될때 100%로 style 적용 */
+.alopexgrid .cell.bodycell.cell-type-alopexui-textinput .Textinput {
+	width: 100%;
+	height: 23px;
+	line-height: 23px;
+	vertical-align: top;
+	margin-top: 1px;
+}
+
+/* Alopex UI Dialog 및 Popup 사용 시 그리드 외부에 생성되어 동작하는 기능들이 header, cell 위에 뜰 수 있도록 z-index조절 */
+.Dialog ~ .alopexgrid.alopexgrid-contextmenu-wrapper,
+.Dialog ~ .alopexgrid.alopexgrid-newcontextmenu-wrapper,
+.Dialog ~ .alopexgrid.alopexgrid-dragdrop-header,
+.Dialog ~ .alopexgrid.alopexgrid-dragdrop-row,
+.Dialog ~ .alopexgrid.alopexgrid-filterdropdown-wrapper,
+.Dialog ~ .alopexgrid.alopexgrid-celledit-popupwrap,
+.Dialog ~ .alopexgrid .modal {
+	z-index: 1009;
+}
+
+/* Alopex UI Dialog 및 Popup을 사용 시 프로그래스가 header, cell 위에 뜰 수 있도록 z-index조절 */
+.Dialog ~ .alopexgrid .progress {
+	z-index: 1010;
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SV Portal : SK BM 사례</title>
+    <meta charset="UTF-8" />    
+<meta http-equiv="Content-Type" content="text/html; charser=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<base href="../../static/">
+
+<link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+
+<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/alopex-ui-default.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/src/alopex-ext.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/grid/alopex-grid.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/common_portal.css" /><!-- portal css -->    
+<link rel="stylesheet" href="lib/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+
+<script src="lib/jquery/jquery-3.4.1.min.js"></script>
+<script src="lib/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script src="lib/alopex/ui/script/alopex-ui.min.js"></script>
+
+<script src="lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+<script src="lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+<script src="lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+<script src="lib/alopex/grid/alopex-grid.min.js"></script>
+<script src="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+<script src="lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+<script src="lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+
+
+<!-- 공통 JS(S) -->
+<script src="js/sv-utils.js"></script>
+<script src="js/sv-setup.js"></script>
+<script src="js/sv-control.js"></script>
+<script src="js/sv-file.js"></script>
+<script src="js/bignumber.js"></script>
+<!-- 공통 JS(E) -->
+
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script><!--Alopex - ui Webeditor -->
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script><!--Alopex - ui Webeditor -->
+
+<style type="text/css">
+    .alopexgrid-progress-modal {
+        display: none;
+    }
+
+    .alopexgrid-progress {
+        display: none;
+    }
+
+    .btn_tree_column {
+        float: right;
+        margin-top: 7px;
+    }
+</style>
+</head>
+<body>
+    <div class="root__container-portal">
+        
+	<section class="header__container">		
+		<div class="header__wrap"><!-- header__wrap (S) -->
+			<h1 class="logo"><a href=""><i>SV</i><b>Portal</b></a></h1>
+
+			<div class="menu">
+				<ul class="depth1">
+					<li data-menu="summary"><a href="">SV추진개요</a></li>
+					<li data-menu="bm"><a href="/build/bm/bmList.html">SK DBL BM</a></li>
+					<li data-menu="social"><a href="/build/">사회적가치 성과</a></li>
+					<li data-menu="board"><a href="/build/board/refDbList.html">DBㆍ자료실</a></li>
+					<li data-menu="asmt"><a href="/build/">SV평가모델</a></li>
+				</ul>
+				<ul class="depth-sub">
+					<li class="root" data-menu="summary">
+						<ul class="depth2">
+							<li><a href="/build/">SV추진체계</a></li>
+							<li><a href="/build/">ESG분류체계</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="bm">
+						<ul class="depth2">
+							<li><a href="/build/">DBL BM</a></li>
+							<li><a href="/build/">SK BM 사례</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="social">
+						<ul class="depth2">
+							<li><a href="/build/">사회성과 대외공표</a></li>
+							<li><a href="/build/">성과측정 지표</a></li>							
+						</ul>
+					</li>
+					<li class="root" data-menu="board">
+						<ul class="depth2">
+							<li><a href="/build/">Reference DB</a></li>
+							<li><a href="/build/">SK News</a></li>
+							<li><a href="/build/">언론보도자료</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="asmt">
+						<ul class="depth2">
+							<li><a href="/build/">SV평가개요</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<a href="/build/assessment/asmtBoard.html" class="btn-asmt">SV 평가</a>
+		</div><!-- header__wrap (E) -->
+
+	</section>
+        <div class="contents__container">
+<!--/* [ Page ]
+@menu   : SK DBL BM > Sk BM 상세조회
+@page   : SK BM 사례 (목록)
+*/-->
+
+<div class="heading-area bm">
+    <div class="wrap">
+        <h1 class="page-title">SK BM 사례</h1>
+        
+        <ul class="breadcrumb">
+            <li class="home">Home</li>
+            <li>SK DBL BM</li>
+            <li>SK BM 사례</li>
+        </ul>
+    </div>
+</div>
+<div class="article pageBmList">
+    <div class="slide-bm list lazylist" id="scrollDblBm">
+        <ul class="slide" id="dblBmList"></ul> 
+    </div>   
+    <p class="lazyload-placeholder">스크롤하시면 더 많은 데이터를 확인하실 수 있습니다.</p>
+</div>
+
+
+
+<script>    
+    $a.page(function() {
+        this.init = function() {
+
+            // BM Data 샘플
+            var _data = [
+                {
+                    link : './', // 이동 URL
+                    img: '../../static/image/mvp/temp/bm-temp-01.png', // 이미지 URL
+                    /* [label] 업계 분류별 tag string
+                        에너지 : energy,
+                        통신/ICT : ict,
+                        반도체 : smcd,
+                        물류/서비스: dist                
+                    */
+                    label : 'energy',
+                    mbrNm : 'SKI', // 관계사명
+                    article: '내트럭 하우스를 통한 화물 운전자 복지서비스 제공 성과' // 내용
+                },
+                {
+                    link : './', // 이동 URL
+                    img: '../../static/image/mvp/temp/bm-temp-02.png',
+                    label : 'energy',
+                    mbrNm : 'SKI', 
+                    article: '홈픽 서비스로 인한 고령 택배기사의 고용 지원 성과'
+                },
+                {
+                    link : './', // 이동 URL
+                    img: '../../static/image/mvp/temp/bm-temp-03.png',
+                    label : 'ict',
+                    mbrNm : 'SKT',
+                    article: '장애인 사용요금 할인을 통한 취약계층 정보 접근성 제고 성과'
+                },
+                {link : './', img: '../../static/image/mvp/temp/bm-temp-04.png',label : 'ict',mbrNm : 'SKB',article: 'SE, 소상공인의 stoa 판매를 통한 경쟁력 제고 성과'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'smcd', mbrNm : 'SKB', article: '반도체샘플'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'dist', mbrNm : 'SKB', article: '물류/서비스'},
+                {link : './', img: '../../static/image/mvp/temp/bm-temp-04.png',label : 'ict',mbrNm : 'SKB',article: 'SE, 소상공인의 stoa 판매를 통한 경쟁력 제고 성과'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'smcd', mbrNm : 'SKB', article: '반도체샘플'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'dist', mbrNm : 'SKB', article: '물류/서비스'},
+            ];
+
+            const bmList = new DblBmList({
+                id:  'dblBmList',
+                data : _data,
+            });
+
+
+            // lazy load
+            const param = {
+                count : 10
+            };            
+            _sc.lazyInit({
+                id : 'dblBmList',
+                type: 'bm',
+                data : { // $a.request 옵션
+                    mapping : './',
+                    data : param,
+                    method : 'post',
+                    progress : true,
+                    callback : {
+                        success : function(res){                        
+                            bmList.append(res.data); // DOM 갱신
+                        },
+                    }
+                }, 
+            });
+        };
+
+    });
+</script>
+    
+        </div>
+
+        <footer class="footer__container">
+    <div class="wrap">
+        <ul class="site">
+            <li><a href="">SK 홈페이지</a></li>
+            <li><a href="">사회적가치연구원</a></li>
+            <li><a href="">경영경제연구소</a></li>
+        </ul>
+        <small>COPYRIGHT&copy;2020 BY SK HOLDINGS CO., LTD. ALL RIGHTS RESERVED</small>
+    </div>
+</footer>
+    </div>
+</body>
+</html>

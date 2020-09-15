@@ -1,0 +1,46 @@
+
+<div id="dialogAlert" class="Dialog" data-dialog-type="close">
+    <div class="Dialog-contents">컨텐츠 영역입니다.</div>
+    </div>
+
+<div id="dialogConfirm" class="Dialog" data-dialog-type="okcancel">
+    <div class="Dialog-contents">컨텐츠 영역입니다.</div>
+</div>
+
+<button id="alertTest" class="Button btn__page-task"><i>디자인 alert</i></button>
+<button id="confirmTest" class="Button btn__page-task"><i>디자인 Confirm (버튼 2개)</i></button>
+
+<script>
+$(function(){
+    $("#alertTest").on('click', function() {
+
+        
+
+        $('#dialogId2').open({
+            title:"Basic",
+            left:500,
+            top:50,
+            width: 270,
+            height: 270,
+            type:"close",
+            resizable:true,
+            movable:true,
+            modal:false,
+            animation:"fade",
+            animationtime:200,
+            alias: "flag1",
+            xButtonClickCallback : function(el){ // 우측 상단 X 버튼으로 닫을 경우 동작하는 콜백
+                if(el.alias === "flag1"){
+                    if(confirm("저장되지 않은 데이터가 있습니다. 창을 닫으시겠습니까?")){
+                        return true; // true를 return 시, 내부적으로 close 동작이 자동 수행됩니다.
+                    }else{
+                        return false; // false를 return 시, 내부적으로 close하는 동작을 제어 합니다.
+                    }
+                }
+            }
+        });
+});
+
+
+});
+</script>

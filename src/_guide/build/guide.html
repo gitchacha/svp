@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>퍼블가이드 :: SV-Portal</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>    
+    <link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+    
+    <link rel="stylesheet" type="text/css" href="../../static/lib/alopex/ui/css/alopex-ui-default.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/lib/alopex/ui/css/src/alopex-ext.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/lib/alopex/grid/alopex-grid.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/common_portal.css" /><!-- Portal -->
+    <link rel="stylesheet" type="text/css" href="../../static/css/common_asmt.css" /><!-- 평가등록 -->
+    <link rel="stylesheet" type="text/css" href="../../_guide/css/guide.css" /><!-- Guide -->
+    <link rel="stylesheet" type="text/css" href="../../static/lib/alopex/grid/plugin/search/alopex-grid-plugin-search.css" /><!-- Search plugin -->
+    
+    <script src="../../static/lib/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../static/lib/alopex/ui/script/alopex-ui.min.js"></script>    
+    <script src="../../static/lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+	<script src="../../static/lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+    <script src="../../static/lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+    <script src="../../static/lib/alopex/grid/alopex-grid.min.js"></script>
+    <script src="../../static/lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+    <script src="../../static/lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+    <script src="../../static/lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+    <script src="../../static/lib/alopex/grid/plugin/search/alopex-grid-plugin-search.min.js"></script><!-- Alopex Search plugin -->
+    
+    <!-- 공통 JS(S) -->
+    <script src="../../static/js/sv-utils.js"></script>
+    <script src="../../static/js/sv-setup.js"></script>
+    <script src="../../static/js/sv-control.js"></script>
+    <script src="../../static/js/sv-file.js"></script>
+    <script src="../../static/js/bignumber.js"></script>
+    <!-- 공통 JS(E) -->
+
+    <!-- Webedtior -->
+    <link rel="stylesheet" href="../../static/lib/alopex/ui/script/src/webeditor/alopex-webeditor.css" />
+	<script src="../../static/lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script>
+    <script src="../../static/lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script>   
+
+    <!-- Production 배포 금지 !!  퍼블용 Dummy DATA!!!(S)  -->
+    <script>
+        var dummyGuide = {};
+        var _isMainPopup = false;
+    </script>
+    <script src="../js/dummyGuide.js"></script> <!-- SKSV common style -->
+    <!-- Production 배포 금지 !!  퍼블용 Dummy DATA!!!(E)  -->  
+</head>
+<body id="sksv__guild-pub">
+    <section class="guide__navigation" id="guideNavi">
+        <h1 class="heading">SV-Portal<span>퍼블리싱 가이드</span></h1>
+        <ul class="navi"></ul>
+    </section>
+
+
+    <div class="guide__container">
+        <section class="guide__wrap" id="guideScreen">
+            <h1 class="heading">화면 목록</h1>
+            <div id="">
+                <div id="search"></div>
+<div id="GridBoardScreen" class="gridInitClass"></div>  
+
+<script>
+    function screenSet(data){
+        var search = new AlopexGrid.plugin.Search();
+        search.setGrid('#GridBoardScreen');
+        search.setSearchWidget("#search");
+        search.init();
+
+        $('#GridBoardScreen').alopexGrid({
+            pager:false,
+            paging : {
+                perPage:null,
+            },
+            preventScrollPropagation:true,
+            autoColumnIndex: true,             
+            fitTableWidth:true,
+            height: 579,
+            rowSelectOption: {
+                clickSelect:false,
+                groupSelect: false
+            },	
+            defaultColumnMapping: {
+                sorting:true,
+                resizing:true,
+                ellipsisText: true
+            },
+            useClassHovering: true,
+            numberingColumnFromZero: false,
+            grouping :{
+                by : ['l1', 'l2', 'fileName', 'jeplinId'],
+                useGrouping : true,
+                useGroupRowspan : true,
+            },
+            columnFixUpto:4,
+            footer: {
+                footerMapping: [                    
+                    {columnIndex:8, render: ['화면수 : ','count(8)'], align: 'right',},
+                ] 
+            },
+            columnMapping : [
+                { key: 'no', width : 40, title:'No', numberingColumn : true, align: 'center', },
+                { key : 'group', title : '구분', width : 85, align:'center',
+                    styleclass : function(value,data) {
+                        if ( value === 'SV 평가모델' ) {
+                            return 'grp-model'
+                        } else if (value === 'SV 추진체계'){
+                            return 'grp-ahead'
+
+                        }else {
+                            return 'grp-na'
+                        }
+                    }
+                },
+                { key : 'l1', title : 'L1(대메뉴)', width : 140, styleclass:'l1'},
+                { key : 'l2', title : 'L2(중메뉴)', width : 220, styleclass:'l2'},
+                { key : 'l3', title : 'L3(기능)', width : 160, styleclass:'l3'},
+                { key : 'l4', title : 'L4(기능상세)', width : 150, styleclass:'l4'},
+                { key : 'screen', title : '화면명', width : 230, 
+                    styleclass:'screen',
+                    render : function(value,data) {
+                        var _pageType = typeof(data.pageType) === 'string' ? data.pageType : 'P';                        
+                        switch(_pageType){
+                            case 'M2' : return '<span class="l3 l3_s">'+data.screen+'</span>';
+                            case 'P' : return '<span class="l3 l3_p">(팝업)'+data.screen+'</span>';
+                            default : return '<span class="l3">'+data.screen+'</span>';
+                        }
+                    },
+                },
+                { key : 'menuFolder', title : '상위폴더', width :  110, align:"center"},
+                { key : 'fileName', title : '파일명', width :  220, rowspan:true, 
+                    styleclass:'fileName',
+                    render : function(value,data) {
+                        if ( data.fileName.length < 5 ) {
+                            return '<span class="noFile">작업전(사유:비고란 참조)</span>'
+                        }
+
+                        if ( data.fileName === 'emailTemplate.html' ) { // 예외 : 이메일템플릿
+                            return '<a class="url" href="../../static/templates/' + data.fileName +'" target="_blank">'+data.fileName+'</a>';
+                        }
+
+                        return value
+                    },
+                },
+                {   key : 'pageType', title : '형태', width : 60, align:'center' ,sorting:true,
+                    render : function(value,data) {
+                        return data.pageType;                        
+                    }
+                },
+                {key : 'dueDate', title : '완료일', width : 85, align:'center'  },
+                {key : 'latestDate', title : '최종수정일', width : 85, align:'center' },
+                {key : 'desc', title : '비고', width :  700, sorting:false },
+            ],
+            data: data
+        });
+
+        
+    $('.alopexgrid-search-plugin-keyword').attr('placeholder',"화면명/ID/메뉴그룹 으로 검색(엔터)");
+
+    // 그리드 bodycell click
+    $('#GridBoardScreen').on('click', '.bodycell', function(e){
+        const data = AlopexGrid.parseEvent(e).data;
+        const urlPrefix = '../../build/' + data.menuFolder + '/' + data.fileName;
+
+        if ( typeof(data.pageType) === 'string' ) {
+            window.open(urlPrefix);
+        } else { // POPUP
+            
+            const _popup = data.pageType;
+            
+            $a.popup({
+                url: urlPrefix, 
+                title: data.screen,
+                width: _popup.w,height:_popup.h,
+                data: _popup.data ? _popup.data : null,
+                callback: function(data){
+                    //callback
+                }    
+            });    
+        }
+    });
+}
+
+function guidePopupOpen(url,width,height, title, alias){
+
+}
+
+
+</script>
+            </div>
+        </section>
+
+        <section class="guide__wrap" id="guideComponent">
+            <h1 class="heading">Component</h1>
+            <div id="guideComponentWrap">
+                
+<div class="division">
+    <h2 class="heading-sub">Tooltip</h2>
+    
+    <br>
+
+    <input class="Textinput error" id="inputErr1" value="코드명을 입력하세요" />
+    <div data-base="#inputErr1" class="Tooltip" data-position="top">필수입력란에 입력하지 않았습니다.</div>
+
+    
+    <input class="Textinput error" id="inputErr2" value="코드명을 입력하세요" />
+    <div data-base="#inputErr2" class="Tooltip" data-position="top">필수입력란에 입력하지 않았습니다.필수입력란에 입력하지 않았습니다.</div>
+
+    <br><br>
+
+    <input class="Textinput error" id="inputErr3" value="코드명을 입력하세요" />
+    <div data-base="#inputErr3" class="Tooltip"><!--
+    --><ul class="list"><li><i class="left">홍길동 수석, 글로벌 운영팀</i><i class="right status type3">합의완료</i></li><li><i class="left">홍길동 수석, 글로벌 운영팀</i><i class="right status">-</i></li></ul>
+    </div>
+    
+    <input class="Textinput error" id="inputErr4" value="코드명을 입력하세요" />
+    <div data-base="#inputErr4" class="Tooltip shadow"><!--            
+    --><ul class="list nonDot"><li><i class="left status type3">경제간접 기여성과</i><i class="right">￦33,714</i></li><li><i class="left status type2">경제간접</i><i class="right">￦33,714</i></li></ul>
+    </div>
+</div>
+
+    
+<div class="division">
+    <h2 class="heading-sub">Select Box</h2><br>
+
+    <!-- inner title select (Border radius 차이) -->
+    <div class="select__primary selectCustom">
+        <button class="Dropdownbutton button">2019년</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018년</a></li>
+            <li><a>2017년</a></li>
+        </ul>
+    </div>
+
+    <div class="select__primary selectCustom">
+        <button class="Dropdownbutton button" data-disabled="true">5월</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>6월</a></li>
+            <li><a>7월</a></li>
+            <li><a>8월</a></li>
+            <li><a>9월</a></li>
+            <li><a>12월</a></li>
+        </ul>
+    </div>
+
+    <div class="select__primary selectCustom error"><!-- Error 메시지 툴팁 출력 -->
+        <button class="Dropdownbutton button">5월</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>6월</a></li>
+            <li><a>7월</a></li>
+            <li><a>8월</a></li>
+            <li><a>9월</a></li>
+            <li><a>12월</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+
+    <!-- default select -->
+    <div class="select__form selectCustom">
+        <button class="Dropdownbutton button">선택</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018</a></li>
+            <li><a>2017</a></li>
+            <li><a>2016</a></li>
+        </ul>
+    </div>
+
+    <div class="select__form selectCustom">
+        <button class="Dropdownbutton button" data-disabled="true">선택</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018</a></li>
+            <li><a>2017</a></li>
+            <li><a>2016</a></li>
+        </ul>
+    </div>
+
+    <div class="select__form selectCustom error">
+        <button class="Dropdownbutton button">선택</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018</a></li>
+            <li><a>2017</a></li>
+            <li><a>2016</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+
+    <!-- Multiselect -->
+    <div class="multiselect__primary">
+        <select class="multiselect__primary Multiselect" id="MultiSample">
+            <option value="1">SK 이노베이션계열</option>
+            <option value="2">SK 텔레콤</option>
+            <option value="3">SK 건설</option>
+            <option value="4">SK E&amp;S</option>
+            <option value="5">SK 케미칼</option>
+        </select>
+    </div>
+
+    <div class="multiselect__primary">
+        <select class="multiselect__primary Multiselect" id="MultiSampleDis">
+            <option value="1">SK 이노베이션계열</option>
+            <option value="2">SK 텔레콤</option>
+            <option value="3">SK 건설</option>
+            <option value="4">SK E&amp;S</option>
+            <option value="5">SK 케미칼</option>
+        </select>
+    </div>
+
+
+    <div class="multiselect__primary">
+        <select class="multiselect__primary Multiselect error" id="MultiSampleErr">
+            <option value="1">SK 이노베이션계열</option>
+            <option value="2">SK 텔레콤</option>
+            <option value="3">SK 건설</option>
+            <option value="4">SK E&amp;S</option>
+            <option value="5">SK 케미칼</option>
+        </select>
+    </div>
+
+</div>
+
+
+<div class="division">
+    <h2 class="heading-sub">Textinput</h2><br>
+    <input class="Textinput" placeholder="코드명을 입력하세요" /><br><br>
+    <input class="Textinput" data-disabled="true" value="비활성화 테스트" /><br><br>
+
+    <input class="Textinput error" id="inputErr" value="(error)코드명을 입력하세요" /><br><br>
+
+    <span class="func__input-search empty">
+        <input class="Textinput Disabled" disabled data-disabled="true" />
+        <button class="inputEmpty">삭제</button><i class="icon i-input-person"></i>
+    </span>
+    <span class="func__input-search empty">
+        <input class="Textinput error Disabled" disabled data-disabled="true" />
+        <button class="inputEmpty">삭제</button><i class="icon i-input-person"></i>
+    </span>
+</div>
+
+
+
+<div class="division">
+    <h2 class="heading-sub">Datepicker</h2><br>
+    
+
+
+    <div>
+        <div class="Dateinput" data-placeholder="true" data-format="yyyy/MM/dd">
+            <input id="dateinput01">
+            <div class="Calendar" id=""></div>
+        </div>
+        <div class="Dateinput" data-disabled="true">
+            <input id="dateinput02">
+            <div class="Calendar" id=""></div>
+        </div>
+        <br><br>
+        <div class="Dateinput" data-pickertype="monthly" data-placeholder="true">
+            <input id="dateinput03">
+            <div class="Calendar" id=""></div>
+        </div>
+        <div class="Dateinput" data-pickertype="monthly" data-disabled="true">
+            <input id="dateinput04">
+            <div class="Calendar" id=""></div>
+        </div>
+    </div>
+    
+    <br><br>
+
+    <div>
+        <div id="daterange1" class="Daterange dateinput__period">
+            <div class="Startdate Dateinput">
+                <input id="daterange01" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange02" />
+            </div>
+        </div>
+        <br><br>
+        dd
+        <div id="daterange2" class="Daterange dateinput__period" data-pickertype="monthly">
+            <div class="Startdate Dateinput">
+                <input id="daterange07" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange08" />
+            </div>
+        </div>
+        <br><br>
+        <div id="daterange3" class="Daterange dateinput__period">
+            <div class="Startdate Dateinput" data-disabled="true">
+                <input id="daterange03" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange04" />
+            </div>
+        </div>
+        <br><br>
+        <div id="daterange4" class="Daterange dateinput__period" data-disabled="true">
+            <div class="Startdate Dateinput">
+                <input id="daterange05" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange06" />
+            </div>
+        </div>
+        <br><br>        
+        <div id="daterange5" class="Daterange dateinput__period" data-format="yyyy/MM/dd">
+            <div class="Startdate Dateinput error" >
+                <input id="daterange01" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput error">
+                <input id="daterange02" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">Radio &amp; Checkbox</h2><br>
+    
+    <label class="ImageRadio"><input class="Radio" type="radio" name="rgoGrp" value="" />텍스트</label>
+    <label class="ImageRadio"><input class="Radio" type="radio" name="rgoGrp" value="" checked />텍스트</label>    
+    <label class="ImageRadio"><input class="Radio" data-disabled="true" type="radio" name="rgoGrp" value="" />비활성</label>    
+    <br><br>
+
+    <label class="ImageCheckbox"><input class="Checkbox" type="checkbox" name="" value="" />텍스트</label>
+    <label class="ImageCheckbox"><input class="Checkbox" type="checkbox" name="" value="" checked />텍스트</label>
+    <label class="ImageCheckbox part"><input class="Checkbox" type="checkbox" name="" value="" checked />일부선택</label>
+    <label class="ImageCheckbox"><input class="Checkbox" data-disabled="true" type="checkbox" name="" value="" />텍스트</label>    
+    <label class="ImageCheckbox error"><input class="Checkbox" type="checkbox" name="" value="" />필수 동의 항목</label>
+</div>
+
+
+
+<div class="division">
+    <h2 class="heading-sub">WebEditor</h2>
+    <div id="Webeditor"></div>
+</div>
+
+<script>
+$(function(){
+
+    /**************Datepicker(S)***************/
+    // ie에서 비활성화 렌더링 안됨. 추가 처리 필요
+    $('.Dateinput[data-disabled="true"]').setEnabled(false);
+
+    /**************Datepicker(E)***************/
+
+    $('#Webeditor').webeditor({
+        height: 300,
+    });
+
+    // 멀티셀렉트 Sample
+    $('#MultiSampleDis').multiselect('disable');
+
+
+    
+    // Tooltip sample
+    // var $tooltip = $('<div data-base="#tooltipMngr" class="Tooltip" id="TooltipMsg" />'),
+    //     $tooltip2 = $('<div data-base="#tooltipMngr2" class="Tooltip" id="TooltipMsg2" />');
+
+    // $a.convert($tooltip);
+    // $a.convert($tooltip2);
+
+    // $tooltip.html('<ul class="list"><li>홍길동 수석, 글로벌 운영팀<i class="status type3">합의완료</i></li><li>김선경 수석, 글로벌 운영팀<i>-</i></li></ul>');
+    // $tooltip2.html('<ul class="list"><li>홍길동 수석, 글로벌 운영팀<i class="status type3">합의완료</i></li><li>김선경 수석, 글로벌 운영팀<i>-</i></li></ul>');
+
+    // $('#guideComponent').append($tooltip,$tooltip2); // Tooltip append
+
+
+
+})
+</script>
+            </div>
+        </section>
+
+
+        <section class="guide__wrap" id="guideColor">
+            <h1 class="heading">Color</h1>
+            <div id="guideColorWrap"></div>
+        </section>
+
+        <section class="guide__wrap" id="guideIcon">
+            <h1 class="heading">Icon</h1>
+            <div id="guideIconWrap"></div>
+        </section> 
+
+        <section class="guide__wrap" id="guideButton">
+            <h1 class="heading">Button</h1>
+            <div id="guideButtonWrap">
+                
+<div class="division">
+    
+    <!-- 삭제(휴지통) -->
+    <button id="" class="Button btn__section export" type="button"><span><b class="icon del"></b>삭제</span></button>
+    
+    
+    <!-- 삭제(휴지통) -->
+    <button id="" class="Button btn__page-task strong" type="button"><span><b class="icon del"></b>삭제</span></button>
+    
+    <br><br>
+    <!-- 신규등록(연필아이콘) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon reg"></b>신규등록</i></button>
+
+    <!-- 목록(list 아이콘) -->
+    <button id="" class="Button btn__page-task"><i><b class="icon list"></b>목록</i></button>
+
+    <!-- InputData 요청(도장같은 아이콘) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon req"></b>Input Data 요청</i></button>
+    
+    <!-- 요청(또다른요청아이콘) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon req2"></b>요청</i></button>
+
+    <!-- 변경(편집 아이콘) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon edit"></b>변경</i></button>
+
+    <!-- Input Data 비교 -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon compare"></b>Input Data 비교</i></button>
+
+    <!-- 측정 -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon measure"></b>측정</i></button>
+    <!-- 측정취소 -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon actionCancel"></b>측정취소</i></button>
+
+    <!-- 1차 성과 산출 -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon calc"></b>1차 성과 산출</i></button>
+
+    <!-- 마감(시계 아이콘) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon clock"></b>마감</i></button>
+
+    <br><br>
+    <!-- 취소(X) -->
+    <button id="" class="Button btn__page-task"><i><b class="icon cancel"></b>취소</i></button>
+
+    <!-- 저장(디스켓) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon save"></b>저장</i></button>
+    
+    <!-- 확인(동그라미체크) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon confirm"></b>확인</i></button>
+    
+    <!-- 일괄확인(겹쳐진체크박스) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon allChk"></b>일괄확인</i></button>
+    
+    <!-- 추가(+) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon add"></b>추가</i></button>
+    
+    <!-- 보완(+) -->
+    <button id="" class="Button btn__page-task emphasis"><i><b class="icon return"></b>보완</i></button>
+    <button id="" class="Button btn__page-task emphasis"><i><b class="icon return2"></b>보완</i></button>
+    
+    <!-- 합의(+) -->
+
+    <button id="" class="Button btn__page-task strong"><i><b class="icon agree"></b>합의</i></button>
+    <button id="" class="Button btn__page-task strong"><i><b class="icon agree2"></b>합의</i></button>
+    <!-- 공지(확성기) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon notice"></b>공지</i></button>
+    
+    <!-- 승인(체크) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon appr"></b>승인</i></button>
+    
+    <!-- 초기화(동글뱅이화살표) -->
+    <button id="" class="Button btn__page-task emphasis"><i><b class="icon reset"></b>초기화</i></button>
+    
+    <!-- 해제() -->
+    <button id="" class="Button btn__page-task emphasis"><i><b class="icon unlock"></b>해제</i></button>
+
+    <!-- 답변() -->
+    <button id="" class="Button btn__section strong"><i><b class="icon msg"></b>답변</i></button>
+    
+    <br><br>
+    <!-- 이전(<) -->
+    <button id="" class="Button btn__page-task strong"><i><b class="icon prev"></b>이전</i></button>
+    
+    <!-- 다음(>) -->
+    <button id="" class="Button btn__page-task strong"><i>다음<b class="icon next"></b></i></button>
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">btn__page-task (화면 Task action 버튼)</h2>
+    <div>
+        <button class="Button btn__page-task"><i>임시저장</i></button>
+        <a class="Button btn__page-task strong"><i>제출</i></a>
+        <a class="Button btn__page-task default"><i>기본버튼</i></a>
+        <a class="Button btn__page-task strong" data-disabled="true"><i>Disabled</i></a>
+        
+    </div>
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">btn__section (컨텐츠 단락 (article) 버튼)</h2>
+    <div>
+        <button class="Button btn__section"><i>임시저장</i></button>
+        <button class="Button btn__section export"><i>엑셀 내보내기</i></button>
+        <a class="Button btn__section strong"><i>제출</i></a>
+        <a class="Button btn__section strong" data-disabled="true"><i>신규지표등록</i></a>
+    </div>
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">btn__grid (그리드/테이블 버튼)</h2>
+    <div>
+        <button class="Button btn__grid">파일첨부</button>
+        <button class="Button btn__grid unit">파일첨부</button>
+        <a class="Button btn__grid strong" data-disabled="true">데이터 업로드</a>
+    </div>
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">btn__unit (작은 단위의 기능 버튼)</h2>
+    <div>
+        <button class="Button btn__unit">필터조건해제</button>
+        <a class="Button btn__unit" data-disabled="true">확정</a>
+    </div>
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">btn__func (기능버튼)</h2>
+    <div>
+        <button class="Button btn__func">파일첨부</button>
+        <button class="Button btn__func strong" data-disabled="true">파일첨부</button>
+        <a class="Button btn__func strong">상세보기</a>
+        <a class="Button btn__func" data-disabled="true">텍스트</a>
+    </div>
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">btn__forms (input, select 등 Form 요소와 함께 쓰이는 버튼)</h2>
+    <div>
+        <button class="Button btn__forms">분류조건설정</button>
+        <button class="Button btn__forms emphasis">분류조건설정</button>
+        <button class="Button btn__forms strong">분류조건설정</button>
+        <a class="Button btn__forms" data-disabled="true">계산</a>
+    </div>
+</div>
+<div class="division">
+    <h2 class="heading-sub">btn__icon (아이콘 + 텍스트 버튼)</h2>
+    <div>
+        <button class="Button btn__icon" type="button"><i class="icon i-delete"></i><span>삭제</span></button>
+    </div>
+</div>
+<div class="division">
+    <h2 class="heading-sub">화면검수때부터 만들기시작(2019.10.14~)</h2>
+    <div>
+        <button id="" class="Button btn__row-remove">행삭제</button>
+        <button id="" class="Button btn__ico-write">변경</button>
+    </div>
+</div>
+            </div>
+        </section> 
+        
+        <section class="guide__wrap" id="guideTab">
+            <h1 class="heading">Tab</h1>
+            <div id="guideTabWrap">
+                
+
+<h2 class="tit01">Style 01</h2>
+<div class="Tabs tab__primary" id="">
+	<ul>
+		<li data-content="#tab1">권한 그룹 관리</li>
+		<li data-content="#tab2">권한 그룹별 사용자 관리</li>
+	</ul>
+	<div id="tab1">1</div>
+	<div id="tab2">2</div>
+</div>
+<br>
+<div class="Tabs tab__primary" id="" data-tab-count="3">
+	<ul>
+		<li data-content="#tab1">권한 관리</li>
+		<li data-content="#tab2">권한 그룹 관리</li>
+		<li data-content="#tab3">권한 그룹별 사용자 관리</li>
+	</ul>
+	<div id="tab1">1</div>
+	<div id="tab2">2</div>
+	<div id="tab3">3</div>
+</div>
+<div class="Tabs tab__primary" id="" data-tab-count="4">
+	<ul>
+		<li data-content="#tab1">연간 운영계획</li>
+		<li data-content="#tab2">권한 관리</li>
+		<li data-content="#tab3">권한 그룹 관리</li>
+		<li data-content="#tab4">권한 그룹별 사용자 관리</li>
+	</ul>
+	<div id="tab1">1</div>
+	<div id="tab2">2</div>
+	<div id="tab3">3</div>
+	<div id="tab4">4</div>
+</div>
+<div class="Tabs tab__primary" id="" data-tab-count="5">
+	<ul>
+		<li data-content="#tab1">연간 운영계획</li>
+		<li data-content="#tab2">SV 분류체계</li>
+		<li data-content="#tab3">권한 관리</li>
+		<li data-content="#tab4">권한 그룹 관리</li>
+		<li data-content="#tab5">권한 그룹별 사용자 관리</li>
+	</ul>
+	<div id="tab1">1</div>
+	<div id="tab2">2</div>
+	<div id="tab3">3</div>
+	<div id="tab4">4</div>
+	<div id="tab5">5</div>
+</div>
+<div class="Tabs tab__primary" id="" data-tab-count="6">
+	<ul>
+		<li data-content="#tab1">연간 운영계획</li>
+		<li data-content="#tab2">SV 분류체계</li>
+		<li data-content="#tab3">SV 분류체계</li>
+		<li data-content="#tab4">권한 관리</li>
+		<li data-content="#tab5">권한 그룹 관리</li>
+		<li data-content="#tab6">권한 그룹별 사용자 관리</li>
+	</ul>
+	<div id="tab1">1</div>
+	<div id="tab2">2</div>
+	<div id="tab3">3</div>
+	<div id="tab4">4</div>
+	<div id="tab5">5</div>
+	<div id="tab6">6</div>
+</div>
+
+
+
+<h2 class="tit01">Style 02</h2>
+<div class="Tabs tab__primary simple" id="">
+	<ul>
+		<li data-content="#tabSimple1">전체</li>
+		<li data-content="#tabSimple2">완료</li>
+		<li data-content="#tabSimple3">할일</li>
+	</ul>
+	<div id="tabSimple1">
+		<strong>전체</strong>
+	</div>
+	<div id="tabSimple2">
+		<strong>완료</strong>
+	</div>
+	<div id="tabSimple3">
+		<strong>할일</strong>
+	</div>
+</div>
+            </div>
+        </section> 
+
+        <section class="guide__wrap" id="guideProcessBar">
+            <h1 class="heading">ProcessBar</h1>
+            <div id="guideProcessBarWrap">
+                <br>
+
+<!--/* Style 01 (S) */-->
+<h2 class="tit01">Style 01</h2>
+<br>
+<div class="Tabs tab__step" id="TabStep1">
+    <ul>
+        <li data-content="#tab1" class="done"><span class="label"><b>01</b>관리단위 레벨 설정</span></li>
+        <li data-content="#tab2" class="done"><span class="label"><b>02</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab3"><span class="label"><b>03</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab4"><span class="label"><b>04</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab5"><span class="label"><b>05</b>관리단위 레벨 매핑 등록</span></li>
+    </ul>
+    <div id="tab1">01</div>
+    <div id="tab2">02</div>
+    <div id="tab3">03</div>
+    <div id="tab4">04</div>
+    <div id="tab5">05</div>
+</div>
+<br>
+<div class="Tabs tab__step" id="TabStep2">
+    <ul>
+        <li data-content="#tab1"><span class="label"><b>01</b>관리단위 레벨 설정</span></li>
+        <li data-content="#tab2"><span class="label"><b>02</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab3"><span class="label"><b>03</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab4"><span class="label"><b>04</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab5"><span class="label"><b>05</b>관리단위 레벨 매핑 등록</span></li>
+    </ul>
+    <div id="tab1">01</div>
+    <div id="tab2">02</div>
+    <div id="tab3">03</div>
+    <div id="tab4">04</div>
+    <div id="tab5">05</div>
+</div>
+<!--/* Style 01 (E) */-->
+
+<!--/* Style 01 (S) */-->
+<br> <h2 class="tit01">Style 02</h2> <br>
+
+<div class="box__article">
+    <h2 class="title__article">결재정보<button class="Button btn__func titUnit" id="btnApvHistory">결재상세이력</button></h2>
+    
+    <!--/* 4단계 (S) */-->
+    <ul class="step__process">
+        <!--
+            [COMMENT]
+            1. 대기 / 진행중 / 완료 3가지 상태에 따라 li의 클래스가 분기됩니다. (구조는 동일)
+            - 대기 : N/A
+            - 진행중 : ing
+            - 완료 : done
+            2. 결재자추가 버튼은 '대기' 상태일때만 표기됩니다.
+        -->
+        <li class="done">
+            <span class="label">사회성과 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석 <i class="comment"></i></span>
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="done">
+            <span class="label">사회성과 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b id="tooltipMngr">3</b> <i class="comment"></i></span>
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="ing">
+            <span class="label">성과측정식 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석</span>
+            <i class="date"></i>
+        </li>
+        <li>
+            <span class="label">성과측정식 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b id="tooltipMngr2">3</b></span>
+            <button class="Button btn__process-add">결재자추가</button>
+            <i class="date"></i>
+        </li>
+    </ul>
+    <!--/* 4단계 (E) */-->
+</div>
+
+
+<div class="box__article">
+    <h2 class="title__article">결재정보<button class="Button btn__func titUnit" id="btnApvHistory">결재상세이력</button></h2>
+
+    <!--/* 6단계 (S)*/-->
+    <ul class="step__process">
+        <!--
+            [COMMENT]
+            1. 대기 / 진행중 / 완료 3가지 상태에 따라 li의 클래스가 분기됩니다. (구조는 동일)
+            - 대기 : N/A
+            - 진행중 : ing
+            - 완료 : done
+            2. 결재자추가 버튼은 '대기' 상태일때만 표기됩니다.
+        -->
+        <li class="done">
+            <span class="label">사회성과 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석</span>
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="done">
+            <span class="label">관계사 사회성과 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>                        
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="done hold">
+            <span class="label">최종 사회성과 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>          
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="ing">
+            <span class="label">성과측정식 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석</span>
+            <i class="date"></i>
+        </li>
+        <li>
+            <span class="label">관계사 성과측정식 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>
+            <button class="Button btn__process-add">결재자추가</button>
+            <i class="date"></i>
+        </li>
+        <li>
+            <span class="label">최종 성과측정식 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>
+            <button class="Button btn__process-add">결재자추가</button>
+            <i class="date"></i>
+        </li>
+    </ul>
+    <!--/* 6단계 (E) */-->
+</div>
+
+<!--/* Style 01 (E) */-->
+
+<script>
+$(function(){
+
+    var $tab1 = $("#TabStep1");
+    $tab1.setTabIndex(2);
+    $tab1.setEnabled(false, 0);
+    $tab1.setEnabled(false, 1);
+    
+});
+</script>
+            </div>
+        </section> 
+
+        <section class="guide__wrap" id="guideGrid">
+            <h1 class="heading">Grid</h1>
+            <div id="guideGridWrap">
+                <div id="GridBoard" class="gridInitClass"></div>  
+
+<script>
+    function gridSet(data){        
+        $('#GridBoard').alopexGrid({
+            autoColumnIndex: true,             
+            rowSelectOption: {
+                clickSelect:true,
+            },
+            columnMapping : [
+                {
+                    key: 'check',
+                    width : '60px',
+                    selectorColumn : true,
+                    align: 'center',
+                },
+                {
+                    key : 'menuName',
+                    title : '메뉴명',
+                    width : '190px',
+                    sorting: true,
+                },
+                {
+                    key : 'menuId',
+                    title : '메뉴 ID',
+                    width : '235px',
+                    align : 'center',
+                    sorting: true,
+                },
+                {
+                    key : 'url',
+                    title : 'URL',
+                    width : '260px',
+                },
+                {
+                    key : 'order',
+                    title : '정렬순서',
+                    width : '120px',
+                    align : 'center',
+                    sorting: true,
+                },
+                {
+                    key : 'use',
+                    title : '사용여부',
+                    width : '110px',
+                    sorting: true,
+                    styleclass : function(value,data) {
+                        if ( data.use === "예" ){
+                            return "status type6"
+                        }
+                        return "status type7";
+                    }
+                },
+                {
+                    key : 'parentId',
+                    title : '상위메뉴 ID',
+                    width : '120px',
+                    align : 'center',
+                    sorting: true,
+                },
+                {
+                    key : 'exp',
+                    title : '설명',
+                    width : '250px',
+                },
+            ],
+            data: data
+        });
+
+        $('#GridBoard').on('perPageChange', function(e){
+            console.log(e);
+            alert("page 당 데이터 개수 변경");
+        });
+}
+
+
+// 그리드 디자인가이드 완료후 삭제
+// $('#guideGrid').siblings('.guide__wrap').hide();
+// $('#guideIcon').show();
+</script>
+            </div>
+        </section> 
+    </div>
+    
+    <script>
+        
+    $(function(){
+        
+
+        // Guide HTML 생성
+        function makeGuideHtml(data){
+            var guideMenuHtml = [];
+            data.guideMenu.forEach(function(elem){
+                guideMenuHtml.push('<li><a href="#'+ elem.sectionId + '">'+ elem.name + '</a></li>');
+            });            
+            $('#guideNavi .navi').html(guideMenuHtml);
+
+            makeColorchips(data.color); // Color guide 생성
+            makeIcons(data.icon); // Icon guide 생성
+
+            gridSet(dummyGuide.guide.guideMenu); // Grid 생성
+            screenSet(dummyGuide.guideScreenList); // Grid 생성
+        }
+
+       
+
+        // Color
+        function makeColorchips(target){
+            var htmlArr = [];
+
+
+            Object.keys(target).forEach(function(item){
+                // item[1].forEach(function(elem){
+                //     list.push('<li><span class="chip '+item.className+'">'+item.color+'</span><strong class="className">'+item.className+'</strong></li>');
+                // });
+
+                for(var i =0, len = 1; i < len; i++) {
+                    var items = ''
+                    for(var j =0,jlen = target[item].length; j < jlen; j++) {                        
+                        
+                        items += '<li><span class="chip '+target[item][j].className+'">'+target[item][j].color+'</span><strong class="className">'+target[item][j].className+'</strong></li>';
+                    }
+                    
+                    var htmlStr = '<div class="division"><h2 class="heading-sub">'+ item +'</h2><ul class="colorchip">'+ items +'</ul></div>';
+                }
+
+                htmlArr.push(htmlStr);
+            });
+
+            var htmlStructure = htmlArr.toString().replace(/,/g, '');
+            $('#guideColorWrap').html(htmlStructure);
+        }
+
+
+        // Guide HTML 생성 - Icon
+        function makeIcons(target) {
+            var iconHtml = [];
+
+            Object.keys(target).forEach(function(elem){
+                iconHtml.push('<li><i class="icon i-'+ target[elem].className +'"></i><span class="name">'+ target[elem].className +'</span></li>');
+            });
+
+            $('#guideIconWrap').html(iconHtml);
+            $('#guideIconWrap').wrapInner('<ul class="iconList division"></ul>')
+
+        }
+
+        makeGuideHtml(dummyGuide.guide);
+
+    });
+    </script>
+</body>
+</html>

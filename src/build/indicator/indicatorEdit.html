@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SV 평가모델 : 제품/서비스 지표</title>
+        <meta charset="UTF-8" />    
+    <meta http-equiv="Content-Type" content="text/html; charser=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <base href="../../static/">
+    
+    <link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+
+    <link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/alopex-ui-default.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/src/alopex-ext.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/grid/alopex-grid.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/common_asmt.css" /><!-- SKSV -->    
+
+    <script src="lib/jquery/jquery-3.4.1.min.js"></script>
+    <script src="lib/alopex/ui/script/alopex-ui.min.js"></script>
+    
+    <script src="lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+	<script src="lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+    <script src="lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+    <script src="lib/alopex/grid/alopex-grid.min.js"></script>
+    <script src="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+    <script src="lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+    <script src="lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+    
+    <!-- 공통 JS(S) -->
+    <script src="js/sv-utils.js"></script>    
+    <script src="js/sv-setup.js"></script>
+    <script src="js/sv-control.js"></script>
+    <script src="js/sv-file.js"></script>
+    <script src="js/bignumber.js"></script>
+    <!-- 공통 JS(E) -->
+
+    <script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script><!--Alopex - ui Webeditor -->
+    <script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script><!--Alopex - ui Webeditor -->
+    
+    <style type="text/css">
+        .alopexgrid-progress-modal {
+            display: none;
+        }
+    
+        .alopexgrid-progress {
+            display: none;
+        }
+    
+        .btn_tree_column {
+            float: right;
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body>
+    <div class="root__container-asmt">        
+        <div class="contents__container">
+            <!-- gnb__wrap(S) -->
+<div class="gnb__wrap">
+    <h1 class="logo-asmt"><a href="" class=""><i>SV</i><b>평가모델</b></a></h1>
+    <button type="button" class="btn__gnb-folding">메뉴 접기</button>
+    <div class="menu"><!-- menu(S) -->
+        <ul class="depth1">
+            <li class="on"><a href="" class="root board"><b>대시보드</b></a></li>
+            <li>
+                <strong class="root asmt">평가등록</strong>
+                <ul class="depth2">
+                    <li><a href="" class="link asmt"><b>Self-Assessment 작성</b></a></li>
+                    <li><a href="" class="link prd"><b>제품/서비스 지표 등록</b></a></li>
+                </ul>
+            </li>
+            <li>
+                <strong class="root report">리포팅</strong>
+                <ul class="depth2">
+                    <li><a href="" class="link result"><b>성과 Report</b></a></li>
+                    <li><a href="" class="link detail"><b>상세 분석 Report</b></a></li>
+                    <li><a href="" class="link comp"><b>비교 분석 Report</b></a></li>
+                </ul>
+            </li>
+        </ul>
+    </div><!-- menu(E) -->
+
+    <div class="utils">
+        <a class="go-portal" href=""><span>SV 포털 바로가기</span></a>
+    </div>
+</div>
+<!-- gnb__wrap(E) -->
+            <section class="contents__article">
+                <div class="work__area">
+    <!--/* [ Page ]
+    @menu   : 평가모델 > 제품/서비스 지표 등록
+    @page   : 제품/서비스 지표(신규지표 등록 및 수정)
+    */-->
+    
+    <div class="flex__column pageIndicatorEdit pageToggleList"><!--/* 전체 Wrap(S) */-->
+        <div class="page__title-area prd">
+            <h1 class="title">제품/서비스 지표</h1>
+            <ul class="list-score">
+                <li>진행률<strong>80% (8/10)</strong></li>
+                <li>총 점수<strong>25점</strong></li>
+                <li>SV 성과<strong>72,567,345원</strong></li>
+            </ul>
+        </div>
+
+        <div class="scroll-wrap">
+            <div class="contents"><!--/* 업무화면 (S) */-->
+
+                <div class="search-grp"><!--/* 검색영역(S)*/-->
+                    <ul class="condition">
+                        <li>
+                            <span class="func__input-search empty full" id="">
+                                <input id="path" name="pathSearch" class="Textinput full"  data-disabled="true" data-bind="value: pathSearch" placeholder="분류체계">
+                            </span>
+                            <div class="Tooltip" id="Tooltip" data-base="#pathSearch" data-position="bottom"><!-- 분류체계명 Tooltip --></div>
+                        </li>
+                        <li><input id="id" class="Textinput full" placeholder="지표명" /></li>
+                        <li>
+                            <div class="select__form full"><!--/* 평가진행 상태 combo */-->
+                                <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">상태</button>
+                                <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                            </div>
+                        </li>
+                        <li class="btns">
+                            <button id="" class="Button btn__section emphasis"><i>조회</i></button>
+                        </li>
+                    </ul>
+                </div><!--/* 검색영역(E)*/-->
+                
+
+                <div class="indicator-add"><!--/* 제품/서비스 지표 추가(S) */-->
+                    <div class="toggle-header"><!--/* toggle-header(S) */-->
+                        <h2 class="title">제품/서비스 지표 추가</h2>
+                        <ol class="indi-step">
+                            <!--/*
+                                상태별 class 변경
+                                1. 입력완료 : done
+                                2. 미진행단계 : next    
+                            */-->
+                            <li><i>1</i>제품/서비스 지표 등록</li>
+                            <li class="next"><i>2</i>성과측정식 등록</li>
+                            <li class="next"><i>3</i>기준/근거 자료 첨부</li>
+                        </ol>
+                        <button class="btn-indi-add">지표추가</button>
+                    </div><!--/* toggle-header(E) */-->
+
+                    <div class="toggle-section">
+                        <div class="slide-wrap">
+                            <div class="section" data-order="1"><!--/* 제품/서비스 지표 등록(S) */-->
+                                <p class="req-comm">필수항목</p>
+                                <table class="table__primary">
+                                    <tbody>
+                                        <tr>
+                                            <th class="req">지표명</th>
+                                            <th class="req">분류체계</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input id="" class="Textinput full" placeholder="입력해 주세요." /></td>
+                                            <td>
+                                                <span class="func__input-search empty full" id="csstPopupCall">
+                                                    <input id="path" name="path" class="Textinput full"  data-disabled="true" data-bind="value: path">                                                                                                       
+                                                </span>
+                                                <div class="Tooltip" id="Tooltip" data-base="#path" data-position="bottom"><!-- 분류체계명 Tooltip --></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="req">사회문제</th>
+                                            <th class="req">솔루션</th>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea id="" class="Textarea" cols="10" rows="4" placeholder="입력해 주세요."></textarea></td>
+                                            <td><textarea id="" class="Textarea" cols="10" rows="4" placeholder="입력해 주세요."></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <th class="req">제품/서비스의 기능</th>
+                                            <th>SV기준</th>
+                                        </tr>
+                                        <tr>
+                                            <td><textarea id="" class="Textarea" cols="10" rows="4" placeholder="입력해 주세요."></textarea></td>
+                                            <td><textarea id="" class="Textarea" cols="10" rows="4"></textarea></td>                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!--/* 제품/서비스 지표 등록(E) */-->
+
+
+                            <div class="section" data-order="2"><!--/* 성과측정식 등록(S) */-->
+                                <table class="table__horz">
+                                    <tbody>
+                                        <tr>
+                                            <th>측정유형</th>
+                                            <td>
+                                                <label class="ImageRadio"><input class="Radio" type="radio" name="accType" value="" checked />편익형</label>
+                                                <label class="ImageRadio"><input class="Radio" type="radio" name="accType" value="" />비용형</label>
+                                            </td>
+                                            <th>Baseline 유형</th>
+                                            <td>
+                                                <div class="select__form small selectBl"><!--/* 국가 */-->
+                                                    <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">시장평균ㆍ시장평균계산</button>
+                                                    <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="box-formula-ex">
+                                    <div class="formula">
+                                        <i class="o brc">(</i>
+                                        <b>Base Line</b>
+                                        <i class="o m">-</i>
+                                        <b>자사 SV기준</b>
+                                        <i class="o brc r">)</i>
+                                        <i class="o mtp">X</i>
+                                        <b>Proxy</b>
+                                        <i class="o mtp">X</i>
+                                        <b>제공량</b>
+                                        <i class="o eql">=</i>
+                                        <b>SV성과</b>
+                                    </div>
+                                    <span class="val">0원</span>
+                                </div>
+
+                                <table class="table__primary"><!--/* 제공량 입력 Table(S) */-->
+                                    <tbody>
+                                        <tr>
+                                            <th>Base Line</th>
+                                            <th>자사 SV기준</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="forms"><input id="" type="text" class="Textinput full" placeholder="명칭"></i>
+                                                <i class="forms"><input id="" type="text" class="Textinput full number" placeholder="값 입력(원)"></i>
+                                            </td>
+                                            <td>
+                                                <i class="forms"><input id="" type="text" class="Textinput full" placeholder="명칭"></i>
+                                                <i class="forms"><input id="" type="text" class="Textinput full number" placeholder="값 입력(원)"></i>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Proxy</th>
+                                            <th>제공량</th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="forms">
+                                                    <span class="func__input-search empty full write"><!--/* Proxy popup */-->
+                                                        <input id="proxy" name="proxy" class="Textinput full"  data-bind="value: proxy" placeholder="명칭 입력 혹은 검색">
+                                                        <i class="icon i-input-search" id="popupCallProxy"></i>                                                        
+                                                    </span>
+                                                </div>
+                                                <i class="divide values">
+                                                    <i class="col"><input id="" type="text" class="Textinput full number" placeholder="값"></i>
+                                                    <i class="col"><input id="" type="text" class="Textinput full center" placeholder="단위"></i>
+                                                </i>
+                                            </td>
+                                            <td>
+                                                <i class="forms"><input id="" type="text" class="Textinput full" placeholder="명칭"></i>
+                                                <i class="divide values">
+                                                    <i class="col"><input id="" type="text" class="Textinput full number" placeholder="값"></i>
+                                                    <i class="col"><input id="" type="text" class="Textinput full center" placeholder="단위"></i>
+                                                </i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table><!--/* 제공량 입력 Table(E) */-->
+                            </div><!--/* 성과측정식 등록(E) */-->
+
+
+                            <div class="section" data-order="3"><!--/*  기준/근거 자료 첨부(S) */-->
+                                <div class="grp-attach">
+                                    <div class="fileupload__primary" id="fileDownload"></div>
+                                    <strong class="tit-comm">Comment</strong>
+                                    <textarea id="" class="Textarea" cols="10" rows="5" placeholder="측정식 관련 근거 또는 설명을 입력해 주세요."></textarea>
+                                </div>
+                            </div><!--/*  기준/근거 자료 첨부(E)) */-->
+                        </div>
+                        <div class="btns">
+                            <button class="Button btn__unit btnPrev">이전</button>
+                            <button class="Button btn__unit strong btnNext">다음</button>
+                            <button class="Button btn__unit strong btnReg">등록</button>
+                        </div>
+                    </div>
+                </div><!--/* 제품/서비스 지표 추가(E) */-->
+
+
+                
+                <div class="survey-form-grp"><!--/* 질문 Toggle area(S) */-->
+                    <a class="toggle" href="">
+                        <h2 class="title-indi">
+                            <!--/* 환경/사회/거버넌스 - 분류체계 Level2 출력. 
+                                환경 : <span class="csst-label env">환경</span>
+                                사회 : <span class="csst-label social">사회</span>
+                                거버넌스 : <span class="csst-label gov">거버넌스</span>
+                            */-->
+                            <span class="csst-label env">환경</span>장애인을 위한 멀티 기능 키보드 생산을 통한 업무 효율성 증대
+                        </h2>
+                        <strong class="score">
+                            <i>0</i><em>원</em>
+                        </strong>
+                    </a>
+                    <!--/*
+                        [COMMENT]
+                        하기 지표 정보들은 평가 제출전 까지만 수정이 가능합니다.
+                        제출후에는 어떤 정보도 수정 불가.
+                        제출후에는 모든 form 요소들 (disabled) 처리 부탁드립니다.
+                        */-->
+                    <div class="article"><!--/* 문항본문(S) */-->
+                        <h3 class="title-article">제품/서비스 지표 사회성과 등록</h3>
+                        <p class="req-comm">필수항목</p>
+                        <div class="box__tbl">
+                            <table class="table__primary">
+                                <tbody>
+                                    <tr>
+                                        <th class="req">지표명</th>
+                                        <th class="req">분류체계</th>
+                                    </tr>
+                                    <tr>
+                                        <td><input id="" class="Textinput full" placeholder="입력해 주세요." /></td>
+                                        <td>
+                                            <span class="func__input-search empty full" id="csstPopupCall">
+                                                <input id="path" name="path" class="Textinput full"  data-disabled="true" data-bind="value: path">                                                                                                       
+                                            </span>
+                                            <div class="Tooltip" id="Tooltip" data-base="#path" data-position="bottom"><!-- 분류체계명 Tooltip --></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="req">사회문제</th>
+                                        <th class="req">솔루션</th>
+                                    </tr>
+                                    <tr>
+                                        <td><textarea id="" class="Textarea" cols="10" rows="4" placeholder="입력해 주세요."></textarea></td>
+                                        <td><textarea id="" class="Textarea" cols="10" rows="4" placeholder="입력해 주세요."></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="req">제품/서비스의 기능</th>
+                                        <th>SV기준</th>
+                                    </tr>
+                                    <tr>
+                                        <td><textarea id="" class="Textarea" cols="10" rows="4" placeholder="입력해 주세요."></textarea></td>
+                                        <td><textarea id="" class="Textarea" cols="10" rows="4"></textarea></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="title-article">성과측정식 등록</h3><!--/* 성과측정식 등록(S) */-->
+                        <table class="table__horz">
+                            <tbody>
+                                <tr>
+                                    <th>측정유형</th>
+                                    <td>
+                                        <label class="ImageRadio"><input class="Radio" type="radio" name="accType2" value="" checked />편익형</label>
+                                        <label class="ImageRadio"><input class="Radio" type="radio" name="accType2" value="" />비용형</label>
+                                    </td>
+                                    <th>Baseline 유형</th>
+                                    <td>
+                                        <div class="select__form small selectBl"><!--/* 국가 */-->
+                                            <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">시장평균ㆍ시장평균계산</button>
+                                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="box__tbl-option">
+                            <div class="box-formula-ex">
+                                <div class="formula">
+                                    <i class="o brc">(</i>
+                                    <b>Base Line</b>
+                                    <i class="o m">-</i>
+                                    <b>자사 SV기준</b>
+                                    <i class="o brc r">)</i>
+                                    <i class="o mtp">X</i>
+                                    <b>Proxy</b>
+                                    <i class="o mtp">X</i>
+                                    <b>제공량</b>
+                                    <i class="o eql">=</i>
+                                    <b>SV성과</b>
+                                </div>
+                                <span class="val">0원</span>
+                            </div>
+
+                            <table class="table__primary"><!--/* 제공량 입력 Table(S) */-->
+                                <tbody>
+                                    <tr>
+                                        <th>Base Line</th>
+                                        <th>자사 SV기준</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i class="forms"><input id="" type="text" class="Textinput full" placeholder="명칭" value="문자 스팸 차단율"></i>
+                                            <i class="forms"><input id="" type="text" class="Textinput full number" placeholder="값 입력(원)" value="258,261"></i>
+                                        </td>
+                                        <td>
+                                            <i class="forms"><input id="" type="text" class="Textinput full" placeholder="명칭"></i>
+                                            <i class="forms"><input id="" type="text" class="Textinput full number" placeholder="값 입력(원)"></i>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Proxy</th>
+                                        <th>제공량</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="forms">
+                                                <span class="func__input-search empty full write" id=""><!--/* Proxy popup */-->
+                                                    <input id="proxy" name="proxy" class="Textinput full"  data-bind="value: proxy" placeholder="명칭 입력 혹은 검색">                                                        
+                                                    <i class="icon i-input-search"></i>
+                                                </span>
+                                            </div>
+                                            <i class="divide values">
+                                                <i class="col"><input id="" type="text" class="Textinput full number" placeholder="값"></i>
+                                                <i class="col"><input id="" type="text" class="Textinput full center" placeholder="단위"></i>
+                                            </i>
+                                        </td>
+                                        <td>
+                                            <i class="forms"><input id="" type="text" class="Textinput full" placeholder="명칭"></i>
+                                            <i class="divide values">
+                                                <i class="col"><input id="" type="text" class="Textinput full number" placeholder="값"></i>
+                                                <i class="col"><input id="" type="text" class="Textinput full center" placeholder="단위"></i>
+                                            </i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table><!--/* 제공량 입력 Table(E) */-->
+                        </div><!--/* 성과측정식 등록(E) */-->
+
+                        
+                        <div class="grp-attach">
+                            <!--/* [COMMENT] 파일다운로드 2는 샘플 생략하였습니다 */-->
+                            <div class="fileupload__primary" id="fileDownload"></div>
+                            <strong class="tit-comm">Comment</strong>
+                            <textarea id="" class="Textarea" cols="10" rows="5" placeholder="측정식 관련 근거 또는 설명을 입력해 주세요."></textarea>
+                        </div>
+    
+                        <div class="division__btn">
+                            <div class="right">
+                                <button id="" class="Button btn__section strong"><i>저장</i></button>
+                            </div>
+                        </div>
+                    </div><!--/* 문항본문(E) */-->
+
+                </div><!--/* 지표(E) */-->
+
+
+
+            </div><!--/* 업무화면 (E) */-->
+
+        </div>
+    </div><!--/*  전체 Wrap(E) */-->
+    <script>
+        $(function(){            
+            initFileDownload(fileuploadCallBack, fileDeleteCallback);            
+
+            $('.btn-indi-add').on('click',function(){
+                $('.indicator-add').toggleClass('open');
+                _ui.indicator_add('init');
+            });
+
+            $('#popupCallProxy').on('click',function(){
+                console.log('Proxy 팝업 호출');
+            });
+        });
+
+
+        var _attFl = { atcFlOwnrDiv : "COMM", atcFlOwnrDtlDiv : "NOTICE", atcFlGrpId : "", atcFlGrpCnt : 0, readOnlyFlag : false };
+        function initFileDownload(_fileuploadCallBack, _fileDeleteCallback) {
+			// 첨부파일 예제
+			$('#fileDownload').initFileLoader(
+					_attFl.atcFlOwnrDiv,
+					_attFl.atcFlOwnrDtlDiv,
+					_attFl.atcFlGrpId,
+					_attFl.readOnlyFlag,
+					_fileuploadCallBack,
+					_fileDeleteCallback
+            );
+            const filedownload = View.fileLoader.fileDownload;
+            filedownload.setTitle('Baseline, 자사SV기준, Proxy 근거자료를 첨부 하십시오'); // Title 변경
+        }
+        function fileuploadCallBack(result) {
+// 			console.log(JSON.stringify(result));
+			if($sv.isNotEmpty(result)) {
+				_attFl.atcFlGrpId = result[0].atcFlGrpId;
+				_attFl.atcFlGrpCnt = result.length;
+				$('#atcFlGrpId').val(_attFl.atcFlGrpId);
+				saveAfterFileupload(_attFl.atcFlGrpId);
+			} else {
+				saveAfterFileupload();
+			}
+		}
+
+		function fileDeleteCallback(result) {
+            var fileInfo = $('#fileDownload').getFileInfo();
+            if(fileInfo.uploadedCount*1 < 1) {		// 파일그룹ID 삭제
+				$('#atcFlGrpId').val('');
+				View.search.atcFlGrpId = '';
+				View.result.atcFlGrpId = '';
+				_noticeListSearch.atcFlGrpId = '';
+				deleteAtcFlGrpId();
+			}
+        }
+</script>
+</div>
+</section>
+</div>
+</div>
+</body>
+</html>

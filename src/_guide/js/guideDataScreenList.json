@@ -1,0 +1,132 @@
+{
+"screenList" : [
+    
+    {"l1": "그룹 Policy 관리", "l2": "공통 Proxy 관리", "l3": "공통 Proxy 조회", "screenId": "1.1.3.1", "menuFolder": "groupPolicy", "fileName": "commonProxyList.html", "pageType": "M", "requestDate":"2019-07-19" ,"dueDate": "2019-07-17", "author":"차성숙",
+        "desc": "검수완료"
+    },
+    {
+        "l1": "그룹 Policy 관리", "l2": "공통 Proxy 관리", "l3": "공통 Proxy 상세",
+        "screenId": "1.1.3.1.1",
+        "menuFolder": "groupPolicy",
+        "fileName": "commonProxyView.html",
+        "pageType": "M2",
+        "requestDate":"2019-07-19",
+        "dueDate": "2019-07-17",
+        "author":"차성숙",
+        "desc": "첨부파일"
+    },
+    {
+        "l1": "그룹 Policy 관리", "l2": "공통 Proxy 관리", "l3": "공통 Proxy 상세 변경이력(L)",
+        "screenId": "1.1.3.1.1.1",
+        "menuFolder": "groupPolicy",
+        "fileName": "changeHistory_P.html", 
+        "pageType": { "type":"P", "width":1050, "heigth":757} ,
+        "requestDate":"2019-07-19",
+        "dueDate": "2019-07-17",
+        "author":"차성숙",
+        "desc": "검수완료"
+    },
+    {
+        "l1": "그룹 Policy 관리", "l2": "공통 Proxy 관리", "l3": "공통 Proxy 등록/변경",
+        "screenId": "1.1.3.1.2",
+        "menuFolder": "groupPolicy",
+        "fileName": "commonProxyEdit.html",
+        "pageType": "M2",
+        "requestDate":"2019-07-19" ,"dueDate": "2019-07-17",
+        "author":"차성숙",
+        "desc": "파일첨부"
+    },
+    {"l1": "그룹 Policy 관리", "l2": "공통 Proxy 관리", "l3": "환율 정보 조회", "screenId": "1.1.3.2", "menuFolder": "groupPolicy", "fileName": "exchangeRateList.html", "pageType": "M", "requestDate":"2019-07-19" ,"dueDate": "", "author":"차성숙",
+        "desc": "그리드 변경 editable"
+    },
+    {"l1": "그룹 Policy 관리", "l2": "공통 Proxy 관리", "l3": "환율 정보 상세", "screenId": "1.1.3.2.1", "menuFolder": "groupPolicy", "fileName": "exchangeRateView.html", "pageType": "M2", "requestDate":"2019-07-19" ,"dueDate": "2019-07-17", "author":"차성숙",
+     "desc": "검수완료" 
+    },
+    {"l1": "그룹 Policy 관리", "l2": "공통 Proxy 관리", "l3": "환율 정보 등록·변경", "screenId": "1.1.3.2.2", "menuFolder": "groupPolicy", "fileName": "exchangeRateEdit.html", "pageType": "M2", "requestDate":"2019-07-19" ,"dueDate": "2019-07-17", "author":"차성숙",
+     "desc": "Datepicker 디자인" 
+    },
+
+    {"l1": "사별 기준정보 관리", "l2": "데이터 레벨 관리", "l3": "데이터 관리 레벨 등록", "screenId": "2.1.3.1", "menuFolder": "partnerCriterion", "fileName": "dataManagementList.html", "pageType": "M", "requestDate":"2019-07-19" ,"dueDate": "2019-07-18", "author":"차성숙",
+        "desc": ""
+    },
+    {"l1": "사별 기준정보 관리", "l2": "데이터 레벨 관리", "l3": "데이터 관리 관리레벨 추가", "screenId": "2.1.3.1.1", "menuFolder": "partnerCriterion", "fileName": "dataManagementCreate.html", "pageType": "M2", "requestDate":"2019-07-19" ,"dueDate": "2019-", "author":"차성숙",
+        "desc": "1) 탭(step) 영역 수정, 2)'다음','이전'버튼 화살표 아이콘 틀어짐, 3)'레벨설정' 탭> 오른쪽 데이터설정그리드 placeHolder 높이값, 4)'데이터 매핑'탭 > 행추가 잘 안댐"
+    },
+
+    {"l1": "개별지표 개발", "l2": "Proxy 관리", "l3": "Proxy 조회", "screenId": "2.2.3.1", "menuFolder": "eachIndicator", "fileName": "proxyList.html", "pageType": "M", "requestDate":"2019-07-19" ,"dueDate": "2019-07-19", "author":"차성숙",
+        "desc": ""
+    },
+    {"l1": "개별지표 개발", "l2": "Proxy 관리", "l3": "Proxy 상세", "screenId": "2.2.3.1.1", "menuFolder": "eachIndicator", "fileName": "proxyView.html", "pageType": "M2", "requestDate":"2019-07-19" ,"dueDate": "2019-07-19", "author":"차성숙",
+        "desc": "파일첨부 리스트"
+    },
+    {"l1": "개별지표 개발", "l2": "Proxy 관리", "l3": "Proxy 등록/변경", "screenId": "2.2.3.1.2", "menuFolder": "eachIndicator", "fileName": "proxyEdit.html", "pageType": "M2", "requestDate":"2019-07-19" ,"dueDate": "2019-07-19", "author":"차성숙",
+        "desc": "파일첨부"
+    },
+
+    {"l1": "개별지표 개발", "l2": "Input Data 코드 관리", "l3": "Input Data 코드 조회", "screenId": "2.2.4.1", "menuFolder": "eachIndicator", "fileName": "inputDataList.html", "pageType": "M", "requestDate":"2019-07-19" ,"dueDate": "2019-07-19", "author":"차성숙",
+        "desc": "검수완료"
+    },
+    {"l1": "개별지표 개발", "l2": "Input Data 코드 관리", "l3": "Input Data 코드 상세", "screenId": "2.2.4.1.1", "menuFolder": "eachIndicator", "fileName": "inpuDataView.html", "pageType": "M2", "requestDate":"2019-07-19" ,"dueDate": "2019-07-19", "author":"차성숙",
+        "desc": ""
+    },
+    {
+        "l1": "개별지표 개발", "l2": "Input Data 코드 관리", "l3": "Input Data 코드 변경이력(P)",
+        "screenId": "2.2.4.1.1.1",
+        "menuFolder": "eachIndicator",
+        "fileName": "inputDataHistory_P.html",
+        "pageType": { "type":"P", "width":1050, "heigth":757} ,
+        "requestDate":"2019-07-19" ,"dueDate": "2019-07-19",
+        "author":"차성숙",
+        "desc": ""
+    },
+    {"l1": "개별지표 개발", "l2": "Input Data 코드 관리", "l3": "Input Data 코드 등록/변경", "screenId": "2.2.4.1.2", "menuFolder": "eachIndicator", "fileName": "inputDataEdit.html", "pageType": "M2", "requestDate":"2019-07-19" ,"dueDate": "2019-07-19", "author":"차성숙",
+        "desc": ""
+    },
+
+    {"l1": "시스템 관리", "l2": "권한관리", "l3": "권한관리", "screenId": "3.2.5.1", "menuFolder": "system", "fileName": "authManagement.html", "pageType": "M", "requestDate":"2019-07-12" ,"dueDate": "2019-07-15", "author":"김가빈", "desc": "" },
+    {"l1": "시스템 관리", "l2": "권한그룹관리", "l3": "권한그룹관리", "screenId": "3.2.5.2", "menuFolder": "system", "fileName": "authGrpManagement.html", "pageType": "M2", "requestDate":"2019-07-12" ,"dueDate": "2019-07-15", "author":"김가빈","desc": ""},
+    {
+        "l1": "시스템 관리", "l2": "권한그룹관리", "l3": "(팝업)권한조회",
+        "screenId": "3.2.5.2.2.1", 
+        "menuFolder": "system",
+        "fileName": "-",
+        "pageType": { "type":"P", "width":1050, "heigth":757} ,
+        "requestDate":"2019-07-12" ,"dueDate": "-",
+        "author":"김가빈",
+        "desc": "2019-07-16 ) 권한조회 / 사용자조회 Popup - 화면설계/디자인대기중 (디자인 완료 예정시일 : 07-22)"
+    },
+    {
+        "l1": "시스템 관리", "l2": "권한그룹관리", "l3": "(팝업)사용자조회",
+        "screenId": "-",
+        "menuFolder": "system", 
+        "fileName": "--",
+        "pageType": { "type":"P", "width":1050, "heigth":850} ,
+        "requestDate":"2019-07-12", "dueDate": "-",
+        "author":"김가빈",
+        "desc": "2019-07-16 ) 권한조회 / 사용자조회 Popup - 화면설계/디자인대기중 (디자인 완료 예정시일 : 07-22)"
+    },    
+    {
+        "l1": "시스템 관리", "l2": "보안리소스관리", "l3": "보안 리소스 관리",
+        "screenId": "3.2.5.3", 
+        "menuFolder": "system", 
+        "fileName": "resourcesManagement.html", 
+        "pageType": "M2",
+        "requestDate":"2019-07-16" ,
+        "dueDate": "2019-07-16", 
+        "author":"김가빈", "desc": "" 
+    },
+    {
+        "l1": "시스템 관리", "l2": "보안리소스관리", "l3": "(팝업)권한부여", 
+        "screenId": "3.2.5.3.0.1", 
+        "menuFolder": "system", 
+        "fileName": "authorize_P.html", 
+        "pageType": { "type":"P", "width":1050, "heigth":850} ,
+        "requestDate":"2019-07-12",
+        "dueDate": "2019-07-15",
+        "author":"김가빈","desc": ""
+    },
+    
+    {"l1": "시스템 관리", "l2": "공통코드 관리", "l3": "공통코드 조회 및 수정", "screenId": "3.2.6.1", "menuFolder": "system", "fileName": "commonCodeList.html", "pageType": "M", "requestDate":"2019-07-19" ,"dueDate": "2019-07-17", "author":"차성숙","desc": "(D)트리그리드"}
+
+    ]
+}

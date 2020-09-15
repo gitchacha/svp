@@ -1,0 +1,94 @@
+<div class="main__wrap">
+    <div class="main__visual-area">    
+        <p class="main-copy"><strong>SK</strong>는 오늘보다<br />더 행복한 내일을 만듭니다</p>
+        <span class="scroll">Scroll Down</span>
+    </div>
+    
+    <div class="sv-goal"><!--/* SV 추진체계(S) */-->
+        <h1 class="title-main-section">SV 추진체계</h1>
+        <p class="copy">SK는 향후 10년 동안 집중할 10대 사회문제별 주요 솔루션과 이행 지표를 선정하고<br />
+        각 영역에서 2030년까지 달성할 사회적 가치 창출 목표와 구체적인 추진 전략을 실행하고 있습니다.</p>
+    
+        <div class="main-slide">
+            
+        </div>        
+    </div><!--/* SV 추진체계(E) */-->
+
+    <div class="dbl-bm"><!--/* SK DBL BM(S) */-->
+        <h1 class="title-main-section">SK DBL BM</h1>
+        <p class="copy">회사별 Financial Story에 사회적 가치 성과 체계를 담은 Business Model</p>
+    
+        <div class="slide-bm" id="scrollDblBm">
+            <ul class="slide" id="dblBmList"></ul> 
+        </div>
+        <div class="wrap">
+            <a href="" class="more">More</a>
+        </div>
+    </div><!--/* SK DBL BM(E) */-->
+
+    <div class="sk-story"><!--/* sk-story(S) */-->
+        <h1 class="title-main-section">SK Story</h1>
+        <p class="copy">SK그룹이 추진하고 있는 사회성과/지표와 Data Pool 공유, 그리고 주목할 만한 이야기들</p>
+        <ul class="list-story">
+            <li class="social"><a href="">사회성과 공표</a></li>
+            <li class="indicator"><a href="">측정지표</a></li>
+            <li class="ref"><a href="">Reference DB</a></li>
+            <li class="news"><a href="">SK news</a></li>
+            <li class="media"><a href="">언론/보도자료</a></li>
+        </ul>
+    </div><!--/* sk-story(E) */-->
+    
+    
+</div>
+<script>
+    $(function(){
+        $("#scrollDblBm").mCustomScrollbar({            
+            axis: "x",            
+            mouseWheel:{ 
+                scrollAmount: 440,
+                preventDefault:true,
+                normalizeDelta:false
+            },
+            advanced:{ updateOnContentResize: true }
+        });
+
+        // BM Data 샘플
+        var _data = [
+            {
+                link : './', // 이동 URL
+                img: '../../static/image/mvp/temp/bm-temp-01.png', // 이미지 URL
+                /* [label] 업계 분류별 tag string
+                    에너지 : energy,
+                    통신/ICT : ict,
+                    반도체 : smcd,
+                    물류/서비스: dist                
+                */
+                label : 'energy',
+                mbrNm : 'SKI', // 관계사명
+                article: '내트럭 하우스를 통한 화물 운전자 복지서비스 제공 성과' // 내용
+            },
+            {
+                link : './', // 이동 URL
+                img: '../../static/image/mvp/temp/bm-temp-02.png',
+                label : 'energy',
+                mbrNm : 'SKI', 
+                article: '홈픽 서비스로 인한 고령 택배기사의 고용 지원 성과'
+            },
+            {
+                link : './', // 이동 URL
+                img: '../../static/image/mvp/temp/bm-temp-03.png',
+                label : 'ict',
+                mbrNm : 'SKT',
+                article: '장애인 사용요금 할인을 통한 취약계층 정보 접근성 제고 성과'
+            },
+            {link : './', img: '../../static/image/mvp/temp/bm-temp-04.png',label : 'ict',mbrNm : 'SKB',article: 'SE, 소상공인의 stoa 판매를 통한 경쟁력 제고 성과'},
+            {link : './', img: '../../static/image/mvp/temp/n.png', label : 'smcd', mbrNm : 'SKB', article: '반도체샘플'},
+            {link : './', img: '../../static/image/mvp/temp/n.png', label : 'dist', mbrNm : 'SKB', article: '물류/서비스'},
+        ];
+
+        new DblBmList({
+            id:  'dblBmList',
+            data : _data,
+        });
+    });
+</script>

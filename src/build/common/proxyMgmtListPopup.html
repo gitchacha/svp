@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SV 평가모델 : Proxy 조회</title>
+        <meta charset="UTF-8" />    
+    <meta http-equiv="Content-Type" content="text/html; charser=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <base href="../../static/">
+    
+    <link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+
+    <link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/alopex-ui-default.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/src/alopex-ext.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/grid/alopex-grid.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/common_asmt.css" /><!-- SKSV -->    
+
+    <script src="lib/jquery/jquery-3.4.1.min.js"></script>
+    <script src="lib/alopex/ui/script/alopex-ui.min.js"></script>
+    
+    <script src="lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+	<script src="lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+    <script src="lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+    <script src="lib/alopex/grid/alopex-grid.min.js"></script>
+    <script src="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+    <script src="lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+    <script src="lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+    
+    <!-- 공통 JS(S) -->
+    <script src="js/sv-utils.js"></script>    
+    <script src="js/sv-setup.js"></script>
+    <script src="js/sv-control.js"></script>
+    <script src="js/sv-file.js"></script>
+    <script src="js/bignumber.js"></script>
+    <!-- 공통 JS(E) -->
+
+    <script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script><!--Alopex - ui Webeditor -->
+    <script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script><!--Alopex - ui Webeditor -->
+    
+    <style type="text/css">
+        .alopexgrid-progress-modal {
+            display: none;
+        }
+    
+        .alopexgrid-progress {
+            display: none;
+        }
+    
+        .btn_tree_column {
+            float: right;
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body class="popup__primary">
+    <div class="popup__container">
+<div class="pageCustom pageProxyMgmtListPopup">
+    <div class="condition__search"><!--/* 조건검색 (S) */-->
+        
+        <div id="searchCondition" class="condition__wrap">                        
+            <!--/* 조건 (S) */-->
+            <ul class="condition__list">
+                <li class="condi rel">
+                    <strong>관계사</strong>
+                    <div class="rule">
+                        <div class="select__form selectCustom small full">
+                            <button id="selectOnsCpbdId" class="Dropdownbutton button" data-default-option="all" data-bind-option="cmpCd: cmpNm" data-bind="value: onsCpbdId, code: options"></button>
+                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="condi csst">
+                    <strong>분류체계(Lv.3)</strong>
+                    <div class="rule">
+                        <span class="func__input-search empty full small" id="">
+                            <input id="path" name="pathSearch" class="Textinput full"  data-disabled="true" data-bind="value: pathSearch">
+                        </span>
+                        <div class="Tooltip" id="Tooltip" data-base="#pathSearch" data-position="bottom"><!-- 분류체계명 Tooltip --></div>
+                    </div>
+                </li>
+                <li class="condi year">
+                    <strong>기준년도</strong>
+                    <div class="select__form selectCustom full small">
+                        <button id="selectMsmtPrcpNb" class="Dropdownbutton button" data-bind-option="code: name" data-bind="value: msmtPrcpNb code: options"></button>
+                        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+                        </ul>
+                    </div>
+                </li>
+                <li class="condi prx-type">
+                    <strong>Proxy 구분</strong>
+                    <div class="rule forms">
+                        <label class="ImageCheckbox"><input id="srhPrxGbnGr" name="srhPrxGbn" class="Checkbox" type="checkbox" value="COMMON" data-bind="checked: srhPrxGbn"/>공통</label>
+                        <label class="ImageCheckbox"><input id="srhPrxGbnOc" name="srhPrxGbn" class="Checkbox" type="checkbox" value="INDIVIDUAL" data-bind="checked: srhPrxGbn"/>개별</label>
+                    </div>
+                </li>
+            </ul>
+            <ul class="condition__list">
+                <li class="condi grp">
+                    <strong>Proxy 그룹</strong>
+                    <div class="rule">
+                        <div class="select__form selectCustom small full">
+                            <button id="selectPrxGrpCd" class="Dropdownbutton button" data-bind-option="dtlCd: dtlCdNm" data-default-option="all" data-bind="value: prxGrpCd, code: options">선택</button>
+                            <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="condi prx-nm">
+                    <strong>Proxy명</strong>
+                    <input id="stdItmNm" name="stdItmNm" class="Textinput full small" data-bind="value: stdItmNm" />
+                </li>
+                <li class="condi useyn">
+                    <strong>사용여부</strong>
+                    <div class="rule forms">
+                        <label class="ImageCheckbox"><input id="srhUseY" name="srhUseYn" class="Checkbox" type="checkbox" value="Y" data-bind="checked: srhUseYn" />사용</label>
+                        <label class="ImageCheckbox"><input id="srhUseN" name="srhUseYn" class="Checkbox" type="checkbox" value="N" data-bind="checked: srhUseYn" />미사용</label>
+                    </div>
+                </li>
+                <li class="condi prcp">
+                    <strong>기준</strong>
+                    <div class="rule forms">
+                        <label class="ImageRadio"><input class="Radio" type="radio" name="msmtPrcpDiv" data-bind="checked: msmtPrcpDiv" value="KPI" checked />추정</label>
+                        <label class="ImageRadio"><input class="Radio" type="radio" name="msmtPrcpDiv" data-bind="checked: msmtPrcpDiv" value="PUBLIC" />확정</label>                        
+                    </div>
+                </li>
+            </ul>
+            <!--/* 조건 (E) */-->
+        </div>
+        <div class="condition__utils"><!--/* 조건검색 Buttons */-->            
+            <div class="btns">
+                <button id="btnReset" class="Button btn__icon small btnReset"><span>초기화</span></button>
+                <button id="btnSearch" class="Button btn__forms btnSearch">검색</button>
+            </div>
+            <button class="btn__condition-fold">조건검색<i></i></button>
+        </div>
+    </div><!--/* 조건검색 (E) */-->
+
+
+    <div id="grpProxyGrid" class="gridInitClass grid__list pointer"><!--/* 공통Proxy Grid */--></div>
+
+
+    <div id="divisionSticky" class="division__btn with-pager">
+        <div class="actions">
+            <div class="right">
+                <button id="btnApplyGrpProxy" class="Button btn__section strong">선택</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var dummyData = [
+        {
+            'onsCpbdNm':'공통',
+            'csstNm':'비즈니스 사회성과>환경>환경 제품서비스',
+            'prxGrpNm':'공통(환경)',
+            'stdItmNm':'CO2(Carbon dioxide)',
+            'untCd':'원/t-CO2-eq',
+            'crnCd':'KRW',
+            'stdItmVal':'103333333',
+            'crnXcngVal':'원화값',
+            'prxStatus':'AGREE',
+            'useYn' : 'Y'
+        },
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'지정폐기물 소각','untCd':'원/ton','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'일반,지정 폐기물 매립','untCd':'원/kg','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'일반폐기물 소각','untCd':'원/ton','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'T-N(Nitrogen, total)','untCd':'원/kg','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'NOT', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},        
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'지정폐기물 소각','untCd':'원/ton','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'일반,지정 폐기물 매립','untCd':'원/kg','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'일반폐기물 소각','untCd':'원/ton','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'T-N(Nitrogen, total)','untCd':'원/kg','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'NOT', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},        
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'지정폐기물 소각','untCd':'원/ton','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'일반,지정 폐기물 매립','untCd':'원/kg','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'일반폐기물 소각','untCd':'원/ton','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'T-N(Nitrogen, total)','untCd':'원/kg','crnCd':'EUR','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'NOT', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'N'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},
+        {'onsCpbdNm':'공통', 'csstNm':'비즈니스 사회성과>환경>환경 제품서비스', 'prxGrpNm':'공통(환경)', 'stdItmNm':'CO2(Carbon dioxide)','untCd':'원/t-CO2-eq','crnCd':'KRW','stdItmVal':'103333333','crnXcngVal':'원화값','prxStatus':'AGREE', 'useYn':'Y'},                
+    ];
+
+
+    $a.page(function() {
+
+        this.init = function(id, param) {         
+            setEventHandler();				//Step2.Event Handler 세팅
+            initGrid();                     //Step3.Alopex grid 초기화
+        };
+    });
+
+    /* Step2.Event Handler 세팅 */
+    function setEventHandler() {
+        $('.btn__condition-fold').on('click',function(e){
+            const $this = $(this);
+            const $wrap = $this.closest('.condition__search');
+            const $condi = $(document.getElementById('searchCondition'));
+            const $btns = $wrap.find('.condition__utils .btns');
+
+            if ( $wrap.hasClass('fold') ) {
+                $wrap.removeClass('fold');
+                $condi.stop().slideDown(200);
+                $btns.stop().fadeIn(200);
+                $('#grpProxyGrid').alopexGrid('updateOption', { 'height' : '10row'});
+                
+            } else {
+                $wrap.addClass('fold');
+                $condi.stop().slideUp(200);
+                $btns.stop().fadeOut(200);
+                $('#grpProxyGrid').alopexGrid('updateOption', { 'height' : '15row'});
+            }
+        });
+    }
+
+    function initGrid(){
+        $('#grpProxyGrid').alopexGrid({ // 비즈니스 그리드
+            pager:true,
+            paging : {
+                pagerTotal : false
+            },
+            message: {
+                nodata: '조회된 결과가 없습니다.'
+            },
+            height: '10row',
+            defaultColumnMapping: {
+                align:'center',
+                resizing: true,
+                sorting:true,
+            },
+            rowSelectOption: {            
+                clickSelect: true,
+            },
+            grouping: {
+                by: ['lv1','lv2','csstNm','lv4','lv5'],
+                useGrouping: true,
+                useGroupRowspan: true,
+            },
+            columnMapping : [                
+                { key: 'check', width : 50, selectorColumn : true, align: 'center'},
+	            { key: 'stdItmId', width: 110, title: '기준항목ID', hidden:true},
+	            { key: 'onsCpbdId', width: 140, title: '관계사', hidden:true},
+	            { key: 'onsCpbdNm', width: 130, title: '관계사', align: 'center'},                
+                { key: 'csstNm', width: 240, title: '분류체계(Lv.3)'},
+                { key: 'prxGrpCd', width: 140, title: 'Proxy그룹', align: 'center', hidden:true },
+	            { key: 'prxGrpNm', width: 130, title: 'Proxy 그룹', align: 'center'},
+	            { key: 'stdItmNm', width: 240, title: 'Proxy 명',},
+                { key: 'untCd', width: 100, title: 'Proxy 단위', align: 'center'},
+	            { key: 'crnCd', width: 80, title: '화폐구분', align: 'center'},
+	            { key: 'stdItmVal', width: 110, title: 'Proxy 값', align: 'right',
+	            	render : function(k, v){
+            			return AlopexGrid.renderUtil.addCommas(k);
+                	}
+	            },
+	            { key: 'crnXcngVal', width: 110, title: '원화값', align: 'right',
+	            	render : function(k, v){
+            			return AlopexGrid.renderUtil.addCommas(k);
+                	}
+	            },
+	            { key: 'prxStatus', width: 80, title: '상태',
+	                render : function(value,data) {
+	                    if ( value == 'AGREE' ) return '<span class="status type3">확정</span>'
+	                    return '<span class="status type2">미확정</span>';
+	                },
+	            },
+	            { key: 'useYn', width: 85, title: '사용여부', align: 'center',
+	                render : function(value,data) {
+	                    if(value == 'Y') {
+	                    	return '<span class="status char3 type6">사용</span>';
+                        } else {
+                            return '<span class="status char3 type7">미사용</span>'
+                        }
+	                },
+	            },                
+            ], // (E) columnMapping
+            data : dummyData
+        });
+    }
+
+
+</script>
+    </div>
+</body>
+</html>

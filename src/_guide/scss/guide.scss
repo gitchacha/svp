@@ -1,0 +1,355 @@
+/***** [ Description ] *****
+@description : 퍼블 가이드 전용 CSS. Production 반영 금지.
+*/
+body {
+    background-color:#eee
+}
+#sksv__guild-pub {
+    // display:flex;
+    
+
+    .guide__navigation {
+        position: fixed;left:0;top:0;bottom:0;        
+        width:160px;
+        background-color: #fff;
+        box-shadow: inset -1px 0 #ddd;
+        
+        .heading {
+            padding:20px 0;
+            font-size:20px;            
+            background-color:#333;
+            color:#fff;
+            text-align:center;
+            letter-spacing: -1px;
+            span {
+                display:block;
+                margin-top:10px;
+                font: {weight:400;size:15px;}
+            }
+        }
+
+        .navi li a {
+            display:block;
+            width: calc(100% - 1px);
+            box-sizing: border-box;
+            padding:13px 0 13px 23px;
+            border-bottom:1px solid #eee;
+            transition: all ease .4s;
+
+            &:hover {
+                background-color:#eee;
+                text-decoration: underline;
+                color:#002c5a
+            }
+        }
+    }
+    .guide__container {
+        padding-left:160px;
+        box-sizing: border-box;
+        height:100%;overflow:auto;        
+    }
+
+    .guide__wrap {
+        padding:40px 40px 0;        
+        margin:auto;
+        .heading {
+            position: relative;
+            padding-left:23px;
+            margin-bottom:15px;
+            font-size:18px;
+            color:#004769;
+            &::before {
+                display: block;content:"";
+                position: absolute;left:0;top:3px;
+                width:15px;height: 15px;
+                border-radius: 10px;
+                background-color: #0b66e4;
+                box-shadow: inset 0 0 5px #8bf2ff;
+            }
+        }
+
+        .division {
+            padding:20px 40px;margin-bottom:20px;
+            border:1px solid #ccc;
+            background-color:#fff;
+            box-shadow: 2px 2px 4px rgba(0,0,0,.1);
+            border-radius:3px;
+            .heading-sub {
+                display:inline-block;
+                margin-bottom:20px;padding:6px 13px 8px;
+                font: {
+                    size:14px;
+                    weight:400;
+                }
+                background-color:#003f6e;
+                border-radius:50px;
+                text-align: center;
+                color:#fff;
+
+            }
+        }
+
+        .chip {
+            display:block;
+            padding:15px;margin-bottom:5px;
+            font-size:13px;
+            text-shadow: 0px 0px 5px #000;
+            text-align:center;
+            color: #fff;
+
+            &[class*=border] {
+                border-width:5px;
+                
+                font-weight:600;
+                text-shadow: none;
+                color:#000;
+            }
+        }
+        .className {
+            display:block;
+            font-size:13px;
+            
+        }
+
+        .tit01 { font-size: 16px; }
+        .tit02 { font-size: 14px; }
+
+        &#guideComponent { position: relative; }
+
+        #guideTabWrap {
+            .Tabs.tab__primary {
+                div { padding:5px; text-align: center; }
+
+                &.simple{                    
+                    width: 200px;
+                    margin: auto;
+                }
+            }
+        }
+        #guideProcessBarWrap {
+            .Tabs.tab__step {
+                div { padding:5px; text-align: center; }
+            }
+            .box__article { width: 1410px; box-sizing: border-box; }
+        }
+
+    }
+
+    //현황판 그리드 스타일
+    #guideScreen {
+        position: relative;
+        #GridBoardScreen.alopexgrid{
+            .wrapper { background-color: #fff;border:1px solid #acacac; }
+
+            .cell.headercell {                
+                border-bottom: 1px solid #bbb;
+                background-color: #dfdfdf;
+                border-right: 1px solid #c3c3c3;
+                color: #000;
+                &.cell-lastcolumn {
+                    text-align: left;
+                }
+            }
+            .cell.bodycell.screen {
+                background-color: #f2f2f2;                
+                border-right:1px solid #ddd;                
+                border-bottom:1px solid #ddd;
+                color:#000;                
+            }
+            .alopexgrid-cell.bodycell{
+                white-space: nowrap;
+                padding-top:0;
+                height:30px;                                
+                font-size:12px;
+                line-height: 28px;
+                border-bottom:1px solid #ddd;
+                border-right:1px solid #ddd;
+                background-color:#fff;
+                &:hover {
+                    cursor:pointer;
+                }
+                &.cell-firstcolumn:after,
+                &.cell-lastcolumn:after {
+                    display: none;    
+                }
+                &.selected { background-color: #d4e6ff }
+
+                &.cell-hoveringrow {
+                    text-decoration: underline;
+                    span {text-decoration: underline;}
+                    box-shadow: none;
+                    // background-color:red;
+                    &.cell-firstcolumn:before,&.cell-firstcolumn:after {display: none}
+                }
+                &.l1 ,&.l2,&.l3,&.l4  {
+                    padding-left:10px;
+                    background-color: #f6f6f6;
+                }
+
+                &[class*=grp] {
+                    border-left: 0;
+                }
+                &.grp-model {
+                    font-size:12px;                    
+                    background-color:#fff4e9;
+                    
+                }
+                &.grp-ahead {
+                    font-size:12px;                    
+                    background-color:#ffe9e9;
+                }
+
+                &.fileName {
+                    padding-left:10px;
+                    font-size:13px;
+                    color:#f86601;
+                }
+
+                &.screen {
+                    padding-left:10px;
+                    padding-right:0;
+                    font: {size: 12px;weight:500}
+                    border-right: 1px solid #c1dfed;
+                    color: #1154ce;
+                    background-color: #f3f9fc;
+                    border-bottom-color: #c6e3f1;
+                }
+
+                span {color:inherit}
+            }
+            .alopexgrid-cell {
+                border-bottom: 0;
+                color:#848893;
+                .l3 { display: inline-block; font-weight: 600; color: #000;}
+                .l3_s { text-indent: 20px; font-weight: 400;}
+                .l3_p { text-indent: 40px; font-weight: 400;}
+                color:#333;
+            }
+            
+
+            .relative-wrap {position:static}
+            
+            .bodycell[data-alopexgrid-columnindex="3"] {font-weight:600}
+            .bodycell[data-alopexgrid-columnindex="1"] { border-left:1px solid #ddd;}            
+            .bodycell[data-alopexgrid-columnindex="9"] {
+                padding-left:0;padding-right:0;
+                letter-spacing: -.5px;
+                background-color: #fbffa5;
+                border-color: #e1e675;
+            }
+            
+
+            .bodycell {
+                span {
+                    max-width: 100%;overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            .noFile {
+                color:red;
+            }
+
+            // 소계
+            .footercell {                
+                font-weight: 600;
+                background-color: #d1e8cb;
+                border: {
+                    width:1px 1px 0 0 ;
+                    style:solid;
+                    color:#98ba98;
+                }
+                color: #0d2f0d; 
+                &.footercell-bottom {line-height:normal;padding-top:4px;}
+            }
+
+            
+        }
+
+        .alopexgrid-cell.cell-search-highlight-row,
+        .alopexgrid-cell.cell-search-match-column {
+            border-color: #d8d56f!important;
+            background-color: #fffc90 !important;
+        }
+        
+        
+    }
+    //color
+    .colorchip {
+        &:after {display:block;content:"";clear:both;}
+        li {
+            float:left;
+            margin:0 20px 20px 0;
+        }
+    }
+
+    // icon
+    .iconList {
+        overflow:hidden;
+        li {
+            float:left; 
+            margin:8px;
+            min-height:80px;
+            padding:20px 15px 0;
+            border:1px solid #ddd;
+            border-radius: 5px;
+            font-size:25px; 
+            text-align: center;
+            &:first-child {margin-left:0;}
+
+            .name{
+                display:block;
+                margin-top:10px;
+                font-size:14px;
+            }
+        }
+    }
+    
+}
+
+
+
+#search.alopexgrid-search-plugin {
+    width:100%;
+    position: absolute;left:170px;top:35px;z-index:1;
+    margin-bottom:-25px;
+    input {
+        height:29px;width:250px;
+        padding-left:10px;
+        
+        margin-right: 5px;
+        border-color:#bbb;
+        font-family: inherit;
+    }
+    .alopexgrid-search-plugin-result {
+        top:0;right:auto;left:375px;height:27px;min-width:50px;
+        display:inline-block;
+        padding:7px 10px;
+        border-radius: 50px;
+        font-size:12px;color:#333;
+        color:#fff;
+        background-color:#333;
+        text-align: center;
+    }
+    .alopexgrid-search-plugin-section {
+        position: static;
+        button {
+            height:27px;
+            padding:0 15px;
+            font-size:13px;
+            &:first-child {margin-right:5px;}
+            background-color: #666;
+            border-radius: 3px;
+        }
+        .alopexgrid-search-plugin-prev,.alopexgrid-search-plugin-next {
+            border-radius: 3px 0 0 3px;
+            padding:0;
+            width:24px;
+            background-position:9px 7px;
+        }
+        .alopexgrid-search-plugin-next {background-position:-10px 7px;border-radius: 0 3px 3px 0;}
+    }
+
+    
+}
+

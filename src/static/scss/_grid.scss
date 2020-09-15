@@ -1,0 +1,1557 @@
+/* [ Page ] _grid.scss : 디자인 'Grid' 표준 */
+// Alopex Grid component 공통 Override
+
+$headerRowHeight : 60;
+$bodyRowHeight : 56;
+
+// cell bg / font style
+$cellBgColor : #fff;
+$cellBorderColor : #cacdd2;
+$cellTxtColor : #1b1d1f;
+$cellSelectedColor : #1b1d1f;
+
+
+$headercellTxtColor : #464c52;
+$headerCellBgColor : #fff;
+
+// body row - hover
+$rowHoverBgColor:#f7fbfd;
+$rowHoverBgColorDefault:inherit;
+
+//footerColor
+$subTotalColor:#f3f5fa;
+$totalColor:#e7ebf3;
+
+
+//groupMeta (그룹핑)
+$groupMetaBgColor:#f3f3f3;
+// header 
+
+
+
+
+.alopexgrid {
+    max-width:#{$articleWidth}px;
+    padding-top:32px;
+    font: {
+        family: inherit;
+        size:13px;
+    } 
+
+    * {font: inherit;line-height:normal}
+
+    // 그리드 하단에 util-area 가 있는 경우 border-radius 없앰
+    &.utils {
+        .wrapper {border-radius:10px 10px 0 0;border-bottom:0;}
+        &.hide-pager .pager {
+            height:0;padding-top:0;
+            .pager-right, .pager-center {display:none}
+        }
+    } 
+
+    // 그리드 + 총건수 없음
+    &.no-count {
+        padding-top:0;
+        .pager-left {display:none}
+    }
+    // 가로스크롤 hide
+    &.no-scroll {
+        .scrollbar.x {display:none}
+    }
+
+    /* 그리드를 구성하는 모든 셀과 스크롤 요소는 .wrapper 클래스 내에 위치하게 된다. */
+    .wrapper {
+        background-color:$cellBgColor;
+        border:0;
+        border-radius: 10px;
+
+        .alopexgrid-cell { // Grid Cell
+            padding:0 15px;
+            background-color:$cellBgColor;
+            border: {
+                width:1px 1px 0 0;                
+                style:solid;
+                color:$cellBorderColor
+            } 
+            white-space: normal;
+            line-height:22px;
+            color:$cellTxtColor;
+
+            &.cell-ellipsis-text {
+                padding-top:0;
+                white-space: nowrap;
+                .cellVerticalMiddle,.cellVerticalMiddle-read {top:calc(50% + 5px)}
+
+                &.bodycell {
+                    // 세로 가운데 정렬문제로 line-height 처리함. 행간 줄넘김 허용되는 Grid는 재조정 필요
+                    padding-top:0;line-height: #{$bodyRowHeight}px;
+
+                    &.editing:not(.editingcell) {
+                        line-height:#{$bodyRowHeight}px;
+                        .cellVerticalMiddle {top:calc(50% - 14px)}
+                        .cellVerticalMiddle-read {top:50%}
+                    }
+                    &.editing.editingcell,
+                    &.editing.selector-column {
+                        line-height:#{$bodyRowHeight - 10}px;
+                    }
+                } 
+            } 
+
+            /***** Cell 공통 *****/
+            &.cell {
+                // 그리드 > Tree 
+                .alopexgrid-treecolumn-icon {
+                    &.expandable { // parent tree
+                        width:10px;height:auto;
+                        margin:0 10px 0 15px;
+                        background:none;
+
+                        &.expanded { // 펼침
+                            &:before {
+                                position:relative;top:-1px;left:1px;
+                                transform: rotate(90deg);
+                            }
+                        }
+                    }
+
+                    &.leaf { // 최하위 Item
+                        position: relative;top:-2px;
+                        width:10px;height:10px;
+                        margin: {left:16px;right:10px;}
+                    }
+                }
+
+                &.headercell .alopexgrid-treecolumn-icon {
+                    width:10px;height:auto;
+                    margin:0 10px 0 15px;
+                    background:none;
+                    & + .column-title {
+                        font-weight: 600;
+                    }
+                }
+
+                // bodycell 내부 tree
+                &.bodycell .alopexgrid-treecolumn-icon.expandable {
+                    margin:0 10px 0 10px;
+                    @media all and (-ms-high-contrast:none) {top:-2px;}
+                }
+            }
+
+            
+            &.bodycell {
+                // padding: {top:10px;bottom:10px;}
+                font-size:16px;
+                > div {
+                    display: inline-block;vertical-align: middle;
+                }
+
+                // 'wrapCellContent' 옵션으로 추가한 클래스
+                .ellipsisCell {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    width: 100%;
+                }
+
+                /***** selected cell *****/
+                &.selected {
+                    // font-weight: 600;
+                    background-color:$cellBgColor;
+                    color:$cellSelectedColor;
+                }
+
+                /***** 팝업 띄우는 cell *****/
+                &.popupCell {
+                    cursor:pointer!important;
+                    &:hover {
+                        //text-decoration: underline; 
+                        background-color: $rowHoverBgColor;
+                    }
+                    &.cell-groupheader,
+                    &.cell-groupfooter {cursor: default!important; &:hover {text-decoration: none}}
+                }
+
+                /***** BG가 있는 cell *****/
+                &.activeCell, .activeCell,
+                &.cell-highlight, .cell-highlight {
+                    cursor:pointer!important;
+                    background-color: $rowHoverBgColor!important;
+                    &:hover { background-color: $rowHoverBgColor!important; }
+                }
+                
+                /***** hover row *****/
+                &.cell-hovering:hover,
+                &.cell-hoveringrow,
+                &.cell-hoveringrow.cell-grouping {
+                    background-color:$rowHoverBgColorDefault;
+                    &.cell-groupheader:hover {background-color: #fff;}
+                }
+                
+                /***** editing cell *****/
+                &.cell-ui-editable, 
+                &.cell-multi-column .multicell.cell-ui-editable,                
+                &.cell-ui-editable.cell-lastcolumn {
+                    padding-right:13px;
+                    &.editing {
+                        padding: {
+                            left:5.5px;right:5.5px;
+                        }
+                    }
+                }
+                &.cell-type-setEditable {
+                    height:42px;
+                    padding-bottom:0;
+                }
+
+                              
+                
+                &.columnLevel {
+                    background-color:#fff;
+                    .alopexgrid-treecolumn-icon.leaf{
+                        background-color:#fff;
+                    }
+                }
+                &.columnSubTotal, .columnSubTotal.cell-hoveringrow { 
+                    font-weight:600;
+                    background-color:$subTotalColor;                    
+                }
+                &.columnTotal, &.rowRoot.columnTotal,
+                &.columnTotal.cell-lastcolumn {
+                    font-weight: 600;
+                    background-color:$totalColor;                    
+                    &.cell-groupmeta.cell-groupheader{
+                        background-color:#fff;
+                    }
+                }
+                &.columnTotal.cell-hoveringrow, &.rowRoot.columnTotal.cell-hoveringrow,
+                &.columnTotal.cell-lastcolumn.cell-hoveringrow {
+                    background-color:$totalColor;
+                }
+
+
+                &.rowTotal, &.rowSubTotal {
+                    font-weight: 600;
+                    background-color:#e5e5e5;
+                    border-color:#ccc;
+                    &.cell-firstcolumn { text-align: center; border-color:#ccc; }
+                    &.type1 {background-color:#ddd;}
+                }
+
+                &.rowTotal, &.rowTotal.cell-hoveringrow, &.rowTotal.cell-grouping {background-color:$totalColor}
+                &.rowSubTotal, &.rowSubTotal.cell-grouping {
+                    background-color:#f3f5fa;
+                }                
+                &.rowTotal, &.rowSubTotal, &.rowSubTotal.cell-grouping{
+                    .alopexgrid-treecolumn-icon{
+                        display: none;
+                    }
+                }
+                &.rowTotal.cell-groupheader {
+                    display: none;
+                }
+
+                &.rowRoot, &.rowRoot.cell-hoveringrow {
+                    background-color:#f3f5fa;
+                    border-right-color:#d6d7d9;
+                }
+
+                &.cell-multi-column{
+                    padding: 0;
+                    .multicell {
+                        display: block; position:relative;
+                        line-height: 44px;
+                        padding: 0 15px;
+                    }
+                }
+
+                &.total {
+                    font: {                        
+                        weight: 600;
+                    }
+                }
+
+                &.preline {
+                    white-space: pre-line!important;
+                    word-break: break-word;
+                    @media all and (-ms-high-contrast:none) {
+                        word-break: break-all;
+                    }
+                    
+                }
+            }
+
+
+            &.cell-lastcolumn {
+                border-right:0;
+            }
+
+            
+            /***** Cell common *****/
+            &.selector-column .alopexgrid-input-checkbox-wrapper {
+                .selector-checkbox {margin:0}                    
+            }
+
+            /***** Header cell *****/
+            &.headercell {
+                height:  #{$headerRowHeight}px;                
+                padding: {left:0;right:0;}
+                font: {weight:300;}                
+                background-color:$headerCellBgColor;                
+                color:$headercellTxtColor;
+                &.selector-column.cell-firstcolumn {padding-left:0;}
+                box-shadow: inset 0px -1px 0px #ccc;
+                border: {
+                    width:0 0 2px 0;
+                    style:solid;
+                    color:#f5f5f5;
+                }
+
+                
+                .relative-wrap { // with sorting
+                    // position:relative;top:-2px;
+                    display: inline-block;
+                    margin-top: -3px;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                }
+                
+                .column-title {
+                    margin:0;
+                    font : {                        
+                        size:15px;
+                        weight:300;
+                    }
+
+                
+                    // 타이틀 옆 'f' 태그 (ex:reportEstResultDetail.html)
+                    .forecast {
+                        display:inline-block;
+                        width:16px;height: 16px;line-height: 16px;
+                        margin-left:4px; border-radius: 50%;
+                        color:#fff;
+                        font-size: 10px;
+                        background-color: #89c933;
+                    }
+                    .search { // '돋보기'버튼
+                        display:inline-block;
+                        width:16px;height: 16px;line-height: 16px;
+                        margin-left:4px; 
+                        color:#fff;
+                        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAA0VXHyAAACNElEQVQ4EZVTX0hTYRT/fddLD2U6NHVutdzShzKCaqWZGghpMaIsphERRPUQSUEQoSAEgRFBIGS+9BoEey8qkCKTxFUYuWQ6B8PdrR5kkS/F3W7nfPbpvcUeOi+H8zu/3+H7zh+Bv2zfwa5Gy7QuWih0QsAn0xZSAtoLoYtHU2+fz9glQgXhcHhdMpW7bwGXAUtTuNOLAglG/T7X9Ugk8otzsgCLF1K5ZyTscAqKRWIs4HMd5SIlTFm/0TtM4l5F93rcON3TjZPdIWwL+JHNfsOP5WWVZu/Pff9ZYaQXngr+c8EsfFLPbmttxtDtAei6DiPzFZ7aGpimiYHBIbwZf2crIgqaru3SuGFK7Covw63BG5ibTyJ0/AxO9ZyXnmPGOb9mltRqstt/0GBwN8qJdOfuMJaWchJlzzHjnLcba7XVUVGmuqpS5g0ja+chbWRk7K6pduCsdYwrHk9IwqH2Fgexve2AjOcTSQfOgQ5aEvI7OIh+mEb0/TT6b15FFb3m88wX7GzcjksXziKfz2NxMc20NSNtiXdzfQM1sVmh4xOTNLo69IZP4FioC03792Aq+hFl1IMjnR149XpidaS0nY//GaMqtKmyAnVbtyCdySJD42yoD2B05B5mZ+Pou9ZPtJUxyk0MNh1+YMG6osTFvKfWjdLSDYjPJah/YiQ6+bJPNpF3myqOFRMq3KDXsJi5KxpArnIsFsu3tux9wutJySAzlMjp+ZjEQ7qDc45jspP+95x/A/GI2g3HYjIcAAAAAElFTkSuQmCC') no-repeat 0 0;
+                        cursor: pointer;
+                        vertical-align: text-bottom;
+                    }
+
+                }
+          
+
+                // sort
+                &.sorting {
+                    .sorting-handle {
+                        position: static!important;
+                        width:8px;height: 11px;
+                        margin: {left:4px;top:2px}
+                        font-size:9px;
+                        background:none;
+                        line-height: 12px;
+                    }
+                    &.asc .sorting-handle, &.desc .sorting-handle {
+                        &:before {content: "\e94c";color: #888}
+                        // &:after {content: "\e91a";color: #ddd;margin-left: -.73em;}
+                    }
+                    &.desc .sorting-handle {
+                        transform: rotate(-180deg)
+                    }
+                }
+
+
+                
+            } // (E) Header cell
+            
+
+            /***** Body cell *****/
+            &.bodycell {
+                height: #{$bodyRowHeight}px;
+                padding-top:10px;
+                padding-bottom:20px;
+
+                &.cell-type-string {padding-right:15px!important;}
+                
+                // 그룹핑 펼침/접기 아이콘
+                .toggle {
+                    position: relative; top: -2px;
+                    display: inline-block;
+                    padding-right: 10px;
+                    .i-arrow {
+                        font-size: 10px;
+                        vertical-align: middle
+                    }
+                }                
+                
+                
+                
+                &.cell-lastcolumn:before,
+                &.cell-firstcolumn:before { // hover 시 border 100% 처리
+                    display:block;content:"";
+                    height:1px;width:20px;
+                    background-color: #ccc;
+                    position: absolute;top:-1px;
+                }
+                &.cell-firstcolumn:before {left:20px;transition:left ease .2s;}
+                &.cell-lastcolumn:before {right:20px;transition:right ease .2s;}
+
+
+                &.cell-firstcolumn:after {left:20px;right:0}
+                &.cell-lastcolumn:after {left:0;right:20px}
+
+                .func__input-search {
+                    height:auto;                    
+                }
+                
+
+                // body cell hover
+                // &.cell-hoveringrow, &.selected {
+                &.selected,
+                &.selected.cell-grouping {
+                    z-index: 30;
+                    // margin-top:-1px;padding-top:11px;
+                    background-color:#f7fbfd;
+                    border: {
+                        // color:$color-pointType2;
+                        // bottom:0;
+                    }
+                    // box-shadow:inset 0 1px 0 $color-pointType2;
+
+                    // &:before {top:0;background-color: $color-pointType2;}
+                    
+                    &.cell-firstcolumn {
+                        // border-left:1px solid $color-pointType2;
+                        &.cell-rowspan-column {border-left:0;}
+                    }
+
+
+                    // fixcol
+                    &.cell-fixcol {
+                        z-index:31;
+                        &.cell-hoveringrow {z-index:31;}
+                    }
+                }
+               
+
+                // 체크박스 컬럼
+                &.selector-column {
+                    &.cell-grouping {padding-left: 14px;}
+                    &.cell-ui-noneditable {padding-left:7px;}                    
+                }
+
+                &.selector-column,
+                &.selector-column.cell-firstcolumn, &.selector-column.selected,
+                &.selector-column.cell-lastcolumn ,&.selector-column.selected {
+                    padding: {left:7px;right:8px;}
+                }
+
+
+                .Textarea, textarea {
+                    padding-top:5px; margin-top:5px;
+                    min-height: calc(100% - 10px);
+                    min-width:100%;
+                }
+
+                &.funcEditCell {
+                    .func__input-search {
+                        top:-2px;
+                        min-width: 100%;
+
+                    }
+                }
+                //editing cell
+                &.editingcell {
+                    // padding: {top: 6px; left:5.5px;right:5.5px;}
+
+                    .Textinput, .Select , .Button, .func__input-search,
+                    .Daterange {
+                        max-width:100%;position: relative;top:-1px;transition:none;
+                        font-weight: 400;
+                    }
+
+                    .Daterange {
+                        display:inline-flex;
+                        align-items:center;
+
+                        .Startdate, .Enddate {
+                            // 디자인 가이드에는 130px 인데, 그리드 에디팅 셀 안에서는 또 120임. 해서 예외적용함
+                            width:120px;
+                        }
+                    }
+
+                    // .func__input-search .Textinput {top:0;}
+                    .func__input-search.full {width: 100%;}
+                    .Textinput, .Select {min-width:100%}
+                    select.Select {padding-left:10px;}
+                    &.cell-ellipsis-text {padding-top:0;}
+
+                    // Textinput
+                    .Textinput {
+                        background-color:#fff;
+                        vertical-align: middle;
+                        // &[disabled], &[data-disabled="true"] {background-color:#f9f9f9}
+                        &.Disabled { background-color:#f3f3f3; }
+                    }
+                    
+
+                    // 검색팝업 Input
+                    .func__input-search {
+                        vertical-align: middle;
+                        background-color: #fff;
+                        .Textinput {
+                            min-width: calc(100% - 40px);
+                            // border: 0 none;
+                            vertical-align: top;
+                            cursor: pointer !important;
+                        }
+                        &.empty .inputEmpty:before {transform: translate(-50%, -50%)}
+                        .icon {                   
+                            // top:4px; 
+                            vertical-align: super;
+                            &.i-input-person {
+                                top:6px;
+                                font-size:18px;
+                            }
+                            &.i-input-enter {
+                                top:7px;
+                            }
+                        }
+
+                    }
+
+                } // (E) editing-cell
+
+
+                //grouping cell
+                &.cell-grouping {background-color : #fff;}
+                &.cell-groupmeta {
+
+                    //groupheader
+                    &.cell-groupheader {
+                        padding-left:15px;
+                        border-bottom-color:#ccc;
+                        background-color:#f3f3f3;
+                        color:#000;                        
+                    }
+                    &.grpHeaderAll, &.grpHeaderAll.cell-hoveringrow {
+                        font-weight: 700;
+                        background-color:#f3f3f3;
+                    }
+                }
+
+                .grid__grpHeader-dataLev.zero { // 그룹 header - 0 Level
+                    font-weight:400;
+                    color:#888;
+                    .lv {
+                        display:inline-block;
+                        position: relative;top:-1px;
+                        box-sizing:border-box;
+                        width:17px;height:16px;
+                        margin-right:5px;
+                        font-size:11px;
+                        background-color:#ccc;
+                        border-radius: 4px;
+                        text-align: center;
+                        line-height:15px;
+                        color:#fff;
+                    }
+
+                }
+                
+           
+                
+                /***** 소계 행 *****/
+                &.cell-groupfooter {
+                    padding-right:13px;
+                    font-size:13px;
+                    // background-color:#f3f3f3!important;
+                    background-color:#f3f5fa;
+                    border: {
+                        color:#ccc;
+                        bottom-color:#ccc!important;
+                    }
+                    
+                    box-shadow:none;
+                    &.cell-firstcolumn .groupsummary-value {
+                        font-weight:600;
+                        vertical-align: text-bottom;
+                    }
+                    
+         
+                    &.cell-type-string.cell-ui-editable {}                    
+                    
+                } // (E) cell-groupfooter - 소계행
+
+                &.anchor {
+                    cursor:pointer!important;
+                }
+
+                
+
+
+
+                .btnHoverEdit { // btnHoverEdit - row Hover 시에만 View
+                    display:none;
+                    &:last-child {margin-right:5px;}
+                }
+                .bodycell.align-right{ .btnHoverEdit:last-child {margin-right: 0 }}
+                
+            
+                .rowHoverBtnToggle {
+                    .btnHoverEdit {
+                        display:none;
+                        position:absolute;right:15px;top:50%;
+                        transform:translateY(-50%);
+                        margin-top:-5px;
+                    }
+            
+                    .btn__forms {
+                        padding: {left:10px;right:10px;}
+        
+                    }
+                    span.btnHoverEdit {
+                        margin-top:0;
+            
+                        .btn__icon {
+                            width:26px;height:26px;
+                            padding:0;margin-left:4px;
+                            text-align: center;
+                        }
+            
+                    }
+
+                    &.top { // rowspan 컬럼의 경우 위치값 상단으로
+                        .btnHoverEdit.Button, span.btnHoverEdit {
+                            top:25px;
+                        }
+                    }
+                }
+            
+                // rowHoverHideEll - Text 일립시스, Button hover Show
+                .rowHoverHideEll {
+                    display:flex;
+                    .desc, .actions {flex:auto}
+                    .actions {
+                        display:block;
+                        padding-left:20px;
+                    }
+                    .desc {
+                        width:100%;
+                        overflow:hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .rowHoverHideEll {
+                    .actions {display:none;}
+                }
+
+                &.cell-hoveringrow .rowHoverHideEll .actions {
+                    display:block;
+                }
+            } // (E) Body cell
+
+
+
+            
+            &.attachCell { // 파일첨부 Cell
+                text-align: left;
+            }
+            .attach { // 파일첨부 Icon
+                .i-attach {
+                    position: relative;top:-2px;
+                    margin-right:5px;
+                    font-size:14px;
+                }
+                cursor: pointer;
+            }
+            
+            
+        } // (E) Grid Cell
+
+
+        
+        
+        // fixed column shadow 
+        .alopexgrid-cell.cell-fixcol-lastcolumn.alopexgrid-cell-fixedcolumn, 
+        .alopexgrid-cell.cell-fixcol-lastcolumn, 
+        .alopexgrid-cell.cell-fixcol-lastcolumn.cell-firstcolumn,
+        .alopexgrid-cell.cell-fixcol-lastcolumn.headercell,
+        .alopexgrid-cell.cell-fixcol-lastcolumn.cell-groupfooter,        
+        .alopexgrid-cell.footercell.cell-fixcol,
+        .footercell.footercell-bottom.cell-firstcolumn.cell-fixcol {
+            overflow:visible;
+            &:after {
+                position:absolute;right:-9px!important;top:0;bottom:0;left:auto!important;
+                display:block!important;content:"";
+                width: 9px;height:auto;
+                background: {
+                    image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1));
+                    color:transparent!important;
+                }
+                transform:none;
+            }
+            > span {display:inline-block;overflow:hidden;text-overflow: ellipsis;vertical-align: middle}
+            // &.cell-hoveringrow {border-right:1px solid #ccc;}
+        }
+
+
+        .footercell { // footercell
+            overflow:hidden;text-overflow:ellipsis;
+            font-weight:600;
+            background-color:#e5e5e5;            
+            &.cell-firstcolumn {
+                font-weight:600;
+                &:after {
+                    display:block!important;content:"";
+                    width:1px; height:18px;
+                    position: absolute;right:0;top:50%;
+                    transform:translateY(-50%);
+                    background-color:#ddd;
+                }
+            }
+
+
+            &.footercell-bottom {
+                line-height: #{$bodyRowHeight}px;
+            }
+            &.align-right {padding-right:13px}
+        } // (E) footercell
+
+        
+    } // (E) wrapper
+
+
+    // 그리드 체크박스
+    .headercell .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper,
+    .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper {
+        
+
+        
+        &.checked:after, &.checked:focus:after, &.checked:hover:after,
+        &:focus:after,
+        &:hover:after,
+        &.disabled:after {            
+            background-color: transparent;
+        }
+
+        &::after {
+            top:35%;transform: translateY(-50%);
+            @media all and (-ms-high-contrast:none) {top:45%}
+            width:18px;height:18px;                     
+            background: {
+        
+                color:transparent;
+            }
+            @include sprite(31,324);
+            transition:none;
+        }
+        &:hover::after {            
+            @include sprite(31,324);
+            transition:none;
+        }
+
+
+        
+        //체크박스        
+        &.checked:hover::after,
+        &.checked::after {
+            @include sprite(75,324);
+            transition:none;
+        }
+        
+        // disabled
+        &.disabled {
+            &::after {
+                @include sprite(119,324);
+                transition:none;
+                box-shadow: inset 0 0 0 1px #ccc;
+                background-color: transparent;
+                border-radius: 5px;
+            }
+            &.checked::after {
+                @include sprite(160,324);
+                transition:none;
+            }
+        }
+    }
+
+
+    
+    
+    .headercell .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper {
+        &:after {
+            // top:10px;
+            // @media all and (-ms-high-contrast:none) {top:12px;}            
+            @include sprite(31,324);
+        } // 전체 체크 (all chk)
+        &.checked:after {}
+    }
+
+
+    
+
+  
+    
+    //  그리드 no-data
+    .nodatacell {
+        top:50%!important;
+        height:auto!important;
+        padding-top:40px;
+        transform:translateY(-50%);
+        // background-color:#f9f9f9;
+        line-height:normal;
+        border:0;
+        
+        color:#888;
+        .emptycell-message {margin-top:0}
+    }
+    
+    
+
+    /* pagination */    
+    $pagerSize: 28;
+    $pagerSelectWidth: 50;
+    $pagerSelectLarge: 120;
+
+    .pager {
+        position:static!important;
+        display:inline-block;
+        padding: {right: 50%; top:20px}
+        margin-left:calc(12.5% - #{$pagerSelectWidth}px);
+        &:after {display: block;content:'';clear:both}
+        transition:padding ease .3s;
+
+        @media screen and (max-width:1500px) { 
+            padding-right:45%;
+            margin-left:0;
+            padding-left:calc(12.5% - #{$pagerSelectWidth}px);
+        }
+        @media screen and (max-width:1280px) { 
+            padding-right:45%;
+            margin-left:0;
+            padding-left:calc(12.5% - #{$pagerSelectWidth}px);
+        }
+        @media screen and (max-width:1210px) { padding-right:36%}
+        // @media screen and (max-width:1100px) { padding-right:31%}
+        @media screen and (max-width:1000px) { padding-right:38%}
+        
+
+        /* 페이저 좌측 영역 option.paging.pagerTotal */
+        .pager-left {
+            top:3px;left:10px;
+            font-weight:400;            
+            .cnt {margin-left:5px;}
+        }
+        /* 페이저 우측 영역 option.paging.pagerSelect */
+        .pager-right {
+            position: static;
+            float:right;
+        }
+        .select__primary.on .option {
+            z-index:1001;
+        }
+
+        
+        /* 페이저 버튼 영역 */
+        .pager-center {            
+            float:right;
+            // transform: translateX(50%);
+            @media all and (-ms-high-contrast:none) {margin-left:40px}
+            @supports (-ms-ime-align:auto) {margin-left:40px}
+
+            &:before {
+                content:"";width:5px;display:inline-block;
+            }
+
+            /* 첫페이지, 전페이지, 페이지번호, 다음페이지, 끝페이지를 표현하는 요소들 */            
+            .pagination {
+                // 페이지 목록
+                &.page-list {
+                    margin-top:0;
+                    padding:0 30px;
+                    .page-item {
+                        width:auto;height:auto;
+                        margin: 0 5px;
+                        font: {
+                            family:'SCDream';
+                            size:15px;
+                        }
+                        background-color: transparent;
+                        a {
+                            width:#{$pagerSize}px;height:#{$pagerSize}px;
+                            padding-top:0;
+                            border:0;border-radius: 20px;
+                            font-weight:400;
+                            line-height:#{$pagerSize}px;
+                            color:#73787e;
+                        }
+                        &.hovering a {background-color:transparent;}
+                        &.current a {
+                            background-color:#e63d3d;
+                            color:#fff;
+                        }
+                    }
+                }
+
+                // first, prev, next, last button
+                &.page-button { 
+                    width:auto;height:auto;
+                    margin:0 5px;                    
+                    background-color: transparent;
+                    vertical-align: middle;
+                    .page-set {
+                        @include sprite(376,106);
+                    }
+                    a {
+                        display:block;
+                        width:#{$pagerSize + -1}px;height:#{$pagerSize + -1}px;                                                
+                        border:0;                        
+                    }
+
+                    // hover
+                    &.hovering a,
+                    a:hover, a:focus {background-color: transparent;}
+
+                    &.first-page, &.last-page,
+                    &.prev-page, &.next-page {
+                        .page-set {
+                            position: relative;
+                            font-size:20px;
+                            color:#fff;                            
+                        }
+                    }
+
+
+                    &.prev-page .page-set,
+                    &.next-page .page-set{background-position: -400px -106px;}                    
+                    &.next-page,&.last-page {margin-right:0; .page-set {transform:rotate(180deg)}}
+                    &.next-page {
+                        margin: {left:0;right:0;}
+                        .page-set:before {top:53%;}
+                    }
+
+                    &.last-page .page-set:before {top:53%}
+
+                } // (E) page-button                    
+            } // (E) pagination
+
+        }
+        
+    } //(E) pager
+
+    
+
+
+    .cell-hoveringrow.alopexgrid-cell {
+        .rowHoverHide {
+            display:none;
+            
+        }
+
+        .btnHoverEdit.Button, 
+        span.btnHoverEdit {
+            display:inline-block;
+            position: relative;top:-2px;
+        }
+        .rowHoverHideEll {            
+            .actions {display:inline-block;}
+        }
+        
+        &.rowHoverBtnToggle, .rowHoverBtnToggle { // 버튼만 show/hide
+            .btnHoverEdit, .btnHoverEdit.Button {
+                display:inline-block;
+                
+            }
+        }
+        // 자회사지분율 조회처럼 Hover시 value + button 나란히 둘다 보일때
+        .rowHoverBtnToggle + .btnHoverEdit.Button {
+            margin-left: 10px;
+        }
+    }
+
+    &.grid__list { // grid__list(S)
+
+        .alopexgrid-cell.cell-hoveringrow {
+            .rowHoverHide + .btnHoverEdit.Button {
+                display:inline-block;
+                position: relative;top:-2px;
+            }
+
+
+            &.rowHoverBtnToggle {
+                .btnHoverEdit.Button, span.btnHoverEdit {
+                    position: absolute;top:calc(50% + 5px);
+                    margin-top:-18px;
+                    right:15px;
+                } 
+            }
+        }
+
+        .wrapper .bodycell {
+            .rowHoverHideEll {
+                margin-top:10px;
+                .actions {
+                    margin-top:-2px;
+                }
+            }
+
+            &.editingcell {
+                .Textinput, .Select , .Button, .func__input-search, .Daterange {top:1px;}
+            }
+        }
+        
+
+    }  // grid__list(E)
+    
+
+
+
+    // grid custom
+    &.toggle {
+        .cell.headercell {
+            .alopexgrid-groupfolding-icon {display:none}
+        }
+    }
+
+
+    // scrollbar
+    $scrollH:18;
+    .scrollbar.x {
+        height: #{$scrollH}px;
+        background-color: #f3f3f3;
+
+        .scrollhandle {
+            bottom:2px;left:20px;
+            box-sizing: border-box;
+            height:#{$scrollH - 4}px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+
+        }
+        
+        .scrollbutton {
+            height:#{$scrollH}px;width:20px;
+            background:none;
+            background-color:transparent;
+            &::after {
+                display:block;content:"";
+                position: absolute;top:5px;left:4px;
+                border: {
+                    style:solid;
+                    width:4px 4px;
+                    color:transparent #aeb4bd transparent transparent;
+                }
+            }
+
+            &.rightbutton {
+                transform:rotate(180deg)
+            }
+
+        }
+
+    }
+
+    
+}
+
+/* [ + [pointer] ] Bodycell 에 클릭 이벤트 걸려있는 경우 - cursor 조정  */
+.pointer { &.alopexgrid {
+    .bodycell {
+        cursor: pointer;
+    }
+}}
+
+/* [ + [pointerCell] ] Bodycell 에 클릭 이벤트 걸려있는 경우 - cursor 조정  */
+.pointerCell { &.alopexgrid {
+    .bodycell.cell-hoveringrow.alopexgrid-cell:not(.editing):not(.cell-fixcol):not(.cell-groupfooter) {
+        cursor:pointer!important;
+        &:hover {
+            //text-decoration: underline; 
+            background-color: $rowHoverBgColor;
+        }
+        &.cell-groupheader,
+        &.cell-groupfooter {cursor: default!important; &:hover {text-decoration: none}}                
+    }
+}}
+
+
+.alopexgrid { &.title-line {
+    padding-top:0;
+    .wrapper {
+        border-radius: 0 0 15px 15px;
+    }
+
+}}
+
+/* [ + close--border ]
+    @description : 기본 그리드 + 닫힌 border
+    @custom class : .gridInitClass.close--border
+*/
+$gridCloseBorder-btmPadding: 20; // 하단 여백 높이
+.alopexgrid { &.close--border {
+
+
+    &.only-total {
+        .pager{
+            height:0; padding:0;
+            .pager-center,.pager-right {display: none!important;}
+        } 
+    }
+
+    &.hide-pager {
+        .pager {
+            height:60px;
+            .pager-left,.pager-center,.pager-right {display: none!important;}
+        }
+    }
+
+    &::after { // 하단 여백 처리
+        display:block;content:"";
+        position: absolute;left:0;right:0;bottom:#{$gridCloseBorder-btmPadding * 2}px;
+        z-index:1000;        
+        height:#{$gridCloseBorder-btmPadding}px;
+        border: {
+            // top:1px solid #ccc;
+            radius:0 0 10px 10px;
+        }
+        background-color:#fff;        
+    }
+
+    .wrapper {
+        border: {
+            left:0;right:0;bottom:0;
+            radius:10px 10px 0 0;
+        }
+        margin-bottom:#{$gridCloseBorder-btmPadding}px;
+
+        .headercell, .bodycell {
+            border-right:1px solid #ddd;
+            border-bottom:1px solid #ddd;
+        }
+
+        .headercell {
+            background-color:#ddd;
+            border-color:#bbb;
+            &:after {display:none}
+        }
+        .bodycell {
+            &.cell-lastcolumn {border-right-width:0;}
+            &.cell-firstcolumn, &.cell-lastcolumn {
+                border-bottom:1px solid #ddd;
+                &:before,&:after {display:none}
+                // &.selected {border-bottom:0;}
+            }
+
+            &.editingcell {             
+                .Textinput, .Select , .Button, .func__input-search,
+                .Daterange {
+                    top:3px;
+                }
+            }
+
+            &.cell-hoveringrow {
+                background-color:$rowHoverBgColorDefault;
+            }
+
+
+            &.cell-fixcol.cell-hoveringrow {
+                z-index:13;
+            }
+
+            &.selected {
+            // &.cell-hoveringrow, &.selected {
+                margin-top:0;                   
+                border: {
+                    right-color:#ddd;                    
+                }
+                &.cell-ellipsis-text {padding-top:0;}
+
+                &.cell-lastrow {
+                    border-bottom:0;
+                    //height:#{$bodyRowHeight}px!important; // border 겹침 fix. 문제될경우 삭제
+                    // -> 연간목표수립(지표기준)화면에서 Grid multi Row 선택시 레이아웃깨짐.
+                }
+
+                &.cell-hoveringrow {background-color:$rowHoverBgColor}
+            }
+            &.popupCell:hover{background-color:$rowHoverBgColor}
+
+            &.cell-groupmeta.cell-groupheader.cell-hoveringrow,
+            &.cell-hoveringrow.cell-grouping.cell-groupheader:hover {
+                background-color:$groupMetaBgColor;
+                
+            }
+
+            .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper::after  {
+                top:65%;
+                @media all and (-ms-high-contrast:none) {top:75%}
+            }
+            &.cell-ui-noneditable .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper::after  {
+                top:35%;
+                @media all and (-ms-high-contrast:none) {top:45%}                
+            }
+            .alopexgrid-input-wrapper.alopexgrid-input-checkbox-wrapper.disabled:after  {
+                top:40%;
+                @media all and (-ms-high-contrast:none) {top:55%}
+            }
+        }
+        .cell-lastrow {
+            border-bottom-width:1px!important;            
+        }
+
+        /***** footer cell *****/
+        .cell-groupfooter {
+            color:#000;
+
+            
+            &.cell-firstcolumn {color:#000;}
+            
+            &.cell-hoveringrow {
+                z-index: 12;
+                &.cell-firstcolumn {
+                    border-left:0;
+                    &:after {background-color:transparent;}
+                    
+                }
+            }
+
+            &.cell.bodycell.cell-colspan-column.cell-fixcol {z-index: 13;}
+            &.cell-hoveringrow {background-color: $subTotalColor;}
+        }
+
+        .footercell {
+            z-index:32;
+            font-weight:400;
+            border-right:1px solid #ccc;            
+            //color:#888;
+            //@include totalFakeInput;
+            background-color: $totalColor;
+            &:before {
+                background-color: #f3f3f3;
+            }
+            
+            &.cell-firstcolumn {
+                font-weight:600;
+                color:#000;
+                &:after {display:none!important}
+            }
+            &.cell-hoveringrow {background-color: $totalColor;}
+            &.cell-fixcol {
+                z-index:32;
+                &.cell-fixcol-lastcolumn,
+                &.cell-firstcolumn {z-index:33;}
+            }
+            
+        }
+
+        
+    }
+
+    // close--border + pointer
+    &.pointer {
+        .wrapper .bodycell.cell-hoveringrow {background-color:$rowHoverBgColor}
+    }
+}} // (E) close--border
+
+
+.division__btn.close--border {margin-top:-30px}
+
+
+.alopexgrid { &.only-grid {
+    border-radius: 10px;
+    margin-top:20px;
+    &:before {
+        content:"";
+        display:block; 
+        position: absolute; top: -20px; bottom: 40px;
+        width:100%;
+        border-radius: 10px;
+        background-color: #fff;
+    }
+    .wrapper { 
+        border: {
+            top-color:#bbb;bottom-color:#ccc;
+            left:0;right:0;
+            radius:0;
+        }
+        background-color:#fff;
+        .alopexgrid-cell {
+            &.headercell {
+                background-color:#ddd;
+                border-bottom-color:#bbb;
+            }
+            &.bodycell {
+                border-color:#ddd
+            }
+            &.cell{ 
+                &.cell-firstcolumn , &.cell-lastcolumn {
+                    border-bottom-width: 1px;
+                    &:after {display: none;}
+                }
+
+                &.cell-lastrow {
+                    border-bottom-width:1px!important;
+                }
+            }
+        }
+
+        .nodatacell {
+            padding-top:10px;
+            background-color:#fff;
+        }
+    } 
+    .pager {
+        padding-top:40px;
+        .pager-left { left:30px; }
+    }
+    & + .division__btn.with-pager { margin-top:-42px; }
+
+    // close--border Override
+    &.close--border {
+        &:after {display:none}
+        .wrapper {
+            margin-bottom:0;
+            border-bottom:0;
+
+            .bodycell.editing {
+                line-height:#{$bodyRowHeight}px;
+            }
+            .bodycell.editingcell {
+                line-height:#{$bodyRowHeight - 10}px;
+            }
+        }
+    }
+}}
+
+
+// 그리드 - Cell custom
+.alopexgrid .wrapper {
+    .bodycell {
+        .ell {
+            display:flex;
+            align-items:center;
+            height:#{$bodyRowHeight}px;
+            .value {
+                flex:auto;
+                overflow:hidden;
+                padding-right: 10px;
+                text-overflow: ellipsis;
+                text-align: right;
+            }
+            .btn__unit {                
+                white-space: nowrap;
+            }
+        }
+
+
+        .btn__unit {
+            height:26px;
+            line-height: 24px;
+            padding: {left:9px;right:9px}
+        }
+
+        .btn__func {
+            top:-2px;
+            height:22px;
+        }
+    }
+}
+
+// wrapCellContent
+.alopexgrid.gridInitClass  {
+    .editing.cell-ui-editable .cell-content {
+        height:calc(100% + 8px);
+        margin-top:2px;
+    }
+}
+
+.alopexgrid.gridInitClass .cell-content {
+    overflow: hidden;
+    height: auto;width: 100%;
+    text-overflow: ellipsis;
+    .dataBoard {.btn__func {top:-4px}}
+    .dataBoard.level {
+        min-width: auto;
+        vertical-align: middle;
+    }
+    .dataBoard.level .classify+span {
+        display: inline-block;
+        overflow: hidden;
+        width: calc(100% - 30px);
+        text-overflow: ellipsis;
+        vertical-align: text-bottom;
+
+    }
+}
+
+// cellVerticalMiddle - cell value 세로 가운데 정렬
+$vc : '.cellVerticalMiddle';
+$vcr : '.cellVerticalMiddle-read';
+.alopexgrid { &.gridInitClass {
+    .cell {
+        #{$vc}, #{$vcr} { 
+            position: relative;
+            left:0;right:0;
+            top:50%;
+            padding: {left:20px;right:20px}
+            transform: translateY(-50%);
+            vertical-align: top!important;            
+        }
+
+        &.cell-ellipsis-text {
+            #{$vc} { &:not(.cellVerticalMiddle-read) {
+                top:calc(50% - 9px);
+                vertical-align: middle!important;
+            }}
+        }
+
+        &.align-center {
+            #{$vc} { padding:0 }
+        }
+
+        &.editing {
+            @mixin vcRead {
+                top:-2px;
+                box-sizing: border-box;
+                max-width: 100%;min-width: 100%;
+                transform:none;
+                padding: {left:0;right:0;}
+            }
+
+            // Form
+            &.cell-input , &.cell-select  {
+                #{$vc} { @include vcRead}
+            }
+
+            #{$vc} {&:not(.cellVerticalMiddle-read) {
+                @include vcRead
+            }}
+        }
+    }}
+}
+
+
+
+
+
+// 마지막줄
+.alopexgrid { &:not(.grid__list) {
+    .wrapper .bodycell {
+        // &[data-alopexgrid-rowspaned]:not([data-alopexgrid-rowspaned="1"]) {
+        //     transform:scaleY(1.01) translate(0,1px);
+        // }
+        &.cell-lastrow[data-alopexgrid-rowspaned="1"],
+        &.cell-lastrow:not(.cell-multi-column):not(.cell-rowspan-column) {
+            // border-bottom-width:0!important;
+            &.cell-firstcolumn,&.cell-lastcolumn { &:after {display:none}}
+
+            // height:#{$bodyRowHeight + 1}px!important; // border 겹침 fix. 문제될경우 삭제
+                // -> 연간목표수립(지표기준)화면에서 Grid multi Row 선택시 레이아웃깨짐.
+
+        }
+    }
+}}
+
+// grid__summary 
+.alopexgrid { &:not(.grid__list):not(.close--border) {
+    .wrapper { 
+         // Cell common
+        .selector-column .alopexgrid-input-checkbox-wrapper {
+            top:2px;
+        }
+        
+        .bodycell {
+            &.cell-lastrow {
+                border-bottom:0;
+                &.cell-rowspan-column::after {display:none;}
+            }
+
+            &.editing {
+                padding: {top:5px;bottom:5px;}
+            }
+            &.editingcell { 
+                .Textarea,  textarea {
+                    margin-top:0
+                }
+                .Textinput {
+                    top:0;vertical-align: top;
+                }
+            }
+
+        }
+        .footercell {
+            background-color:$totalColor;
+            border-bottom:0;
+        }
+
+    }
+
+    // pointer
+    &.pointer {
+        .wrapper {
+            .bodycell.cell-hoveringrow {
+                background-color: $rowHoverBgColor;
+                // &.cell-firstcolumn::after, &.cell-lastcolumn::after {display:none}
+            }
+        }
+    }
+}}
+
+
+
+// 팝업용 그리드
+.popup__container {
+    .alopexgrid.gridInitClass {
+        .wrapper {
+            border: 1px solid #ccc;
+            .alopexgrid-cell {
+                &.headercell, &.bodycell {
+                    border: {
+                        width:0 0 1px 0;
+                    }
+                }
+
+
+                /***** Header cell *****/
+                &.headercell {
+                    height:  #{$headerRowHeight - 25}px;
+                    background-color:#f8f8f8;
+                    box-shadow: none;
+                    line-height:41px!important;
+                    
+                    color:#5b5f67;
+                    .column-title {
+                        font-size:14px;
+                        font-weight: 400;
+
+                    }
+                }
+
+                /***** Body cell *****/
+                &.bodycell {
+                    height: #{$bodyRowHeight - 19}px;
+                    font-size: 13px;
+                    border-color:#e2e8f0;
+                    letter-spacing:normal;
+                    color:#2a2a2a;
+                    &.cell-ellipsis-text {
+                        line-height: #{$bodyRowHeight - 19}px;
+                    }
+                }
+
+            }
+        }       
+    }
+}
+
+// 그리드 - pager select
+.PageCustomSelector {
+    position: relative;top:-4px;
+    margin-right:16px;
+}

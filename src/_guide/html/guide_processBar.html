@@ -1,0 +1,139 @@
+<br>
+
+<!--/* Style 01 (S) */-->
+<h2 class="tit01">Style 01</h2>
+<br>
+<div class="Tabs tab__step" id="TabStep1">
+    <ul>
+        <li data-content="#tab1" class="done"><span class="label"><b>01</b>관리단위 레벨 설정</span></li>
+        <li data-content="#tab2" class="done"><span class="label"><b>02</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab3"><span class="label"><b>03</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab4"><span class="label"><b>04</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab5"><span class="label"><b>05</b>관리단위 레벨 매핑 등록</span></li>
+    </ul>
+    <div id="tab1">01</div>
+    <div id="tab2">02</div>
+    <div id="tab3">03</div>
+    <div id="tab4">04</div>
+    <div id="tab5">05</div>
+</div>
+<br>
+<div class="Tabs tab__step" id="TabStep2">
+    <ul>
+        <li data-content="#tab1"><span class="label"><b>01</b>관리단위 레벨 설정</span></li>
+        <li data-content="#tab2"><span class="label"><b>02</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab3"><span class="label"><b>03</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab4"><span class="label"><b>04</b>관리단위 레벨 매핑 등록</span></li>
+        <li data-content="#tab5"><span class="label"><b>05</b>관리단위 레벨 매핑 등록</span></li>
+    </ul>
+    <div id="tab1">01</div>
+    <div id="tab2">02</div>
+    <div id="tab3">03</div>
+    <div id="tab4">04</div>
+    <div id="tab5">05</div>
+</div>
+<!--/* Style 01 (E) */-->
+
+<!--/* Style 01 (S) */-->
+<br> <h2 class="tit01">Style 02</h2> <br>
+
+<div class="box__article">
+    <h2 class="title__article">결재정보<button class="Button btn__func titUnit" id="btnApvHistory">결재상세이력</button></h2>
+    
+    <!--/* 4단계 (S) */-->
+    <ul class="step__process">
+        <!--
+            [COMMENT]
+            1. 대기 / 진행중 / 완료 3가지 상태에 따라 li의 클래스가 분기됩니다. (구조는 동일)
+            - 대기 : N/A
+            - 진행중 : ing
+            - 완료 : done
+            2. 결재자추가 버튼은 '대기' 상태일때만 표기됩니다.
+        -->
+        <li class="done">
+            <span class="label">사회성과 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석 <i class="comment"></i></span>
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="done">
+            <span class="label">사회성과 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b id="tooltipMngr">3</b> <i class="comment"></i></span>
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="ing">
+            <span class="label">성과측정식 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석</span>
+            <i class="date"></i>
+        </li>
+        <li>
+            <span class="label">성과측정식 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b id="tooltipMngr2">3</b></span>
+            <button class="Button btn__process-add">결재자추가</button>
+            <i class="date"></i>
+        </li>
+    </ul>
+    <!--/* 4단계 (E) */-->
+</div>
+
+
+<div class="box__article">
+    <h2 class="title__article">결재정보<button class="Button btn__func titUnit" id="btnApvHistory">결재상세이력</button></h2>
+
+    <!--/* 6단계 (S)*/-->
+    <ul class="step__process">
+        <!--
+            [COMMENT]
+            1. 대기 / 진행중 / 완료 3가지 상태에 따라 li의 클래스가 분기됩니다. (구조는 동일)
+            - 대기 : N/A
+            - 진행중 : ing
+            - 완료 : done
+            2. 결재자추가 버튼은 '대기' 상태일때만 표기됩니다.
+        -->
+        <li class="done">
+            <span class="label">사회성과 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석</span>
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="done">
+            <span class="label">관계사 사회성과 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>                        
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="done hold">
+            <span class="label">최종 사회성과 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>          
+            <i class="date">2019.06.01 12:34</i>
+        </li>
+        <li class="ing">
+            <span class="label">성과측정식 합의요청</span><i class="bullet"></i>
+            <span class="desc">이용현 수석</span>
+            <i class="date"></i>
+        </li>
+        <li>
+            <span class="label">관계사 성과측정식 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>
+            <button class="Button btn__process-add">결재자추가</button>
+            <i class="date"></i>
+        </li>
+        <li>
+            <span class="label">최종 성과측정식 합의</span><i class="bullet"></i>
+            <span class="desc">홍길동 수석 외 <b>3</b></span>
+            <button class="Button btn__process-add">결재자추가</button>
+            <i class="date"></i>
+        </li>
+    </ul>
+    <!--/* 6단계 (E) */-->
+</div>
+
+<!--/* Style 01 (E) */-->
+
+<script>
+$(function(){
+
+    var $tab1 = $("#TabStep1");
+    $tab1.setTabIndex(2);
+    $tab1.setEnabled(false, 0);
+    $tab1.setEnabled(false, 1);
+    
+});
+</script>

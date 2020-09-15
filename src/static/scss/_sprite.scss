@@ -1,0 +1,36 @@
+/** [ Page ] _sprite.scss 스프라이트 img **/
+
+/*
+$left : sprite img - left 좌표
+$top : sprite img - top 좌표
+$inline : 수도클래스를 block+absolute, inline으로 사용할지의 여부 . ( 'inline | block(default) )
+*/
+@mixin sprite($left, $top, $animation:'true') {
+    @if ($animation == 'true') {
+        transition:background-position ease .3s;
+    }
+    background: {
+        image:url(../image/mvp/mvp-sprite.png);
+        repeat:no-repeat;
+        position: -#{$left}px -#{$top}px;
+    }
+}
+@mixin spritePseudo($left, $top, $inline:'block') {
+    @if ($inline == 'block') {
+        display:block;
+        position: absolute;
+        left:50%;top:50%;
+        transform:translate(-50%, -50%);
+    } @else {
+        position: relative;
+        display:inline-block;
+        vertical-align: middle;
+    }
+    content:"";
+    transition:background-position ease .3s;
+    background: {
+        image:url(../image/mvp/mvp-sprite.png);
+        repeat:no-repeat;
+        position: -#{$left}px -#{$top}px;
+    }
+}

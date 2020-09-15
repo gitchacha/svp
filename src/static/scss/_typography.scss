@@ -1,0 +1,311 @@
+/* [ Page ] _typography.scss : 
+1. Heading, Description, status 등 단순 Text 디자인
+2. List, Step 등의 Text 정보 표현 
+3. 기타 Text 단위의 디자인 전부. */
+
+
+// status color : 상태표현 색상
+$color-status1:#89c933;
+$color-status2:#cacbcc;
+$color-status3:#17bbbb;
+$color-status4:#de1c22;
+$color-status5:#555968;
+$color-status6:#6ca9e8;
+$color-status7:#cacbcc;
+
+$status-color: (
+    "type1":$color-status1,
+    "type2":$color-status2,
+    "type3":$color-status3,
+    "type4":$color-status4,
+    "type5":$color-status5,
+    "type6":$color-status6,
+    "type7":$color-status7
+);
+@each $type, $color in $status-color {
+    .status.#{$type}:before {
+        background-color:$color;
+    }
+} 
+.status {    
+    &:before {
+        display:inline-block;content:"";
+        position: relative;top:-1.5px;
+        width:8px;height:8px;
+        margin-right:5.5px;
+        border-radius:4px;
+        vertical-align: middle;
+    }
+    & + .status {
+        margin-left:30px;
+        &.singleView {margin-left:0;}
+    }
+
+}
+
+
+
+.page__title { // 페이지 최상위 Heading
+    font : {
+        family:'SCDream';
+        size:34px;
+        weight:600;
+    }
+    margin-bottom:45px;    
+}
+
+
+.title-section {
+    font : {
+        family:'SCDream';
+        size:24px;
+        weight:500;
+    }
+    letter-spacing: normal;
+    margin-bottom:23px;    
+}
+
+
+.page__title-area { // img bg title
+    padding-bottom:44px;
+    margin: {top:-9px;bottom:30px;}
+    &::before { // line bg
+        display: block;content:"";
+        position: absolute;left:0;right:0;top:0;z-index: 0;
+        height:162px;        
+    }
+    > * {position: relative;z-index: 1;}
+    
+    .title {
+        position: relative;z-index:1;
+        padding: {left:60px;bottom:32px;}
+        font: {
+            size:30px;;
+            family: 'SCDream';
+        };
+        letter-spacing: -.75px;    
+        
+        // icon
+        &::before {
+            display: inline-block;content:"";
+            position: absolute;left:0;top:-3px;
+            width:40px;height:40px;
+            border-radius: 20px;
+        }
+        &::after { // bg img
+            display:block;content:"";
+            position: absolute;right:14px;bottom:-59px;z-index:0;
+            width:359px;height:152px;
+            background:url(../image/mvp/mvp-sprite-asmtTop.png) right bottom -20px no-repeat;
+        }
+    }
+    
+    &.social { // 사회공헌
+        &::before {background-color:#ffe4e2;}
+        .title {
+            &::before { 
+                background-color:#fff7f6;
+                @include sprite(145,100);
+            }
+            &::after { 
+                background-position:65px -600px;
+            }
+        }
+    }
+    &.economy { // 경제간섭
+        &::before {background-color:#fde4d5;}
+        .title {
+            &::before { 
+                background-color:#fef7f2;
+                @include sprite(61,102);
+            }
+            &::after { 
+                background-position:30px -384px;
+            }
+        }
+    }
+    &.biz { // 비즈니스 사회성과
+        &::before {background-color:#dae5f7;}
+        .title {
+            &::before { 
+                background-color:#f9fbfe;
+                @include sprite(21,102);
+            }
+            &::after { 
+                background-position: 0 8px;
+            }
+        }
+    }
+    &.prd { // 제품/서비스지표
+        &::before {background-color:#fbf7d3 ;}
+        .title {
+            &::before { 
+                background-color:#fefdf2;
+                @include sprite(104,101);
+            }
+            &::after { 
+                background-position:0px -207px;
+            }
+        }
+    }
+
+    .list-score { // list-score(S)
+        position: relative;z-index:1;
+        li {
+            display:inline-block;
+            position: relative;
+            padding: {
+                left:12px;
+                right:60px;
+            }
+            font-size:16px;
+            color:#464c52;
+            &:last-child {padding-right: 0;}
+            &::before {
+                display: block;content:"";
+                position: absolute;left:0;top:5px;
+                width:6px;height:6px;
+                border-radius: 3px;
+                background-color:#73787e;
+            }
+            strong {
+                padding-left:10px;
+                font-family: 'SCDream';
+                color:#1b1d1f;
+            }
+        }
+    }  // list-score(E)
+}
+
+.title-article {
+    margin-bottom:20px;
+    font: {size:18px;weight:400;}
+    color:#1b1d1f;
+    & + .req-comm {
+        padding-bottom:22px;
+        margin-top:-47px;
+    }
+}
+
+// 필수항목 noti
+.req-comm {
+    padding:10px 0 6px;
+    font-weight: 300;
+    text-align: right;
+    color:#464c52;
+    &::before {
+        position: relative;top:7px;
+        display:inline-block;content:"";
+        width:4px;height:4px;
+        margin-right:6px;
+        border-radius: 2px;
+        background-color:#e63d3d;
+        vertical-align: top;
+    }
+}
+
+
+
+// 그리드 타이틀
+.title-grid {
+    height:77px;
+    padding:28px 30px 0;
+    background-color:#fff;
+    border-radius: 15px 15px 0 0;
+    border-bottom:1px solid #cacdd2;
+    font: {
+        size:18px;
+        family:'SCDream';
+        weight:400;
+
+    }
+
+}
+
+
+// 화면 Title
+.root__container-portal {
+    .heading-area { // heading-area (포탈) (S)
+        position: relative;
+        height:360px;
+        &::after,&::before {
+            display:block;content:"";
+            position: absolute;left:0;right:0;top:0;bottom:0;
+            z-index:0;
+        }
+        &::before {z-index:1;}
+        .wrap { // wrap(S)
+            position: relative;z-index:2;
+            max-width:1400px;
+            height:100%;
+            margin:auto;
+            .page-title {
+                position: absolute;left:50%;top:50%;
+                transform: translate(-50%,-50%);
+                font: {
+                    size:45px;
+                    family:'SCDream';
+                    weight:600;
+                };
+                color:#fff;
+                letter-spacing: -1.13px;
+            }
+            .breadcrumb {
+                display:flex;
+                position: absolute;right:0;top:43px;
+                li {
+                    position: relative;                
+                    padding-right:27px;
+                    font: {size:15px;weight:300};
+                    letter-spacing: -.4px;
+                    color:rgba(255,255,255,.9);
+                    &::after {
+                        display: block;content:"";
+                        position:absolute;right:12px;top:6px;
+                        width:3px;height:3px;
+                        background-color:rgba(255,255,255,.3);
+                    }
+                    &:last-child { &::after {display:none}}
+
+                }
+                .home {
+                    padding-right:64px;
+                    font-size:0;
+                    &::before {
+                        @include spritePseudo(273,226);
+                        top:48%;
+                        width:13px;height:13px;
+                    }
+
+                }
+            }
+
+        }  // wrap(E)
+        
+        // 페이지별 img 
+        &.bm { // BM List
+            &::before {background: url(../image/mvp/title-bm.png) center center no-repeat;}
+            &::after {
+                background:linear-gradient(to right, #cfc7ae, #b1a89a)
+            }
+        }
+        &.board { // SK News
+            &::before {background: url(../image/mvp/title-board.png) center center no-repeat;}
+            &::after {
+                background:linear-gradient(to right, #b6afa4, #8c7e65)
+            }
+        }
+    }  // heading-area (포탈) (E)
+}
+
+// Lazy load 관련
+.lazyload-placeholder {
+    font-size:16px;
+    text-align: center;    
+    color:#464c52;
+    &::before {
+        @include spritePseudo(304,224,'inline');
+        width:18px;height:18px;
+        margin-right:10px;
+    }
+}

@@ -1,0 +1,22 @@
+/***** IMPORT ( scss parts import )*****/
+@import './reset'; // Reset
+@import './config';  // 공통 variables , 디자인가이드 폰트적용 등
+@import './sprite';
+@import './button';
+@import './formAsmt'; 
+@import './radioCheckbox'; // Radio, checkbox
+@import './layoutAsmt'; // 전체 layout
+@import './gnb'; // GNB
+@import './popup'; // Popup
+@import './tableAsmt'; 
+// @import './tab'; 
+@import './gridAsmt'; 
+@import './typography'; 
+@import './chart'; 
+@import './util'; 
+// @import './chart';
+// @import './editor'; 
+// @import './progress';
+// @import './datePicker'; 
+@import './pageCustom';
+// @import './main'; // main

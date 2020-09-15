@@ -1,0 +1,25 @@
+// 사회성과 대외공표 Chart
+.public-result-chart {
+    display:flex;
+ 
+    .chart-area {
+        flex:1;
+        height:400px;
+
+        .heading {
+            font-size:20px;
+            text-align:center;
+            strong {
+                display:block;                    
+            }
+            em {
+                font-size:18px;
+                i {
+                    display:block;
+                    font-size:16px;
+                }
+                span {font-size:12px;}
+            }
+        }
+    }    
+}

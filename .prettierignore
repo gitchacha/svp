@@ -1,0 +1,8 @@
+view/
+fragment/
+_guide/
+static/**/*
+*.html
+*.js
+*.scss
+*.md

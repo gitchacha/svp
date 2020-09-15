@@ -1,0 +1,264 @@
+// layout variables
+$articleWidth : 1400;
+$headerHeight : 90;
+
+
+body {
+    min-width:1400px;
+}
+
+.root__container-portal {
+    padding-top:#{$headerHeight}px
+}
+// Header
+.header__container { // (S)header__wrap    
+    position:fixed;top:0;left:0;right:0;
+    z-index: 50;
+    background-color:#fff;
+    box-shadow: 0 0 0 rgba(0,0,0,0);    
+    transition:box-shadow ease .3s;
+    &::before { // header border
+        display:block;content:"";
+        height:1px; position: absolute;left:0;right:0;
+        top:#{$headerHeight - 1}px;
+        background-color:#cacdd2;
+    }
+    &::after {display:block;content:"";clear:both;}
+    &.open {
+        .menu .depth-sub {max-height:200px;}
+        box-shadow:9.2px 9.2px 25px 0 rgba(34, 34, 34, 0.06);
+    }
+    
+    .logo, .menu {
+        float:left;        
+    }
+    .header__wrap {
+        position: relative;
+        width:#{$articleWidth}px;
+        height:#{$headerHeight}px;
+        margin:auto;
+        transition:width ease .3s;
+        .logo {
+            display:inline-block;
+            width:23.5%;
+            padding-top:32px;
+            transition:width ease .3s;
+            i {
+                display:inline-block;
+                width:40px;height:23px;
+                margin-right: 7px;
+                font-size:0;
+                @include sprite(29,23);
+                vertical-align: top;
+            }
+            font: {
+                size:20px;
+                weight:500;
+            }
+            letter-spacing: normal;
+        }
+
+        .btn-asmt {
+            position: absolute;right:0;top:50%;
+            transform:translateY(-50%);
+            font: {
+                size:18px;
+                weight:500;
+            }
+            letter-spacing: -1px;
+            color:#dd1621;
+
+            &::after {
+                @include spritePseudo(338,224,'inline');
+                margin-left:6px;
+                width:18px;height:18px;
+                vertical-align: top;
+            }
+        }
+    }
+
+    
+    
+    .menu {
+        .depth1, .depth-sub {
+            display:flex;                
+        }
+        .depth1 {
+            overflow:hidden;
+            height:#{$headerHeight}px;
+            font-size:18px;
+            
+            letter-spacing: normal;
+            li {
+                margin-right:70px;
+                &:last-child {margin-right:0}
+            }
+
+            li a { // depth1 li (S)
+                display:inline-block;
+                position: relative;
+                height:100%;
+                padding-top:36px;
+                color:#1b1d1f;                
+
+                &::after {
+                    display:block;content:"";
+                    height:4px;bottom:-4px;
+                    width:0%;
+                    position: absolute;left:50%;
+                    background-color:#e63d3d;
+                    transform:translateX(-50%);                    
+                    transition:all ease .3s;
+                }
+                
+                &.on, &:hover { // on
+                    color:#dd1621;
+                    &::after {width:100%;height:4px;bottom:0;}
+                }   
+            }  // depth1 li (E)
+
+        }
+        
+        .depth-sub { // depth-sub(S)
+            overflow:hidden;
+            max-height:0;            
+            letter-spacing: -.38px;
+            transition:max-height ease .4s;
+
+            .depth2 {
+                padding:30px 0 46px
+            }
+            .root {
+                margin-right:70px;
+                &:last-child {margin-right:0}
+                &[data-menu="summary"] {width:90px;}
+                &[data-menu="bm"] {width:90px;}
+                &[data-menu="social"] {width:120px;}
+                &[data-menu="board"] {width:90px;}
+            }
+            li a {
+                display:block;
+                font-weight: 300;
+                line-height:35px;
+                white-space: nowrap;                
+                
+                &:hover {                    
+                    color:#dd1621
+                }
+            }
+            
+
+        } // depth-sub(E)
+    } 
+
+        
+    
+
+} // (E)header__wrap
+
+//footer
+.footer__container {
+    height:130px;
+    background-color:#1b1d1f;
+    color:#73787e;
+    .wrap {
+        display:flex;
+        height:100%;
+        align-items: center;
+        justify-content: space-between;
+        max-width:#{$articleWidth}px;
+        margin:auto;
+        font-size:15px;
+        small {font:inherit;letter-spacing: normal;}
+    }
+    .site {
+        display: flex;
+        li {
+            position: relative;
+            padding-right:53px;
+            
+            &:last-child {
+                padding-right:0;
+                &::after {display:none}
+            }
+            &::after {
+                display: block;content:"";
+                position: absolute;right:25px;top:50%;
+                margin-top:-1px;
+                width:3px; height:3px;
+                background-color:#464c52;
+            }
+        }
+        a {
+            font-weight:300;
+            line-height:25px;
+            color:rgba(255, 255, 255, 0.7);
+        }
+    }
+
+}
+
+// 업무 본문 (contents__container , article)
+.contents__container {        
+    .article {
+        max-width: 1400px;
+        margin:auto
+    }
+}
+
+// flex - division
+.flex__row {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    .divide {
+        
+    }
+}
+
+
+@media screen and (max-width:1550px) {
+    .header__container .header__wrap {
+        width:1300px;
+        .logo {width:17%}
+    }
+}
+
+@media screen and (max-width:1400px) {
+    .header__container .header__wrap {
+        width:1200px;
+        .logo {width:17%}
+    }
+}
+
+
+
+// hostMode 표기
+@mixin hostmode {
+    &::after {
+        display:inline-block;content:"로컬";
+        position: relative;top:-4px;
+        padding:5px 10px;
+        margin-left:10px;
+        font-weight:400;
+        vertical-align: top;
+        border-radius: 15px;
+        background-color:orange;
+        color:#fff;
+    }
+}
+.hostMode {
+    &-local {
+        .logo {@include hostmode}
+    }
+    &-dev {
+        .logo {
+            @include hostmode;
+            &::after {
+                content:"개발";
+                background-color:#00c438;
+            }
+        }
+    }
+}

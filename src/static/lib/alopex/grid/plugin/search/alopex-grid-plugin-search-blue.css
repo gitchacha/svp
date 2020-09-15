@@ -1,0 +1,81 @@
+/**
+ * Alopex Grid Search Plugin v1.0.2
+ * http://grid.alopex.io
+ *
+ * Copyright (c) 2018 SK Holdings C&C. All rights reserved.
+ * 
+ * This software is the confidential and proprietary information of SK Holdings C&C.
+ * You shall not disclose such confidential information and shall use it only in
+ * accordance with the terms of the license agreement you entered into with SK Holdings C&C.
+ *
+ * Date : 2019-02-14 10:02:20 GMT+0900 (대한민국 표준시)
+ **/
+.alopexgrid-search-plugin {
+	overflow: hidden;
+	display: inline-block;
+}
+
+.alopexgrid-search-plugin * {
+	box-sizing: border-box;
+}
+
+.alopexgrid-search-plugin .alopexgrid-search-plugin-section {
+	position: relative;
+	float: left;
+}
+
+.alopexgrid-search-plugin .alopexgrid-search-plugin-section .alopexgrid-search-plugin-keyword {
+	height: 22px;
+	vertical-align: top;
+	padding: 0 4px;
+	border: 1px solid #707070;
+}
+
+.alopexgrid-search-plugin .alopexgrid-search-plugin-section .alopexgrid-search-plugin-keyword::-ms-clear {
+	display: none;
+}
+
+.alopexgrid-search-plugin .alopexgrid-search-plugin-section .alopexgrid-search-plugin-result {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	font-size: 11px;
+	color: #ababab;
+}
+
+.alopexgrid-search-plugin .alopexgrid-search-plugin-section .alopexgrid-search-plugin-search {
+	float: left;
+	cursor: pointer;
+	height: 22px;
+	margin-left: 1px;
+	padding: 0 7px 2px;
+	font-size: 11px;
+	color: #ffffff;
+	background: #308dff;
+	border: 1px solid #264eca;
+}
+
+.alopexgrid-search-plugin .alopexgrid-search-plugin-section .alopexgrid-search-plugin-prev {
+	float: left;
+	cursor: pointer;
+	width: 21px;
+	height: 22px;
+	margin-left: 1px;
+	padding-left: 0;
+	padding-right: 0;
+	background: #ffffff url("search/search_icon_blue.png") no-repeat 8px 4px;
+	border: 1px solid #cbcccf;
+	border-right: 0;
+}
+
+.alopexgrid-search-plugin .alopexgrid-search-plugin-section .alopexgrid-search-plugin-next {
+	float: left;
+	cursor: pointer;
+	width: 20px;
+	height: 22px;
+	padding-left: 0;
+	padding-right: 0;
+	background: #ffffff url("search/search_icon_blue.png") no-repeat -12px 4px;
+	border: 1px solid #cbcccf;
+	border-left: 0;
+}

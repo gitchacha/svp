@@ -1,0 +1,138 @@
+<!--/* [ Page ]
+@menu   : 게시판(BM/News/언론보도) > 글쓰기
+@page   : 게시글 등록
+*/-->
+<link type="text/css" rel="stylesheet" href="lib/alopex/ui/script/src/webeditor/alopex-webeditor.css">
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script>
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script>
+
+<div class="heading-area board">
+    <div class="wrap">        
+        <h1 class="page-title"><span id="pageNm">-</span> 등록</h1>
+        <ul class="breadcrumb">
+            <li class="home">Home</li>            
+        </ul>
+    </div>
+</div>
+<div class="article pageBoardEdit board-edit-wrap"><!--/* 업무화면 (S) */-->
+
+    <table class="table__primary">
+        <tbody>
+            <tr data-view="bm">
+                <th class="col1">회사</th>
+                <td>
+                    <div class="select__form full"><!--/* 회사 */-->
+                        <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">회사</button>
+                        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                    </div>
+                </td>
+                <th class="col2">산업군</th>
+                <td>
+                    <div class="select__form full"><!--/* 산업군 */-->
+                        <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">산업군</button>
+                        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                    </div>
+                </td>
+            </tr>
+
+            <tr data-view="board">
+                <th class="col1" colspan="2">출처</th>
+                <td colspan="2"><input id="" class="Textinput full" /></td>
+            </tr>
+            
+            <tr>
+                <th>제목</th>
+                <td colspan="3"><input id="" class="Textinput full" /></td>
+            </tr>
+            <tr>
+                <th class="top">내용</th>
+                <td colspan="3"><div class="WebEditor" id="boardEdit" ><!-- WebEditor --></div></td>
+            </tr>
+        </tbody>
+    </table>    
+
+
+    <div id="divisionSticky" class="division__btn">
+        <div class="actions">
+            <div class="center">
+                <button id="" class="Button btn__page-task strong"><i>등록</i></button>
+            </div>
+        </div>
+    </div>
+
+</div><!--/* 업무화면 (E) */-->
+
+
+
+<script>
+    $a.page(function() {
+        this.init = function(id,param) {
+            const paramData = {
+                /*
+                [COMMENT] breadcrumb, 페이지 타이틀 등 설정을 위한 임시 선언.
+                개발시 실제 param으로 'type' 키에 대한 value 변경바랍니다.
+                */
+                type: 'bm', // 해당 value에 따라 text 등 변경됨
+                data: {
+                    'bm' : {
+                        title : 'BM 사례',
+                        breadcrumb : ['SK DBL BM', 'SK BM 사례']
+                    },
+                    'news' : {
+                        title : 'SK News',
+                        breadcrumb : ['DBㆍ자료실', 'SK News']
+                    },
+                    'media' : {
+                        title : ' 언론보도 자료',
+                        breadcrumb : ['DBㆍ자료실', '언론보도 자료']
+                    }
+                }
+            }
+            initDesign(paramData);              // Design (화면 초기설정) 세팅
+            setEventHandler();				//Step2.Event Handler 세팅            
+        }
+
+        /* 화면 초기 세팅 (Design/단순 Text) */
+        function initDesign(param){
+            const data = param.data[param.type];
+            const title = document.getElementById('pageNm');
+            const breadcrumb = document.querySelector('.breadcrumb');
+            const tableRowBm = document.querySelectorAll('[data-view="bm"]');
+            const tableRowBoard = document.querySelectorAll('[data-view="board"]');
+
+            data.breadcrumb.map(function(v){
+                const item = document.createElement('li');
+                item.textContent = v
+                return item;
+                
+            }).forEach(function(v){
+                breadcrumb.appendChild(v);
+            });
+
+            title.textContent = data.title;
+
+            // table row show/hide
+            if ( param.type === 'bm' ) {                
+                tableRowBm.forEach(function(v){ v.style.display = 'table-row' });
+                tableRowBoard.forEach(function(v){ v.style.display = 'none' });                
+            } else {
+                tableRowBm.forEach(function(v){ v.style.display = 'none' });
+                tableRowBoard.forEach(function(v){ v.style.display = 'table-row' });
+            }
+            
+        }
+
+
+        /* Step2.Event Handler 세팅 */
+		function setEventHandler() {
+            
+        }
+
+
+        
+        
+    });
+
+
+
+</script>

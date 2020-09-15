@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/***** RESET ( 각 태그별 CSS 기본 property 초기화 ) *****/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,small, strong, sub, sup, var,b, i,
+dl, dt, dd, ol, ul, li,fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    box-sizing: border-box;
+    margin:0;padding:0;
+    border:0;outline:0;
+    vertical-align:baseline;
+    background:transparent;
+}
+body {line-height:1;}
+article,aside,details,figcaption,figure, footer,header,hgroup,menu,nav,section { display:block; }
+ul,ol { list-style:none;}
+a {
+    margin:0;padding:0;   
+    box-sizing:border-box;
+    vertical-align:baseline;
+    background:transparent;
+    text-decoration: none;
+    color:inherit;
+}
+table {border-collapse:collapse;border-spacing:0;}
+input, select {vertical-align:middle;}
+i, em {font-style:normal;}
+b {font-weight: 400}
+strong {font-weight: 300;}
+pre {font:inherit}
+button {
+    box-sizing: border-box;
+    font:inherit;
+    background:none;
+    border:none;
+    cursor: pointer;
+}
+// focus outline none
+select:focus, .Select:focus {outline: none}
+input:focus {outline: none}
+a:focus {outline:none}
+button:focus {outline:none}
+textarea:focus {outline:none}
+
+
+/***** Alopex RESET ( Alopex CSS 기본 설정 초기화 ) *****/
+.Accordion, .Accordion *, .Button, .Button *, .Carousel, .Carousel *, .Checkbox, .Checkbox *, .Dateinput, .Dateinput *, .Datepicker, .Datepicker *, .Daterange, .Daterange *, .Dialog, .Dialog *, .Divselect, .Divselect *, .Dropdown, .Dropdown *, .Dropdownbutton, .Dropdownbutton *, .Group, .Group *, .Groupbutton, .Groupbutton *, .Icon, .Icon *, .List, .List *, .Navigationbar, .Navigationbar *, .Navmenu, .Navmenu *, .Paging, .Paging *, .Panel, .Panel *, .Progressbar, .Progressbar *, .Radio, .Radio *, .Searchinput, .Searchinput *, .Select, .Select *, .Slider, .Slider *, .Spinner, .Spinner *, .Switch, .Switch *, .Table, .Table *, .Tabs, .Tabs *, .Textarea, .Textarea *, .Textinput, .Textinput *, .Tooltip, .Tooltip *, .Tree, .Tree *, .Label, .Label *, .Quotation, .Quotation *, .Cite, .Cite *, .Mark, .Mark *, .Code, .Code *, .Small, .Small *, .Strong, .Strong *, .Del, .Del *, .Alink, .Alink *, .Splitter, .Splitter *, .Hierarchical, .Hierarchical *, .MultiSelect, .MultiSelect *, .Autocomplete, .Autocomplete *, .Combobox-base, .Combobox-base *, .Flexbox, .Flexbox * {font-family: inherit;}
+

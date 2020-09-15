@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SV 평가모델 : 평가등록 시작하기</title>
+        <meta charset="UTF-8" />    
+    <meta http-equiv="Content-Type" content="text/html; charser=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <base href="../../static/">
+    
+    <link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+
+    <link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/alopex-ui-default.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/src/alopex-ext.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/grid/alopex-grid.css" />
+	<link rel="stylesheet" type="text/css" href="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+    <link rel="stylesheet" type="text/css" href="css/common_asmt.css" /><!-- SKSV -->    
+
+    <script src="lib/jquery/jquery-3.4.1.min.js"></script>
+    <script src="lib/alopex/ui/script/alopex-ui.min.js"></script>
+    
+    <script src="lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+	<script src="lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+    <script src="lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+    <script src="lib/alopex/grid/alopex-grid.min.js"></script>
+    <script src="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+    <script src="lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+    <script src="lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+    
+    <!-- 공통 JS(S) -->
+    <script src="js/sv-utils.js"></script>    
+    <script src="js/sv-setup.js"></script>
+    <script src="js/sv-control.js"></script>
+    <script src="js/sv-file.js"></script>
+    <script src="js/bignumber.js"></script>
+    <!-- 공통 JS(E) -->
+
+    <script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script><!--Alopex - ui Webeditor -->
+    <script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script><!--Alopex - ui Webeditor -->
+    
+    <style type="text/css">
+        .alopexgrid-progress-modal {
+            display: none;
+        }
+    
+        .alopexgrid-progress {
+            display: none;
+        }
+    
+        .btn_tree_column {
+            float: right;
+            margin-top: 7px;
+        }
+    </style>
+</head>
+<body>
+    <div class="root__container-asmt">        
+        <div class="contents__container">
+            <!-- gnb__wrap(S) -->
+<div class="gnb__wrap">
+    <h1 class="logo-asmt"><a href="" class=""><i>SV</i><b>평가모델</b></a></h1>
+    <button type="button" class="btn__gnb-folding">메뉴 접기</button>
+    <div class="menu"><!-- menu(S) -->
+        <ul class="depth1">
+            <li class="on"><a href="" class="root board"><b>대시보드</b></a></li>
+            <li>
+                <strong class="root asmt">평가등록</strong>
+                <ul class="depth2">
+                    <li><a href="" class="link asmt"><b>Self-Assessment 작성</b></a></li>
+                    <li><a href="" class="link prd"><b>제품/서비스 지표 등록</b></a></li>
+                </ul>
+            </li>
+            <li>
+                <strong class="root report">리포팅</strong>
+                <ul class="depth2">
+                    <li><a href="" class="link result"><b>성과 Report</b></a></li>
+                    <li><a href="" class="link detail"><b>상세 분석 Report</b></a></li>
+                    <li><a href="" class="link comp"><b>비교 분석 Report</b></a></li>
+                </ul>
+            </li>
+        </ul>
+    </div><!-- menu(E) -->
+
+    <div class="utils">
+        <a class="go-portal" href=""><span>SV 포털 바로가기</span></a>
+    </div>
+</div>
+<!-- gnb__wrap(E) -->
+            <section class="contents__article">
+                <div class="work__area">
+    <!--/* [ Page ]
+    @menu   : 평가모델 > 평가 Dashboard > 평가 시작하기
+    @page   : 평가 시작하기 (경제간섭/사회/비즈니스)
+    */-->
+    <h1 class="page__title">DASHBOARD</h1>
+
+    <div class="flex__column pageAsmtSurveyIntro"><!--/* 전체 Wrap(S) */-->
+
+        <div class="scroll-wrap">
+            <div class="contents"><!--/* 업무화면 (S) */-->
+
+                <!--/*
+                    분류체계 1Lv에 따라 아래처럼 클래스 분기 필요 (제품/서비스지표관리는 별도 페이지 - indicatorIntro.html)
+                    1. 경제기여 : <div class="intro-box economy">
+                    2. 사회공헌 : <div class="intro-box social">
+                    3. 비즈니스 : <div class="intro-box biz">
+                */-->
+                <div class="intro-box biz">
+                    <div class="title-box">
+                        <div>
+                            <h2 class="title csstTitle">비즈니스 기여 성과 측정평가</h2>
+                            <p class="copy csstCopy">제품·서비스 개발과 생산·판매를 통해 발생한 사회적 가치로,<br />환경과 사회, 거버넌스 부문 등 측정을 위한 평가를 진행합니다.</p>
+                        </div>
+                    </div>
+
+                    <ul class="score">
+                        <li>
+                            <i>전체 진행률</i>
+                            <em>20%</em>
+
+                            <!-- 경/사/비 - 문항표기 / 제품/서비스 - 측정으로표기 -->
+                            <span class="csstScore">(40문항 중 8문항 답변 완료)</span>
+                            <span class="csstScorePrd">(2개 중 1개 측정 완료)</span>
+                        </li>
+                        <li><i>총 점수</i><em>12점 획득</em></li>
+                        <li><i>SV성과</i><em>72,234,566원</em></li>
+                    </ul>
+
+                    <i class="icon"></i>
+                </div>
+
+                <div class="gridarea-heading">
+                    <h4 class="title-grid gridTitle">비즈니스 사회성과</h4>
+                    <div id="Grid" class="gridInitClass title-line"><!--/* Grid */--></div>
+                </div>
+
+                <div class="prd-process"><!--/* 지표 Process(S) */-->
+                    <h4 class="title-process">제품/서비스 지표 Process</h4>
+                    <ol class="step">
+                       <li class="by1">
+                           <strong>사회성과 상세정보</strong>
+                           <p>사회문제, 솔루션 제품/서비스의<br />기능 등을 정의 합니다.</p>
+                       </li> 
+                       <li class="by2">
+                           <strong>지표 측정 산식</strong>
+                           <p>SV성과 Baseline, 자사 SV기준값, Proxy,<br />제공량 등으로 이루어진 측정식을 정의 합니다.</p>
+                       </li>
+                       <li class="by3">
+                            <strong>성과측정</strong>
+                            <p>입력한 정보로 부터 SV값을<br />측정 합니다.</p>
+                       </li>
+                    </ol>
+                    
+                    <div class="formula">
+                        <i class="o brc">(</i>
+                        <span class="value">
+                            <i>Base Line</i>
+                            <em>258,251원</em>
+                        </span>
+                        <i class="o m">-</i>
+                        <span class="value">
+                            <i>자사 SV기준</i>
+                            <em>158,251원</em>
+                        </span>
+                        <i class="o brc r">)</i>
+                        <i class="o mtp">X</i>
+                        <span class="value">
+                            <i>Proxy</i>
+                            <em>1.25%</em>
+                        </span>
+                        <i class="o mtp">X</i>
+                        <span class="value">
+                            <i>제공량</i>
+                            <em>84,123,444원</em>
+                        </span>
+                        <i class="o eql">=</i>
+                        <span class="value">
+                            <i>SV성과</i>
+                            <em class="total">3,873,508원</em>
+                        </span>
+                    </div>
+                </div><!--/* 지표 Process(E) */-->
+
+                <div id="divisionSticky" class="division__btn">
+                    <div class="actions">
+                        <div class="center">
+                            <button id="" class="Button btn__page-task strong"><i>시작하기</i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--/* 업무화면 (E) */-->
+
+        </div>
+    </div><!--/*  전체 Wrap(E) */-->
+    <script>
+        var dummyData = {
+            biz : [
+                {'lv1':'비즈니스 사회성과', 'lv2':'환경', 'lv3':'환경 공정', 'lv4':'자원소비','lv5':'용수','cnt':5},
+                {'lv1':'비즈니스 사회성과', 'lv2':'환경', 'lv3':'환경 공정', 'lv4':'환경오염','lv5':'온실가스','cnt':2},
+                {'lv1':'비즈니스 사회성과', 'lv2':'환경', 'lv3':'환경 공정', 'lv4':'환경오염','lv5':'대기오염물질','cnt':1},
+                {'lv1':'비즈니스 사회성과', 'lv2':'환경', 'lv3':'환경 공정', 'lv4':'환경오염','lv5':'수질오염물질','cnt':2},
+                {'lv1':'비즈니스 사회성과', 'lv2':'환경', 'lv3':'환경 공정', 'lv4':'환경오염','lv5':'폐기물','cnt':4},
+            ],
+            economy : [
+                {'lv1':'경제간섭 기여성과', 'lv2':'고용', 'cnt':5},
+                {'lv1':'경제간섭 기여성과', 'lv2':'배당', 'cnt':3},
+                {'lv1':'경제간섭 기여성과', 'lv2':'납세', 'cnt':2},
+            ],
+            social : [
+                {'lv1':'사회공헌 사회성과', 'lv2':'사회공헌활동', 'cnt':5},
+                {'lv1':'사회공헌 사회성과', 'lv2':'자원봉사', 'cnt':2},
+                {'lv1':'사회공헌 사회성과', 'lv2':'기부', 'cnt':2},
+                {'lv1':'사회공헌 사회성과', 'lv2':'지속가능경영', 'cnt':4},
+            ]
+        };
+
+        /* 해당 string 구분에 따라 디자인/그리드 분기됩니다
+            1. 사회 : 'social'
+            2. 경제 : 'economy'
+            3. 비즈니스 : 'biz'
+            4. 제품/서비스 : 'prd'        
+        */
+        var CSST_TYPE = 'prd';
+
+        $a.page(function() {
+
+            this.init = function(id, param) {
+                designInit(CSST_TYPE);          // Design 초기화
+                initGrid();                     //Step3.Alopex grid 초기화
+            };
+            
+            /* Step3.Alopex grid 초기화 */
+            function initGrid() {            
+                // 분류체계 lv 3~5 hidden 여부
+                var csst_hidden = CSST_TYPE !== 'biz' ? true : false; 
+                    
+                $('#Grid').alopexGrid({ // 비즈니스 그리드
+                    pager:false,
+                    message: {
+                        nodata: '조회된 결과가 없습니다.'
+                    },
+                    defaultColumnMapping: {
+                        align:'center'
+                    },
+                    wrapCellContent:'cellVerticalMiddle',
+                    grouping: {
+                        by: ['lv1','lv2','lv3','lv4','lv5'],
+                        useGrouping: true,
+                        useGroupRowspan: true,
+                    },
+                    columnMapping : [
+                        { key: 'lv1', width : 180, title:'분류체계Lv.1', rowspan:true},
+                        { key: 'lv2', width : 160, title:'분류체계Lv.2', rowspan:true},
+                        { key: 'lv3', width : 160, title:'분류체계Lv.3', rowspan:true, hidden:csst_hidden},
+                        { key: 'lv4', width : 160, title:'분류체계Lv.4', rowspan:true, hidden:csst_hidden},
+                        { key: 'lv5', width : 160, title:'분류체계Lv.5', rowspan:true, hidden:csst_hidden},
+                        { key: 'cnt', width : 160, title:'지표수',},
+                        
+                    ], // (E) columnMapping
+                    data : dummyData[CSST_TYPE]
+                });
+            } // (E) initGrid
+    
+            /* 매개변수 string 에 따라 디자인 화면분기처리 
+                1. 사회 : 'social'
+                2. 경제 : 'economy'
+                3. 비즈니스 : 'biz'
+                4. 제품/서비스 : 'prd'        
+            */
+            function designInit(arg){
+                const _type      = arg ? arg : 'prd';
+                const _box       = document.querySelector('.intro-box');
+                const _title     = document.querySelector('.csstTitle');
+                const _copy      = document.querySelector('.csstCopy');
+                const _score     = document.querySelector('.csstScore');
+                const _scorePrd  = document.querySelector('.csstScorePrd');
+                const _grid      = document.querySelector('.gridarea-heading');
+                const _gridTitle = document.querySelector('.gridTitle');
+                const _process   = document.querySelector('.prd-process');
+                const _btns      = document.getElementById('divisionSticky');
+    
+                const text = {
+                    social  : { title : '사회공헌 사회 성과 측정평가', gridTitle :'사회공헌 사회성과', copy: '지역사회 공동체에 대한 사회공헌 활동으로 창출한<br />가치 측정을 위한 평가를 진행합니다.'},
+                    economy : { title : '경제 간섭 기여 성과 측정평가',gridTitle :'경제간섭 기여성과', copy: '귀사의 고용+배당+납세 등 기업 활동을 통해 경제에 간접적으로<br />기여하는 가치측정을 위한 평가를 진행합니다.'},
+                    biz     : { title : '비즈니스 기여 성과 측정평가', gridTitle :'비즈니스 사회성과', copy: '제품·서비스 개발과 생산·판매를 통해 발생한 사회적 가치로,<br />환경과 사회, 거버넌스 부문  등 측정을 위한 평가를 진행합니다.'},
+                    prd     : { title : '제품/서비스지표 등록측정',    gridTitle :'',                copy: '귀사의 제품 또는 서비스의 비즈니스가 지속적으로 SV를 창출하도록 설계되어<br />있는 경우 제품/서비스 지표를 등록하여 측정 할 수 있습니다.'},
+                }
+                
+                // design 클래스 설정
+                _box.classList.add(_type);
+    
+                // Text 설정
+                _title.textContent = text[_type].title;
+                _copy.innerHTML = text[_type].copy;
+                _gridTitle.textContent = text[_type].gridTitle;                        
+    
+                if ( _type !== 'prd' ) { 
+                    // 경/사/비
+                    _process.style.display = 'none';
+                    _score.style.display = 'inline';
+                    _scorePrd.style.display = 'none';
+                    _grid.style.display = 'block';
+                    _grid.setAttribute('data-init','');
+                    
+                } else {
+                    // 제품/서비스지표
+                    _score.style.display = 'none';
+                    _scorePrd.style.display = 'inline';
+                    _grid.style.display = 'none';
+                    _grid.removeAttribute('data-init');                
+                    _process.setAttribute('data-init','');
+                }
+    
+                _box.setAttribute('data-init','');
+                _btns.setAttribute('data-init','');
+            }
+        });
+
+
+    </script>
+</div>
+</section>
+</div>
+</div>
+</body>
+</html>

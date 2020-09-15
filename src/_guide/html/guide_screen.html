@@ -1,0 +1,130 @@
+<div id="search"></div>
+<div id="GridBoardScreen" class="gridInitClass"></div>  
+
+<script>
+    function screenSet(data){
+        var search = new AlopexGrid.plugin.Search();
+        search.setGrid('#GridBoardScreen');
+        search.setSearchWidget("#search");
+        search.init();
+
+        $('#GridBoardScreen').alopexGrid({
+            pager:false,
+            paging : {
+                perPage:null,
+            },
+            preventScrollPropagation:true,
+            autoColumnIndex: true,             
+            fitTableWidth:true,
+            height: 579,
+            rowSelectOption: {
+                clickSelect:false,
+                groupSelect: false
+            },	
+            defaultColumnMapping: {
+                sorting:true,
+                resizing:true,
+                ellipsisText: true
+            },
+            useClassHovering: true,
+            numberingColumnFromZero: false,
+            grouping :{
+                by : ['l1', 'l2', 'fileName', 'jeplinId'],
+                useGrouping : true,
+                useGroupRowspan : true,
+            },
+            columnFixUpto:4,
+            footer: {
+                footerMapping: [                    
+                    {columnIndex:8, render: ['화면수 : ','count(8)'], align: 'right',},
+                ] 
+            },
+            columnMapping : [
+                { key: 'no', width : 40, title:'No', numberingColumn : true, align: 'center', },
+                { key : 'group', title : '구분', width : 85, align:'center',
+                    styleclass : function(value,data) {
+                        if ( value === 'SV 평가모델' ) {
+                            return 'grp-model'
+                        } else if (value === 'SV 추진체계'){
+                            return 'grp-ahead'
+
+                        }else {
+                            return 'grp-na'
+                        }
+                    }
+                },
+                { key : 'l1', title : 'L1(대메뉴)', width : 140, styleclass:'l1'},
+                { key : 'l2', title : 'L2(중메뉴)', width : 220, styleclass:'l2'},
+                { key : 'l3', title : 'L3(기능)', width : 160, styleclass:'l3'},
+                { key : 'l4', title : 'L4(기능상세)', width : 150, styleclass:'l4'},
+                { key : 'screen', title : '화면명', width : 230, 
+                    styleclass:'screen',
+                    render : function(value,data) {
+                        var _pageType = typeof(data.pageType) === 'string' ? data.pageType : 'P';                        
+                        switch(_pageType){
+                            case 'M2' : return '<span class="l3 l3_s">'+data.screen+'</span>';
+                            case 'P' : return '<span class="l3 l3_p">(팝업)'+data.screen+'</span>';
+                            default : return '<span class="l3">'+data.screen+'</span>';
+                        }
+                    },
+                },
+                { key : 'menuFolder', title : '상위폴더', width :  110, align:"center"},
+                { key : 'fileName', title : '파일명', width :  220, rowspan:true, 
+                    styleclass:'fileName',
+                    render : function(value,data) {
+                        if ( data.fileName.length < 5 ) {
+                            return '<span class="noFile">작업전(사유:비고란 참조)</span>'
+                        }
+
+                        if ( data.fileName === 'emailTemplate.html' ) { // 예외 : 이메일템플릿
+                            return '<a class="url" href="../../static/templates/' + data.fileName +'" target="_blank">'+data.fileName+'</a>';
+                        }
+
+                        return value
+                    },
+                },
+                {   key : 'pageType', title : '형태', width : 60, align:'center' ,sorting:true,
+                    render : function(value,data) {
+                        return data.pageType;                        
+                    }
+                },
+                {key : 'dueDate', title : '완료일', width : 85, align:'center'  },
+                {key : 'latestDate', title : '최종수정일', width : 85, align:'center' },
+                {key : 'desc', title : '비고', width :  700, sorting:false },
+            ],
+            data: data
+        });
+
+        
+    $('.alopexgrid-search-plugin-keyword').attr('placeholder',"화면명/ID/메뉴그룹 으로 검색(엔터)");
+
+    // 그리드 bodycell click
+    $('#GridBoardScreen').on('click', '.bodycell', function(e){
+        const data = AlopexGrid.parseEvent(e).data;
+        const urlPrefix = '../../build/' + data.menuFolder + '/' + data.fileName;
+
+        if ( typeof(data.pageType) === 'string' ) {
+            window.open(urlPrefix);
+        } else { // POPUP
+            
+            const _popup = data.pageType;
+            
+            $a.popup({
+                url: urlPrefix, 
+                title: data.screen,
+                width: _popup.w,height:_popup.h,
+                data: _popup.data ? _popup.data : null,
+                callback: function(data){
+                    //callback
+                }    
+            });    
+        }
+    });
+}
+
+function guidePopupOpen(url,width,height, title, alias){
+
+}
+
+
+</script>

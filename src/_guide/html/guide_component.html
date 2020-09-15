@@ -1,0 +1,285 @@
+
+<div class="division">
+    <h2 class="heading-sub">Tooltip</h2>
+    
+    <br>
+
+    <input class="Textinput error" id="inputErr1" value="코드명을 입력하세요" />
+    <div data-base="#inputErr1" class="Tooltip" data-position="top">필수입력란에 입력하지 않았습니다.</div>
+
+    
+    <input class="Textinput error" id="inputErr2" value="코드명을 입력하세요" />
+    <div data-base="#inputErr2" class="Tooltip" data-position="top">필수입력란에 입력하지 않았습니다.필수입력란에 입력하지 않았습니다.</div>
+
+    <br><br>
+
+    <input class="Textinput error" id="inputErr3" value="코드명을 입력하세요" />
+    <div data-base="#inputErr3" class="Tooltip"><!--
+    --><ul class="list"><li><i class="left">홍길동 수석, 글로벌 운영팀</i><i class="right status type3">합의완료</i></li><li><i class="left">홍길동 수석, 글로벌 운영팀</i><i class="right status">-</i></li></ul>
+    </div>
+    
+    <input class="Textinput error" id="inputErr4" value="코드명을 입력하세요" />
+    <div data-base="#inputErr4" class="Tooltip shadow"><!--            
+    --><ul class="list nonDot"><li><i class="left status type3">경제간접 기여성과</i><i class="right">￦33,714</i></li><li><i class="left status type2">경제간접</i><i class="right">￦33,714</i></li></ul>
+    </div>
+</div>
+
+    
+<div class="division">
+    <h2 class="heading-sub">Select Box</h2><br>
+
+    <!-- inner title select (Border radius 차이) -->
+    <div class="select__primary selectCustom">
+        <button class="Dropdownbutton button">2019년</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018년</a></li>
+            <li><a>2017년</a></li>
+        </ul>
+    </div>
+
+    <div class="select__primary selectCustom">
+        <button class="Dropdownbutton button" data-disabled="true">5월</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>6월</a></li>
+            <li><a>7월</a></li>
+            <li><a>8월</a></li>
+            <li><a>9월</a></li>
+            <li><a>12월</a></li>
+        </ul>
+    </div>
+
+    <div class="select__primary selectCustom error"><!-- Error 메시지 툴팁 출력 -->
+        <button class="Dropdownbutton button">5월</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>6월</a></li>
+            <li><a>7월</a></li>
+            <li><a>8월</a></li>
+            <li><a>9월</a></li>
+            <li><a>12월</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+
+    <!-- default select -->
+    <div class="select__form selectCustom">
+        <button class="Dropdownbutton button">선택</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018</a></li>
+            <li><a>2017</a></li>
+            <li><a>2016</a></li>
+        </ul>
+    </div>
+
+    <div class="select__form selectCustom">
+        <button class="Dropdownbutton button" data-disabled="true">선택</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018</a></li>
+            <li><a>2017</a></li>
+            <li><a>2016</a></li>
+        </ul>
+    </div>
+
+    <div class="select__form selectCustom error">
+        <button class="Dropdownbutton button">선택</button>
+        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave">
+            <li><a>2018</a></li>
+            <li><a>2017</a></li>
+            <li><a>2016</a></li>
+        </ul>
+    </div>
+
+    <br><br>
+
+    <!-- Multiselect -->
+    <div class="multiselect__primary">
+        <select class="multiselect__primary Multiselect" id="MultiSample">
+            <option value="1">SK 이노베이션계열</option>
+            <option value="2">SK 텔레콤</option>
+            <option value="3">SK 건설</option>
+            <option value="4">SK E&amp;S</option>
+            <option value="5">SK 케미칼</option>
+        </select>
+    </div>
+
+    <div class="multiselect__primary">
+        <select class="multiselect__primary Multiselect" id="MultiSampleDis">
+            <option value="1">SK 이노베이션계열</option>
+            <option value="2">SK 텔레콤</option>
+            <option value="3">SK 건설</option>
+            <option value="4">SK E&amp;S</option>
+            <option value="5">SK 케미칼</option>
+        </select>
+    </div>
+
+
+    <div class="multiselect__primary">
+        <select class="multiselect__primary Multiselect error" id="MultiSampleErr">
+            <option value="1">SK 이노베이션계열</option>
+            <option value="2">SK 텔레콤</option>
+            <option value="3">SK 건설</option>
+            <option value="4">SK E&amp;S</option>
+            <option value="5">SK 케미칼</option>
+        </select>
+    </div>
+
+</div>
+
+
+<div class="division">
+    <h2 class="heading-sub">Textinput</h2><br>
+    <input class="Textinput" placeholder="코드명을 입력하세요" /><br><br>
+    <input class="Textinput" data-disabled="true" value="비활성화 테스트" /><br><br>
+
+    <input class="Textinput error" id="inputErr" value="(error)코드명을 입력하세요" /><br><br>
+
+    <span class="func__input-search empty">
+        <input class="Textinput Disabled" disabled data-disabled="true" />
+        <button class="inputEmpty">삭제</button><i class="icon i-input-person"></i>
+    </span>
+    <span class="func__input-search empty">
+        <input class="Textinput error Disabled" disabled data-disabled="true" />
+        <button class="inputEmpty">삭제</button><i class="icon i-input-person"></i>
+    </span>
+</div>
+
+
+
+<div class="division">
+    <h2 class="heading-sub">Datepicker</h2><br>
+    
+
+
+    <div>
+        <div class="Dateinput" data-placeholder="true" data-format="yyyy/MM/dd">
+            <input id="dateinput01">
+            <div class="Calendar" id=""></div>
+        </div>
+        <div class="Dateinput" data-disabled="true">
+            <input id="dateinput02">
+            <div class="Calendar" id=""></div>
+        </div>
+        <br><br>
+        <div class="Dateinput" data-pickertype="monthly" data-placeholder="true">
+            <input id="dateinput03">
+            <div class="Calendar" id=""></div>
+        </div>
+        <div class="Dateinput" data-pickertype="monthly" data-disabled="true">
+            <input id="dateinput04">
+            <div class="Calendar" id=""></div>
+        </div>
+    </div>
+    
+    <br><br>
+
+    <div>
+        <div id="daterange1" class="Daterange dateinput__period">
+            <div class="Startdate Dateinput">
+                <input id="daterange01" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange02" />
+            </div>
+        </div>
+        <br><br>
+        dd
+        <div id="daterange2" class="Daterange dateinput__period" data-pickertype="monthly">
+            <div class="Startdate Dateinput">
+                <input id="daterange07" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange08" />
+            </div>
+        </div>
+        <br><br>
+        <div id="daterange3" class="Daterange dateinput__period">
+            <div class="Startdate Dateinput" data-disabled="true">
+                <input id="daterange03" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange04" />
+            </div>
+        </div>
+        <br><br>
+        <div id="daterange4" class="Daterange dateinput__period" data-disabled="true">
+            <div class="Startdate Dateinput">
+                <input id="daterange05" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput">
+                <input id="daterange06" />
+            </div>
+        </div>
+        <br><br>        
+        <div id="daterange5" class="Daterange dateinput__period" data-format="yyyy/MM/dd">
+            <div class="Startdate Dateinput error" >
+                <input id="daterange01" />
+            </div>
+            <span class="dash">-</span>
+            <div class="Enddate Dateinput error">
+                <input id="daterange02" />
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="division">
+    <h2 class="heading-sub">Radio &amp; Checkbox</h2><br>
+    
+    <label class="ImageRadio"><input class="Radio" type="radio" name="rgoGrp" value="" />텍스트</label>
+    <label class="ImageRadio"><input class="Radio" type="radio" name="rgoGrp" value="" checked />텍스트</label>    
+    <label class="ImageRadio"><input class="Radio" data-disabled="true" type="radio" name="rgoGrp" value="" />비활성</label>    
+    <br><br>
+
+    <label class="ImageCheckbox"><input class="Checkbox" type="checkbox" name="" value="" />텍스트</label>
+    <label class="ImageCheckbox"><input class="Checkbox" type="checkbox" name="" value="" checked />텍스트</label>
+    <label class="ImageCheckbox part"><input class="Checkbox" type="checkbox" name="" value="" checked />일부선택</label>
+    <label class="ImageCheckbox"><input class="Checkbox" data-disabled="true" type="checkbox" name="" value="" />텍스트</label>    
+    <label class="ImageCheckbox error"><input class="Checkbox" type="checkbox" name="" value="" />필수 동의 항목</label>
+</div>
+
+
+
+<div class="division">
+    <h2 class="heading-sub">WebEditor</h2>
+    <div id="Webeditor"></div>
+</div>
+
+<script>
+$(function(){
+
+    /**************Datepicker(S)***************/
+    // ie에서 비활성화 렌더링 안됨. 추가 처리 필요
+    $('.Dateinput[data-disabled="true"]').setEnabled(false);
+
+    /**************Datepicker(E)***************/
+
+    $('#Webeditor').webeditor({
+        height: 300,
+    });
+
+    // 멀티셀렉트 Sample
+    $('#MultiSampleDis').multiselect('disable');
+
+
+    
+    // Tooltip sample
+    // var $tooltip = $('<div data-base="#tooltipMngr" class="Tooltip" id="TooltipMsg" />'),
+    //     $tooltip2 = $('<div data-base="#tooltipMngr2" class="Tooltip" id="TooltipMsg2" />');
+
+    // $a.convert($tooltip);
+    // $a.convert($tooltip2);
+
+    // $tooltip.html('<ul class="list"><li>홍길동 수석, 글로벌 운영팀<i class="status type3">합의완료</i></li><li>김선경 수석, 글로벌 운영팀<i>-</i></li></ul>');
+    // $tooltip2.html('<ul class="list"><li>홍길동 수석, 글로벌 운영팀<i class="status type3">합의완료</i></li><li>김선경 수석, 글로벌 운영팀<i>-</i></li></ul>');
+
+    // $('#guideComponent').append($tooltip,$tooltip2); // Tooltip append
+
+
+
+})
+</script>

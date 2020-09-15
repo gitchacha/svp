@@ -1,0 +1,276 @@
+// SV 평가모델 Login
+@import './sprite';
+@import './gnb';
+body {
+    min-width:0;
+    background-color:#d8ecff;
+}
+
+.root__container-asmt {
+    width:100%;height:100%;
+    
+    //logo
+    @include logo;
+    .logo-asmt {
+        position:fixed;top:49px;left:68px;
+        padding:0;
+        b {
+            font-weight:600
+        }
+    }
+
+    .login-asmt {
+        height:100%;
+        overflow:hidden;
+
+        .welcome, .contents {
+            float: left;
+            width:50%;height: 100%;
+            display:flex;            
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .welcome { // 좌측 - Welcome message area
+            width:56%;margin-right:-6%;  
+            position: relative;        
+            justify-content: flex-end;            
+            background:url(../image/mvp/login-img.png) center bottom no-repeat;
+            color:#26282b;
+            
+            .copy {
+                position:absolute;left:50%;top:30%;
+                transform:translateX(-50%);
+                font: {
+                    size:44px;
+                    family: 'SCDream';
+                }
+                white-space: nowrap;
+                line-height: 1.3em;
+                letter-spacing: -1.1px;
+                strong {
+                    font-weight: 700;
+                }
+                span {font-weight:300}
+                p {
+                    margin-top:10px;
+                    font-size: 13px;
+                }
+            }
+
+            &::before, &::after,
+            .bg::before, .bg::after {
+                display:block;content:"";
+                position: absolute;
+            }
+            &::before { // 구름1
+                left:0;top:363px;
+                width:263px;height:166px;
+                background:url(../image/mvp/login-cloud1.png);
+            }
+            &::after { // 구름2
+                left:93px;top:748px;
+                width:63px;height:24px;
+                background:url(../image/mvp/login-cloud2.png);
+            }
+            .bg {
+                &::before {
+                    right:19%;top:54%;
+                    width:81px;height:30px;
+                    background:url(../image/mvp/login-cloud4.png);
+                }
+                &::after {
+                    right:7%;top:10%;
+                    width:261px;height:153px;
+                    background:url(../image/mvp/login-cloud3.png);
+                }
+            }
+        } // (E) welcome
+
+        .contents { // Login form area            
+            display:flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;            
+            transition:padding ease .2s;
+            &::after {
+                display:block;content:"";
+                position: absolute;left:938px;right:50px;
+                top:50%;bottom:0;
+                z-index:1;
+                width:50px;height:50px;
+                background-color:#fff;
+                border-radius:50px / 100px;
+                transform:scale(38.5);
+            }
+
+            .copy {
+                padding-bottom:30px;
+                font: {
+                    size: 30px;
+                    weight:600;
+                }
+                text-align: center;
+                letter-spacing: -1.5px;
+            }
+
+            .form {
+                position: relative;
+                z-index: 2;
+                width:400px;
+                .form-control {
+                    width:100%;height:54px;
+                    margin-bottom:15px;
+                    border: {
+                        color:#e9ebed;
+                        radius:27px;
+                    }                    
+                    text-indent: 20px;
+                    &::placeholder { font-size:13px; color: #73787e; }
+                    &:-ms-input-placeholder {font-size:13px; color: #73787e;}
+                }
+
+                .btn__login {
+                    width:100%;height:70px;
+                    margin-top:15px;
+                    border-radius: 35px;
+                    background-color:#e63d3d;
+                    text-align: center;
+                    color:#fff;
+                }
+
+                .utils {
+                    padding-top:30px;
+                    text-align: center;
+                    a {
+                        position: relative;
+                        font: {size:14px;weight:300}
+                        letter-spacing: -.4px;
+                        color:#1b1d1f;
+                        padding : {right:19px;left:14px};
+                        &:first-child {padding-left:0}
+                        &:last-child {padding-right:0; &::after {display: none;}}
+                        &::after {
+                            display:block;content:"";
+                            position: absolute;right:0;top:4px;
+                            width:1px;height:16px;
+                            background-color: #cacdd2;
+                        }
+
+                    }
+                }
+            }
+        } // (E) contents
+
+
+        @media screen and (max-width:1400px) {
+            .welcome {
+                background-size:80% auto             ;
+                .bg {
+                    &::after {right:4%}
+                }
+            }
+            .contents {
+                justify-content: unset;
+                .form {
+                   left:150px
+                }
+            }
+            
+        }
+
+        @media screen and (min-width:700px) {
+            .welcome .copy {font-size:38px}
+            .contents .form {left:50px}
+        }
+
+        &.register { // (S)) register - 평가기본정보등록
+            min-width:1000px;
+            .welcome {                
+                .copy {top:20%;font-size:44px;}
+            }
+
+            .title__section { // 평가기본정보등록 table title
+                margin-bottom:38px;
+                font-size:30px;
+                text-align: center;
+            }
+
+            .form {
+                width:calc(100% - 100px);
+                padding-top:70px;
+                height: 100%;
+                overflow: auto;
+                .table__primary {
+                    table-layout: fixed;
+                    width:580px;                    
+                    margin:auto;
+                }
+
+                .biznum { // 사업자번호
+                    display:flex;
+                    .dash {
+                        margin:0;
+                        flex: {
+                            basis:27px;
+                            grow: 0;
+                        }
+                        text-align: center;
+                    }
+                    .num1,.num2,.num3 {
+                        flex-grow:0;
+                        padding: {left:0;right:0;}
+                        text-align:center;
+                    }
+                    .num1 {flex-basis:122px}
+                    .num2 {flex-basis:92px}
+                    .num3 {flex-basis:152px;margin-right:10px;}
+                    .select__form {flex-grow:1}
+                }
+            }
+
+            .btns {
+                padding-top:40px;
+                text-align: center;
+            }
+            @media screen and (max-height: 900px) {
+                .form {padding-bottom:70px}
+
+
+            }
+            
+            @media screen and (max-width: 1400px) {                
+                .welcome {
+                    width:47%;
+                    .copy {left: 43%;font-size: 39px;}
+                }
+                .contents {width:59%}
+                .form {
+                    width:calc(100% - 50px);
+                }
+            }
+            @media screen and (max-width: 1230px) {
+                .welcome {
+                    width:41%;
+                    .copy {left: 44%;font-size: 30px;line-height: 1.4;}
+                }
+                .contents {width:65%}
+            }
+            @media screen and (max-width: 1100px) {
+                .welcome {width:46%;}
+                .contents {width:60%}
+                .form .table__primary { 
+                    width: 490px;
+                    .biznum {
+                        .num1 {flex-basis:80px}
+                        .num2 {flex-basis:60px}
+                        .num3 {flex-basis:100px}
+                    }
+                }
+            }
+
+
+        } // (E) register - 평가기본정보등록
+
+    } // (E) login-asmt
+}

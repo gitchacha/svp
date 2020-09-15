@@ -1,0 +1,70 @@
+<!--/* [ Page ]
+@menu   : DB/자료실 > 언론보도자료
+@page   : 언론보도 자료
+*/-->
+
+<div class="heading-area board">
+    <div class="wrap">
+        <h1 class="page-title">언론보도 자료</h1>
+        
+        <ul class="breadcrumb">
+            <li class="home">Home</li>
+            <li>DBㆍ자료실</li>
+            <li>언론보도 자료</li>
+        </ul>
+    </div>
+</div>
+<div class="article pageNewsList">
+
+    <div id="Grid" class="gridInitClass pointer board"><!--/* Grid */--></div>
+    
+</div>
+
+
+
+<script>    
+    $a.page(function() {
+        this.init = function() {
+            setEventHandler();				//Step2.Event Handler 세팅
+            initGrid();                     //Step3.Alopex grid 초기화
+
+        }
+
+        /* Step2.Event Handler 세팅 */
+		function setEventHandler() {
+            // 그리드 셀 클릭 이벤트 - 페이지 이동
+            $('#Grid').on('click', '.bodycell', function(e) {
+                var dataObj = AlopexGrid.parseEvent(e).data;
+                console.log(dataObj);                
+            });
+        }
+
+
+        /* Step3.Alopex grid 초기화 */
+        function initGrid() {    
+            $('#Grid').alopexGrid({ // 비즈니스 그리드
+                pager:false,
+                message: {
+                    nodata: '조회된 결과가 없습니다.'
+                },
+                defaultColumnMapping: {
+                    align:'center'
+                },
+                wrapCellContent:'cellVerticalMiddle',
+                grouping: {
+                    by: ['lv1','lv2','lv3','lv4','lv5'],
+                    useGrouping: true,
+                    useGroupRowspan: true,
+                },
+                columnMapping : [
+                    { key: 'no', width:150, title: 'NO', },
+                    { key: 'title', width:350, title: '제목', },
+                    { key: 'author', width:150, title: '출처', },
+                    { key: 'createdAt', width:150, title: '등록일', render: { type: 'timeStamp', format: 'yyyy.MM.dd' }},
+                ], // (E) columnMapping
+                data : []
+            });
+        }
+    });
+
+</script>

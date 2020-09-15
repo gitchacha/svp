@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>퍼블가이드 :: SV-Portal</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>    
+    <link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+    
+    <link rel="stylesheet" type="text/css" href="../../static/lib/alopex/ui/css/alopex-ui-default.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/lib/alopex/ui/css/src/alopex-ext.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/lib/alopex/grid/alopex-grid.css" />
+	<link rel="stylesheet" type="text/css" href="../../static/lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/css/common_portal.css" /><!-- Portal -->
+    <link rel="stylesheet" type="text/css" href="../../static/css/common_asmt.css" /><!-- 평가등록 -->
+    <link rel="stylesheet" type="text/css" href="../../_guide/css/guide.css" /><!-- Guide -->
+    <link rel="stylesheet" type="text/css" href="../../static/lib/alopex/grid/plugin/search/alopex-grid-plugin-search.css" /><!-- Search plugin -->
+    
+    <script src="../../static/lib/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../../static/lib/alopex/ui/script/alopex-ui.min.js"></script>    
+    <script src="../../static/lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+	<script src="../../static/lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+    <script src="../../static/lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+    <script src="../../static/lib/alopex/grid/alopex-grid.min.js"></script>
+    <script src="../../static/lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+    <script src="../../static/lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+    <script src="../../static/lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+    <script src="../../static/lib/alopex/grid/plugin/search/alopex-grid-plugin-search.min.js"></script><!-- Alopex Search plugin -->
+    
+    <!-- 공통 JS(S) -->
+    <script src="../../static/js/sv-utils.js"></script>
+    <script src="../../static/js/sv-setup.js"></script>
+    <script src="../../static/js/sv-control.js"></script>
+    <script src="../../static/js/sv-file.js"></script>
+    <script src="../../static/js/bignumber.js"></script>
+    <!-- 공통 JS(E) -->
+
+    <!-- Webedtior -->
+    <link rel="stylesheet" href="../../static/lib/alopex/ui/script/src/webeditor/alopex-webeditor.css" />
+	<script src="../../static/lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script>
+    <script src="../../static/lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script>   
+
+    <!-- Production 배포 금지 !!  퍼블용 Dummy DATA!!!(S)  -->
+    <script>
+        var dummyGuide = {};
+        var _isMainPopup = false;
+    </script>
+    <script src="../js/dummyGuide.js"></script> <!-- SKSV common style -->
+    <!-- Production 배포 금지 !!  퍼블용 Dummy DATA!!!(E)  -->  
+</head>
+<body id="sksv__guild-pub">
+    <section class="guide__navigation" id="guideNavi">
+        <h1 class="heading">SV-Portal<span>퍼블리싱 가이드</span></h1>
+        <ul class="navi"></ul>
+    </section>
+
+
+    <div class="guide__container">
+        <section class="guide__wrap" id="guideScreen">
+            <h1 class="heading">화면 목록</h1>
+            <div id="">
+                @@include("./guide_screen.html")
+            </div>
+        </section>
+
+        <section class="guide__wrap" id="guideComponent">
+            <h1 class="heading">Component</h1>
+            <div id="guideComponentWrap">
+                @@include("./guide_component.html")
+            </div>
+        </section>
+
+
+        <section class="guide__wrap" id="guideColor">
+            <h1 class="heading">Color</h1>
+            <div id="guideColorWrap"></div>
+        </section>
+
+        <section class="guide__wrap" id="guideIcon">
+            <h1 class="heading">Icon</h1>
+            <div id="guideIconWrap"></div>
+        </section> 
+
+        <section class="guide__wrap" id="guideButton">
+            <h1 class="heading">Button</h1>
+            <div id="guideButtonWrap">
+                @@include("./guide_button.html")
+            </div>
+        </section> 
+        
+        <section class="guide__wrap" id="guideTab">
+            <h1 class="heading">Tab</h1>
+            <div id="guideTabWrap">
+                @@include("./guide_tab.html")
+            </div>
+        </section> 
+
+        <section class="guide__wrap" id="guideProcessBar">
+            <h1 class="heading">ProcessBar</h1>
+            <div id="guideProcessBarWrap">
+                @@include("./guide_processBar.html")
+            </div>
+        </section> 
+
+        <section class="guide__wrap" id="guideGrid">
+            <h1 class="heading">Grid</h1>
+            <div id="guideGridWrap">
+                @@include("./guide_grid.html")
+            </div>
+        </section> 
+    </div>
+    
+    <script>
+        
+    $(function(){
+        
+
+        // Guide HTML 생성
+        function makeGuideHtml(data){
+            var guideMenuHtml = [];
+            data.guideMenu.forEach(function(elem){
+                guideMenuHtml.push('<li><a href="#'+ elem.sectionId + '">'+ elem.name + '</a></li>');
+            });            
+            $('#guideNavi .navi').html(guideMenuHtml);
+
+            makeColorchips(data.color); // Color guide 생성
+            makeIcons(data.icon); // Icon guide 생성
+
+            gridSet(dummyGuide.guide.guideMenu); // Grid 생성
+            screenSet(dummyGuide.guideScreenList); // Grid 생성
+        }
+
+       
+
+        // Color
+        function makeColorchips(target){
+            var htmlArr = [];
+
+
+            Object.keys(target).forEach(function(item){
+                // item[1].forEach(function(elem){
+                //     list.push('<li><span class="chip '+item.className+'">'+item.color+'</span><strong class="className">'+item.className+'</strong></li>');
+                // });
+
+                for(var i =0, len = 1; i < len; i++) {
+                    var items = ''
+                    for(var j =0,jlen = target[item].length; j < jlen; j++) {                        
+                        
+                        items += '<li><span class="chip '+target[item][j].className+'">'+target[item][j].color+'</span><strong class="className">'+target[item][j].className+'</strong></li>';
+                    }
+                    
+                    var htmlStr = '<div class="division"><h2 class="heading-sub">'+ item +'</h2><ul class="colorchip">'+ items +'</ul></div>';
+                }
+
+                htmlArr.push(htmlStr);
+            });
+
+            var htmlStructure = htmlArr.toString().replace(/,/g, '');
+            $('#guideColorWrap').html(htmlStructure);
+        }
+
+
+        // Guide HTML 생성 - Icon
+        function makeIcons(target) {
+            var iconHtml = [];
+
+            Object.keys(target).forEach(function(elem){
+                iconHtml.push('<li><i class="icon i-'+ target[elem].className +'"></i><span class="name">'+ target[elem].className +'</span></li>');
+            });
+
+            $('#guideIconWrap').html(iconHtml);
+            $('#guideIconWrap').wrapInner('<ul class="iconList division"></ul>')
+
+        }
+
+        makeGuideHtml(dummyGuide.guide);
+
+    });
+    </script>
+</body>
+</html>

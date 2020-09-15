@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SV Portal : 게시물 등록</title>
+    <meta charset="UTF-8" />    
+<meta http-equiv="Content-Type" content="text/html; charser=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<base href="../../static/">
+
+<link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+
+<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/alopex-ui-default.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/src/alopex-ext.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/grid/alopex-grid.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/common_portal.css" /><!-- portal css -->    
+<link rel="stylesheet" href="lib/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+
+<script src="lib/jquery/jquery-3.4.1.min.js"></script>
+<script src="lib/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script src="lib/alopex/ui/script/alopex-ui.min.js"></script>
+
+<script src="lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+<script src="lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+<script src="lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+<script src="lib/alopex/grid/alopex-grid.min.js"></script>
+<script src="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+<script src="lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+<script src="lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+
+
+<!-- 공통 JS(S) -->
+<script src="js/sv-utils.js"></script>
+<script src="js/sv-setup.js"></script>
+<script src="js/sv-control.js"></script>
+<script src="js/sv-file.js"></script>
+<script src="js/bignumber.js"></script>
+<!-- 공통 JS(E) -->
+
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script><!--Alopex - ui Webeditor -->
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script><!--Alopex - ui Webeditor -->
+
+<style type="text/css">
+    .alopexgrid-progress-modal {
+        display: none;
+    }
+
+    .alopexgrid-progress {
+        display: none;
+    }
+
+    .btn_tree_column {
+        float: right;
+        margin-top: 7px;
+    }
+</style>
+</head>
+<body>
+    <div class="root__container-portal">
+        
+	<section class="header__container">		
+		<div class="header__wrap"><!-- header__wrap (S) -->
+			<h1 class="logo"><a href=""><i>SV</i><b>Portal</b></a></h1>
+
+			<div class="menu">
+				<ul class="depth1">
+					<li data-menu="summary"><a href="">SV추진개요</a></li>
+					<li data-menu="bm"><a href="/build/bm/bmList.html">SK DBL BM</a></li>
+					<li data-menu="social"><a href="/build/">사회적가치 성과</a></li>
+					<li data-menu="board"><a href="/build/board/refDbList.html">DBㆍ자료실</a></li>
+					<li data-menu="asmt"><a href="/build/">SV평가모델</a></li>
+				</ul>
+				<ul class="depth-sub">
+					<li class="root" data-menu="summary">
+						<ul class="depth2">
+							<li><a href="/build/">SV추진체계</a></li>
+							<li><a href="/build/">ESG분류체계</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="bm">
+						<ul class="depth2">
+							<li><a href="/build/">DBL BM</a></li>
+							<li><a href="/build/">SK BM 사례</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="social">
+						<ul class="depth2">
+							<li><a href="/build/">사회성과 대외공표</a></li>
+							<li><a href="/build/">성과측정 지표</a></li>							
+						</ul>
+					</li>
+					<li class="root" data-menu="board">
+						<ul class="depth2">
+							<li><a href="/build/">Reference DB</a></li>
+							<li><a href="/build/">SK News</a></li>
+							<li><a href="/build/">언론보도자료</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="asmt">
+						<ul class="depth2">
+							<li><a href="/build/">SV평가개요</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<a href="/build/assessment/asmtBoard.html" class="btn-asmt">SV 평가</a>
+		</div><!-- header__wrap (E) -->
+
+	</section>
+        <div class="contents__container">
+<!--/* [ Page ]
+@menu   : 게시판(BM/News/언론보도) > 글쓰기
+@page   : 게시글 등록
+*/-->
+<link type="text/css" rel="stylesheet" href="lib/alopex/ui/script/src/webeditor/alopex-webeditor.css">
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script>
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script>
+
+<div class="heading-area board">
+    <div class="wrap">        
+        <h1 class="page-title"><span id="pageNm">-</span> 등록</h1>
+        <ul class="breadcrumb">
+            <li class="home">Home</li>            
+        </ul>
+    </div>
+</div>
+<div class="article pageBoardEdit board-edit-wrap"><!--/* 업무화면 (S) */-->
+
+    <table class="table__primary">
+        <tbody>
+            <tr data-view="bm">
+                <th class="col1">회사</th>
+                <td>
+                    <div class="select__form full"><!--/* 회사 */-->
+                        <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">회사</button>
+                        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                    </div>
+                </td>
+                <th class="col2">산업군</th>
+                <td>
+                    <div class="select__form full"><!--/* 산업군 */-->
+                        <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">산업군</button>
+                        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                    </div>
+                </td>
+            </tr>
+
+            <tr data-view="board">
+                <th class="col1" colspan="2">출처</th>
+                <td colspan="2"><input id="" class="Textinput full" /></td>
+            </tr>
+            
+            <tr>
+                <th>제목</th>
+                <td colspan="3"><input id="" class="Textinput full" /></td>
+            </tr>
+            <tr>
+                <th class="top">내용</th>
+                <td colspan="3"><div class="WebEditor" id="boardEdit" ><!-- WebEditor --></div></td>
+            </tr>
+        </tbody>
+    </table>    
+
+
+    <div id="divisionSticky" class="division__btn">
+        <div class="actions">
+            <div class="center">
+                <button id="" class="Button btn__page-task strong"><i>등록</i></button>
+            </div>
+        </div>
+    </div>
+
+</div><!--/* 업무화면 (E) */-->
+
+
+
+<script>
+    $a.page(function() {
+        this.init = function(id,param) {
+            const paramData = {
+                /*
+                [COMMENT] breadcrumb, 페이지 타이틀 등 설정을 위한 임시 선언.
+                개발시 실제 param으로 'type' 키에 대한 value 변경바랍니다.
+                */
+                type: 'bm', // 해당 value에 따라 text 등 변경됨
+                data: {
+                    'bm' : {
+                        title : 'BM 사례',
+                        breadcrumb : ['SK DBL BM', 'SK BM 사례']
+                    },
+                    'news' : {
+                        title : 'SK News',
+                        breadcrumb : ['DBㆍ자료실', 'SK News']
+                    },
+                    'media' : {
+                        title : ' 언론보도 자료',
+                        breadcrumb : ['DBㆍ자료실', '언론보도 자료']
+                    }
+                }
+            }
+            initDesign(paramData);              // Design (화면 초기설정) 세팅
+            setEventHandler();				//Step2.Event Handler 세팅            
+        }
+
+        /* 화면 초기 세팅 (Design/단순 Text) */
+        function initDesign(param){
+            const data = param.data[param.type];
+            const title = document.getElementById('pageNm');
+            const breadcrumb = document.querySelector('.breadcrumb');
+            const tableRowBm = document.querySelectorAll('[data-view="bm"]');
+            const tableRowBoard = document.querySelectorAll('[data-view="board"]');
+
+            data.breadcrumb.map(function(v){
+                const item = document.createElement('li');
+                item.textContent = v
+                return item;
+                
+            }).forEach(function(v){
+                breadcrumb.appendChild(v);
+            });
+
+            title.textContent = data.title;
+
+            // table row show/hide
+            if ( param.type === 'bm' ) {                
+                tableRowBm.forEach(function(v){ v.style.display = 'table-row' });
+                tableRowBoard.forEach(function(v){ v.style.display = 'none' });                
+            } else {
+                tableRowBm.forEach(function(v){ v.style.display = 'none' });
+                tableRowBoard.forEach(function(v){ v.style.display = 'table-row' });
+            }
+            
+        }
+
+
+        /* Step2.Event Handler 세팅 */
+		function setEventHandler() {
+            
+        }
+
+
+        
+        
+    });
+
+
+
+</script>
+    
+        </div>
+
+        <footer class="footer__container">
+    <div class="wrap">
+        <ul class="site">
+            <li><a href="">SK 홈페이지</a></li>
+            <li><a href="">사회적가치연구원</a></li>
+            <li><a href="">경영경제연구소</a></li>
+        </ul>
+        <small>COPYRIGHT&copy;2020 BY SK HOLDINGS CO., LTD. ALL RIGHTS RESERVED</small>
+    </div>
+</footer>
+    </div>
+</body>
+</html>

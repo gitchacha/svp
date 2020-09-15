@@ -1,0 +1,49 @@
+// Form 관련 기본 config
+$font-size: 15;
+
+/***** NOMALIZE ( 디자인 가이드 공통사항 적용 )*****/
+// 디자인 기본폰트 - NotoSans KR / S-Core Dream
+$fontTypes : (	
+	font-300 : 'Light',
+	font-400 : 'Regular',
+	font-500 : 'Medium',
+	font-700 : 'Bold',
+);
+
+@for $weight from 1 to 9 { // SCDream
+	$font : 'SCDream' + $weight;
+	@font-face {
+		font: {
+			family: 'SCDream';
+			style:normal;
+			weight:#{$weight}#{0}0;
+		}
+		src:url('../fonts/S-Core-Dream/#{$font}.woff') format('woff');
+	}	
+}
+
+@each $weight in 300,400,500,700 { // NotoSans
+	$fontType : map-get($fontTypes, font-#{$weight});
+	@font-face {
+		font: {
+			family:'NotoSansKR';
+			style:normal;
+			weight:$weight;
+		}
+		src:url('../fonts/NotoSansKR-#{$fontType}.woff') format('woff');
+	}
+}
+
+html,body {
+    height:100%;
+	margin:0;
+    font: {
+        family:'NotoSansKR', "Malgun Gothic", "맑은 고딕", Dotum, "돋움" , sans-serif;
+        size:#{$font-size}px;
+	}
+	letter-spacing: -.85px;
+	color:#26282b; // 기본 Text Color
+}
+h1,h2,h3,h4,h5,h6 {font-size:#{$font-size}px}
+
+

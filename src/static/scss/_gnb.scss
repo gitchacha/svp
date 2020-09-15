@@ -1,0 +1,343 @@
+/* [ Page ] _gnb.scss : 평가모델 Global Navigation Bar */
+@mixin logo {
+    .logo-asmt {
+        padding:49px 0 64px;
+        font-size:20px;
+        text-align: center;
+        i {
+            display: inline-block;
+            @include sprite(30,23);
+            margin-right:4px;
+            width:39px;height:22px;
+            font-size:0;
+            vertical-align: top;
+        }
+    }
+
+}
+.root__container-asmt {
+    .gnb__wrap {
+        position: relative;z-index:10;
+        overflow: visible;
+        display:flex;
+        flex-shrink: 0;
+        flex-direction: column;
+        background-color: #fff;
+        height:100%;
+        border-radius:0 30px 30px 0;
+        white-space: nowrap;
+
+        @include logo;
+        .btn__gnb-folding  { // gnb folding(S)
+            position: absolute;right:-15px;top:45px;
+            z-index: 10;            
+            width:30px;height:30px;
+            font-size:0;
+            border-radius: 30px;
+            background-color:#26282b;
+            color:#fff;
+            transition:top ease .3s;
+            @include sprite(28,219);
+            transition: {
+                property: top, background-position;
+                timing-function: ease;
+                duration:.2s;
+            };
+
+            &:hover {background-position:-56px -219px;}
+            &.fold {
+                top:87px;
+            }
+        }  // gnb folding(E)
+
+
+        .menu {
+            flex:1;            
+            overflow:visible;
+            font-size:16px;
+            color:#26282b;
+            
+            a {
+                display:block;
+                border-radius:30px;
+                background-color:#fff;
+                color:#26282b;
+                b { 
+                    &::after { // 좌측 주황색 Bar
+                        display: block;content:"";
+                        position: absolute;left:-20px;top:50%;
+                        transform:translateY(-50%);                        
+                        width:0;height:0;
+                        border-radius:0 3px 3px 0;
+                        background-color:#ff8a3a;
+                        transition:all ease .3s;
+                    }
+                }
+            }
+
+            .depth1 { // depth1(S)
+                > li { // root li(S)
+                    position: relative;
+                    padding:0 20px;
+                    font-size:18px;
+                    a {
+                        transition: {
+                            property: padding,width, background-color;
+                            duration:.2s;
+                            timing-function:ease;
+                        }
+                    }
+                    .root, a {
+                        display: block;
+                        padding:17px 0 17px 55px;
+                        transition:width ease .3s;
+                    }
+                    .root { 
+                        position: relative;
+                        margin: {top:25px;bottom:3px;}
+                        font-weight: 300;
+                        &::after { // icon
+                            @include spritePseudo(31,68);
+                            left:32px;top:54%;
+                            width:26px;height:26px;
+                        }
+                        &.asmt::after {background-position: -111px -68px;}
+                        &.report::after {background-position: -190px -67px;}
+                    }
+
+                     
+                } // root li(E)
+            } // depth1(E)
+
+            .depth2 { // depth2(S)
+                font-size:16px;
+                li {
+                    a {
+                        position: relative;
+                        padding: {
+                            left:35px;
+                            right:20px;
+                        }
+                        &::before {
+                            display:block;content:"";
+                            position: absolute;left:23px;top:23px;
+                            width:3px;height:3px;
+                            background-color:#cacdd2;
+                            border-radius: 3px;
+                        }
+                    }
+                }
+            } // depth2(E)
+
+            .depth1 li, .depth2 li { // on(S) (현재메뉴)
+                .link::after {display: none}                
+                &.on {
+                    a {
+                        background-color:#e63d3d;
+                        color:#fff;
+                        &::before {background-color:#fff}
+                        
+                        // 메뉴별 Icon
+                        &.board::after {background-position: -69px -68px;}
+                    }
+                }
+                a:hover, &.on a {
+                    b::after {
+                        width:3px;height:40px;
+                    }
+                }
+            } // on(E)
+
+            .link { // menu icon
+                &::after {                    
+                    @include spritePseudo(108,66);
+                    width:30px;height:30px;
+                }
+                &.asmt::after {background-position:-463px -64px}
+                &.prd::after {background-position:-423px -64px}
+                &.result::after {background-position:-109px -64px}
+                &.detail::after {background-position:-383px -65px}
+                &.comp::after {background-position:-271px -65px}
+                &:hover {
+                    background-color:#e63d3d;
+                    color:#fff;
+                    &::before {background-color:#fff}
+                }
+            }
+            .depth1 > li .root.board::after {                
+                background-position:-271px -65px;
+            }
+            .root.board::after,
+            .link::after {
+                left:20px;                
+            } 
+
+        }
+
+        .utils { // sv 포털 바로가기 등 (S) gnb__wrap > utils
+           flex-basis: 70px;
+
+           .go-portal {
+               position: relative;
+               display:block;
+               overflow:hidden;
+               min-height: 100%;
+               color:#73787e;
+               text-align:center;
+               line-height: 70px;               
+               &:hover {color:#26282b;}
+               &::before {
+                   @include spritePseudo(33,155, 'inline');
+                   top:-2px;
+                   width:18px;height:16px;
+                   margin-right:8px;
+               }
+               &::after {
+                   display: block;content:"";
+                   position: absolute;
+                   left:30px;right:30px;top:0;
+                   height:1px;
+                   background-color:#e9ebed;
+               }
+           }
+    
+        } // (E) gnb__wrap > utils
+
+
+        // Folding 용 animation
+        width:250px;
+        transition: all ease .3s;
+        .go-portal > span{transition:opacity ease .3s}
+        .logo-asmt b {transition: all ease .3s}
+
+        &.fold { // fold(S)
+            width:75px;
+            .logo-asmt {
+                i {margin-right: 0;}
+                b {width:0;opacity:0;margin-right:-100%;}
+            }
+            
+            .btn__gnb-folding { 
+                top:90px;
+                background-position:-86px -219px;
+                &:hover {background-position:-116px -219px;}
+            }
+
+            .menu { // menu(S)
+                .depth1 > li {
+                    padding: 0 18px;
+                    .root, a {
+                        padding:0;
+                        width:40px;height:40px;
+                    }
+                    &:first-child {padding-bottom:35px}
+                }
+                a, .root {font-size:0;}
+                
+                .root {
+                    // 링크 없는 menu display none
+                    &.asmt, &.report {display: none;}
+                    &.board {margin-bottom:0;}
+                    &.board::after {left:20px;}
+                }
+
+                a b::after { // 주황색 bar
+                    left:-18px;
+                }
+                
+                .depth2 > li {margin-bottom:35px}
+                .depth1 li, .depth2 li {  
+                    .link::after {
+                        display: block;
+                    }
+                    .link, a {
+                        border-radius: 50px;
+                        background-color:#fff;
+                        transition: {
+                            property: background-color, background-position,
+                                        width, padding-left;
+                            duration:.3s;
+                            timing-function: ease;
+                        }
+                    }
+
+                    &.on .link, &.on .root,  &:hover > a {                        
+                        background-color:#e63d3d;
+                        color:#fff; 
+                        &::after {
+                            display: inline-block;
+                        }
+                    }
+                    &.on > .link, &:hover > .link {
+                        &.asmt::after {background-position:-148px -65px}
+                        &.prd::after {background-position:-423px -64px}
+                        &.result::after {background-position:-228px -64px}
+                        &.detail::after {background-position:-346px -65px}
+                        &.comp::after {background-position:-307px -65px}
+                    }
+
+                    > .link {
+                        &.asmt::after {background-position:-108px -66px}
+                        &.prd::after {background-position:-463px -64px}
+                        &.result::after {background-position:-188px -64px}
+                        &.detail::after {background-position:-383px -65px}
+                        &.comp::after {background-position:-272px -65px}
+                        &::before {display:none}
+    
+                        // 중간 회색 bar
+                        &.asmt, &.result {
+                            b::before {
+                                display:block;content:"";
+                                position: absolute;left:0;right:0;top:-17px;
+                                height:1px; width:40px;
+                                background-color:#e9ebed;
+                            }
+                        }
+                    }
+
+                    
+                }
+                
+
+
+                 
+                // hover시 text show
+                .depth1 li a, .depth2 li a {
+                    &:hover {                        
+                        display: inline-block;                        
+                        width:auto;
+                        padding: {
+                            left:45px;
+                            right:20px;
+                        }
+                        white-space: nowrap;
+                        line-height:38px;
+                        b {font-size:16px;margin-top:-2px;}
+
+                        &::after {left:24px}
+                    }
+                }
+
+            } // menu(E)
+
+            .go-portal {
+                text-align: right;
+                &::after {display: none;}
+                &::before {
+                    position: absolute;
+                    left:50%;top:50%;
+                    transform:translate(-50%, -50%)
+                }
+                span {
+                    position: absolute;left:50%;top:50%;
+                    transform:translate(-50%, -50%);
+                    display:inline-block;
+                    opacity:0;
+                }
+            }
+
+
+
+        } // fold(E)
+    }
+}

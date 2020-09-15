@@ -1,0 +1,80 @@
+<div id="GridBoard" class="gridInitClass"></div>  
+
+<script>
+    function gridSet(data){        
+        $('#GridBoard').alopexGrid({
+            autoColumnIndex: true,             
+            rowSelectOption: {
+                clickSelect:true,
+            },
+            columnMapping : [
+                {
+                    key: 'check',
+                    width : '60px',
+                    selectorColumn : true,
+                    align: 'center',
+                },
+                {
+                    key : 'menuName',
+                    title : '메뉴명',
+                    width : '190px',
+                    sorting: true,
+                },
+                {
+                    key : 'menuId',
+                    title : '메뉴 ID',
+                    width : '235px',
+                    align : 'center',
+                    sorting: true,
+                },
+                {
+                    key : 'url',
+                    title : 'URL',
+                    width : '260px',
+                },
+                {
+                    key : 'order',
+                    title : '정렬순서',
+                    width : '120px',
+                    align : 'center',
+                    sorting: true,
+                },
+                {
+                    key : 'use',
+                    title : '사용여부',
+                    width : '110px',
+                    sorting: true,
+                    styleclass : function(value,data) {
+                        if ( data.use === "예" ){
+                            return "status type6"
+                        }
+                        return "status type7";
+                    }
+                },
+                {
+                    key : 'parentId',
+                    title : '상위메뉴 ID',
+                    width : '120px',
+                    align : 'center',
+                    sorting: true,
+                },
+                {
+                    key : 'exp',
+                    title : '설명',
+                    width : '250px',
+                },
+            ],
+            data: data
+        });
+
+        $('#GridBoard').on('perPageChange', function(e){
+            console.log(e);
+            alert("page 당 데이터 개수 변경");
+        });
+}
+
+
+// 그리드 디자인가이드 완료후 삭제
+// $('#guideGrid').siblings('.guide__wrap').hide();
+// $('#guideIcon').show();
+</script>

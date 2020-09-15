@@ -1,0 +1,219 @@
+
+// height
+$h : 58;
+$h-section : 44;
+$h-unit : 34;
+
+
+// color variable
+$fill-strong : #e63d3d;
+$fill-strongH : #d63939;
+$fill-gray: #cacdd2;
+$fill-grayH: #bcbfc3;
+$fill-darkgray: #73787e;
+$fill-darkgrayH: #6d7278;
+$fill-navy: #6e839d;
+$fill-navyH: #687c95;
+
+$bdr-line : #cacdd2;
+$bdr-lineH : #26282b;
+$color-line : #73787e;
+$color-lineH : #1b1d1f;
+
+$fill-disabled : #e9ebed;
+$color-disabled: #73787e;
+
+
+
+/* [ Page ] _button.scss : 디자인 'Button' 표준 */
+// Alopex Button component 공통 Override
+.Button {
+    padding: {top:0;bottom:0;}
+    border: 0;    
+    white-space: nowrap;
+    
+    &.full {width:100%;margin: {left:0;right:0;}}
+    &:hover {border:0;}
+}
+a.Button {padding-top:1px;}
+
+
+// Task / Section Button 공통 design
+@mixin BtnTaskCommon {
+    overflow:hidden;
+    position: relative;
+    height:#{$h}px;
+    min-width:180px;
+    margin-left:3px;
+    line-height:#{$h - 2}px;    
+    padding: 0 50px 4px;
+    font-size:16px;
+    border-radius:50px;
+    
+    i {position: relative;z-index: 1;}
+
+
+    // icon
+    .icon.i-reset:before {
+        margin-right:3px;
+        font-size:12px;
+        color:#000;
+    }
+}
+
+/* ( btn__page-task ) */
+.btn__page-task, .btn__section {
+    @include BtnTaskCommon;
+    font-weight:400;    
+    background-color:$fill-gray;
+    color:#fff;
+    &:hover {background-color: $fill-grayH}
+
+    &.strong { // 강조 Design 
+        background-color:$fill-strong;
+        &:hover {
+            background-color: $fill-strongH;
+        }
+    }
+
+    &.emphasis {
+        background-color:$fill-darkgray;
+        &:hover {
+            background-color: $fill-darkgrayH;
+        }
+    }
+}
+
+
+/* ( btn__section ) - '구역' action 버튼 */
+.btn__section {
+    height:#{$h-section}px;
+    line-height:#{$h-section - 2}px;    
+    min-width: 120px;
+    padding:0 30px;
+    font: {size:15px;weight:300}
+}
+
+/* ( btn__unit ) - '단위' action 버튼 */
+.btn__unit {
+    height:#{$h-unit}px;
+    padding:0 10px;
+    min-width: 90px;
+    font: {
+        weight:300;    
+        size:15px;
+    }
+    border-radius: 5px;
+    background-color:$fill-gray;
+    color:#fff;    
+
+    &:hover {background-color: $fill-grayH;}
+    
+    &.strong {
+        background-color:$fill-strong;
+        &:hover {
+            background-color: $fill-strongH;
+        }
+    }
+    &.strong2 {
+        background-color:$fill-darkgray;
+        &:hover {
+            background-color: $fill-darkgrayH;
+        }
+    }
+    &.emphasis {
+        background-color:$fill-navy;
+        &:hover {
+            background-color: $fill-navyH;
+        }
+    }
+    &.line {
+        font-weight: 400;
+        background-color:#fff;
+        border: 1px solid $bdr-line;
+        color:$color-line;
+        &:hover {
+            background-color: #fff;
+            border-color:$bdr-lineH;
+            color:$color-lineH;
+        }
+    }
+}
+a.btn__unit {
+    padding-top:5px;
+}
+
+// Strong color button 
+.btn__page-task, .btn__section {
+    &.strong {
+        background-color:$fill-strong;
+        &:hover {
+            background-color: $fill-strongH;
+        }
+    }
+}
+
+// Line button 
+.btn__page-task, .btn__section {
+    &.line {
+        background-color:#fff;
+        border: 1px solid $bdr-line;
+        color:$color-line;
+        &:hover {
+            background-color:#fff;
+            border-color:$bdr-lineH;
+            color:$color-lineH;
+        }
+    }
+}
+
+// Disabled
+.btn__page-task, .btn__section {    
+    &.Disabled, &.Disabled:hover {
+        background-color:$fill-disabled;
+        color:$color-disabled;
+    }
+}
+
+
+
+/* [ division__btn ]
+    @description : 버튼 영역의 좌/우 분할
+    + 가운데 영역 추가
+*/
+.division__btn {
+    padding:20px 10px 0;    
+    
+    &:after {display:block;content:"";clear:both}
+    &.with-pager {margin-top:-67px;}
+    &.no-padding {padding-top:0;}
+    
+    .left {float:left}
+    .right {float:right;}
+    
+    .actions {
+        .center {
+            padding:30px 0;
+            text-align: center;        
+        }
+    }
+    .Button {
+        min-width: 120px;
+    }
+
+
+    &#divisionSticky {
+        .Button {
+            
+            
+        }
+    }
+
+}
+
+// 구역 분할
+.division__area {
+    display:flex;
+    .left { flex:0 0 320px;padding-right: 10px;}
+    .right {flex:auto;}
+}

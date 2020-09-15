@@ -1,0 +1,95 @@
+<!--/* [ Page ]
+@menu   : SK DBL BM > Sk BM 상세조회
+@page   : SK BM 사례 (목록)
+*/-->
+
+<div class="heading-area bm">
+    <div class="wrap">
+        <h1 class="page-title">SK BM 사례</h1>
+        
+        <ul class="breadcrumb">
+            <li class="home">Home</li>
+            <li>SK DBL BM</li>
+            <li>SK BM 사례</li>
+        </ul>
+    </div>
+</div>
+<div class="article pageBmList">
+    <div class="slide-bm list lazylist" id="scrollDblBm">
+        <ul class="slide" id="dblBmList"></ul> 
+    </div>   
+    <p class="lazyload-placeholder">스크롤하시면 더 많은 데이터를 확인하실 수 있습니다.</p>
+</div>
+
+
+
+<script>    
+    $a.page(function() {
+        this.init = function() {
+
+            // BM Data 샘플
+            var _data = [
+                {
+                    link : './', // 이동 URL
+                    img: '../../static/image/mvp/temp/bm-temp-01.png', // 이미지 URL
+                    /* [label] 업계 분류별 tag string
+                        에너지 : energy,
+                        통신/ICT : ict,
+                        반도체 : smcd,
+                        물류/서비스: dist                
+                    */
+                    label : 'energy',
+                    mbrNm : 'SKI', // 관계사명
+                    article: '내트럭 하우스를 통한 화물 운전자 복지서비스 제공 성과' // 내용
+                },
+                {
+                    link : './', // 이동 URL
+                    img: '../../static/image/mvp/temp/bm-temp-02.png',
+                    label : 'energy',
+                    mbrNm : 'SKI', 
+                    article: '홈픽 서비스로 인한 고령 택배기사의 고용 지원 성과'
+                },
+                {
+                    link : './', // 이동 URL
+                    img: '../../static/image/mvp/temp/bm-temp-03.png',
+                    label : 'ict',
+                    mbrNm : 'SKT',
+                    article: '장애인 사용요금 할인을 통한 취약계층 정보 접근성 제고 성과'
+                },
+                {link : './', img: '../../static/image/mvp/temp/bm-temp-04.png',label : 'ict',mbrNm : 'SKB',article: 'SE, 소상공인의 stoa 판매를 통한 경쟁력 제고 성과'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'smcd', mbrNm : 'SKB', article: '반도체샘플'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'dist', mbrNm : 'SKB', article: '물류/서비스'},
+                {link : './', img: '../../static/image/mvp/temp/bm-temp-04.png',label : 'ict',mbrNm : 'SKB',article: 'SE, 소상공인의 stoa 판매를 통한 경쟁력 제고 성과'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'smcd', mbrNm : 'SKB', article: '반도체샘플'},
+                {link : './', img: '../../static/image/mvp/temp/n.png', label : 'dist', mbrNm : 'SKB', article: '물류/서비스'},
+            ];
+
+            const bmList = new DblBmList({
+                id:  'dblBmList',
+                data : _data,
+            });
+
+
+            // lazy load
+            const param = {
+                count : 10
+            };            
+            _sc.lazyInit({
+                id : 'dblBmList',
+                type: 'bm',
+                data : { // $a.request 옵션
+                    mapping : './',
+                    data : param,
+                    method : 'post',
+                    progress : true,
+                    callback : {
+                        success : function(res){                        
+                            bmList.append(res.data); // DOM 갱신
+                        },
+                    }
+                }, 
+            });
+        };
+
+    });
+</script>

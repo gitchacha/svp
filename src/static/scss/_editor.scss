@@ -1,0 +1,26 @@
+/* [ Page ] _editor.scss :  웹에디터(alopex) */
+$bdr-default: #cbced3;
+.root__container-portal, 
+.root__container-asmt {
+    .webeditor {
+        &.note-editor.note-frame {
+            border-color:$bdr-default;
+            border-radius: 5px;
+        }
+
+        .webeditor-header {
+            background-color:transparent;
+            border-bottom-color:$bdr-default;
+
+        }
+
+        .Button.Typeb {
+            border-color:$bdr-default;
+            border-radius: 4px;
+        }
+
+    }
+    .note-editor.note-frame .note-editing-area .note-editable {
+        padding:20px;
+    }
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SV Portal : SK 최신소식</title>
+    <meta charset="UTF-8" />    
+<meta http-equiv="Content-Type" content="text/html; charser=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<base href="../../static/">
+
+<link rel="shortcut icon" href="/static/image/favicon.png?A=1" type="image/x-icon" />
+
+<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/alopex-ui-default.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/ui/css/src/alopex-ext.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/grid/alopex-grid.css" />
+<link rel="stylesheet" type="text/css" href="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.css" />
+<link rel="stylesheet" type="text/css" href="css/common_portal.css" /><!-- portal css -->    
+<link rel="stylesheet" href="lib/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+
+<script src="lib/jquery/jquery-3.4.1.min.js"></script>
+<script src="lib/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script src="lib/alopex/ui/script/alopex-ui.min.js"></script>
+
+<script src="lib/alopex/ui/script/src/alopex-ext.min.js"></script>
+<script src="lib/alopex/grid/alopex-grid-excel.min.js"></script>    
+<script src="lib/alopex/ui/script/src/alopex-ext-setup.js"></script>
+<script src="lib/alopex/grid/alopex-grid.min.js"></script>
+<script src="lib/alopex/grid/plugin/ui/alopex-grid-plugin-ui.min.js"></script><!-- Alopex Grid - ui plugin -->
+<script src="lib/alopex/chart/amcharts/amcharts.js"></script><!-- Alopex Chart - amchart -->
+<script src="lib/alopex/chart/amcharts/serial.js"></script><!-- Alopex Chart - serial -->
+
+
+<!-- 공통 JS(S) -->
+<script src="js/sv-utils.js"></script>
+<script src="js/sv-setup.js"></script>
+<script src="js/sv-control.js"></script>
+<script src="js/sv-file.js"></script>
+<script src="js/bignumber.js"></script>
+<!-- 공통 JS(E) -->
+
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor.min.js"></script><!--Alopex - ui Webeditor -->
+<script src="lib/alopex/ui/script/src/webeditor/alopex-webeditor-setup.js"></script><!--Alopex - ui Webeditor -->
+
+<style type="text/css">
+    .alopexgrid-progress-modal {
+        display: none;
+    }
+
+    .alopexgrid-progress {
+        display: none;
+    }
+
+    .btn_tree_column {
+        float: right;
+        margin-top: 7px;
+    }
+</style>
+</head>
+<body>
+    <div class="root__container-portal">
+        
+	<section class="header__container">		
+		<div class="header__wrap"><!-- header__wrap (S) -->
+			<h1 class="logo"><a href=""><i>SV</i><b>Portal</b></a></h1>
+
+			<div class="menu">
+				<ul class="depth1">
+					<li data-menu="summary"><a href="">SV추진개요</a></li>
+					<li data-menu="bm"><a href="/build/bm/bmList.html">SK DBL BM</a></li>
+					<li data-menu="social"><a href="/build/">사회적가치 성과</a></li>
+					<li data-menu="board"><a href="/build/board/refDbList.html">DBㆍ자료실</a></li>
+					<li data-menu="asmt"><a href="/build/">SV평가모델</a></li>
+				</ul>
+				<ul class="depth-sub">
+					<li class="root" data-menu="summary">
+						<ul class="depth2">
+							<li><a href="/build/">SV추진체계</a></li>
+							<li><a href="/build/">ESG분류체계</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="bm">
+						<ul class="depth2">
+							<li><a href="/build/">DBL BM</a></li>
+							<li><a href="/build/">SK BM 사례</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="social">
+						<ul class="depth2">
+							<li><a href="/build/">사회성과 대외공표</a></li>
+							<li><a href="/build/">성과측정 지표</a></li>							
+						</ul>
+					</li>
+					<li class="root" data-menu="board">
+						<ul class="depth2">
+							<li><a href="/build/">Reference DB</a></li>
+							<li><a href="/build/">SK News</a></li>
+							<li><a href="/build/">언론보도자료</a></li>
+						</ul>
+					</li>
+					<li class="root" data-menu="asmt">
+						<ul class="depth2">
+							<li><a href="/build/">SV평가개요</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<a href="/build/assessment/asmtBoard.html" class="btn-asmt">SV 평가</a>
+		</div><!-- header__wrap (E) -->
+
+	</section>
+        <div class="contents__container">
+<!--/* [ Page ]
+@menu   : DB/자료실 > SK News
+@page   : SK News
+*/-->
+
+<div class="heading-area board">
+    <div class="wrap">
+        <h1 class="page-title">SK News</h1>
+        
+        <ul class="breadcrumb">
+            <li class="home">Home</li>
+            <li>DBㆍ자료실</li>
+            <li>SK News</li>
+        </ul>
+    </div>
+</div>
+<div class="article pageNewestTopicList">
+    <div id="Grid" class="gridInitClass pointer board"><!--/* Grid */--></div>    
+</div>
+
+
+
+<script>    
+    $a.page(function() {
+        this.init = function() {
+            setEventHandler();				//Step2.Event Handler 세팅
+            initGrid();                     //Step3.Alopex grid 초기화
+
+        }
+
+        /* Step2.Event Handler 세팅 */
+		function setEventHandler() {
+            // 그리드 셀 클릭 이벤트 - 페이지 이동
+            $('#Grid').on('click', '.bodycell', function(e) {
+                var dataObj = AlopexGrid.parseEvent(e).data;
+                console.log(dataObj);                
+            });
+        }
+
+
+        /* Step3.Alopex grid 초기화 */
+        function initGrid() {    
+            $('#Grid').alopexGrid({ // 비즈니스 그리드
+                pager:false,
+                message: {
+                    nodata: '조회된 결과가 없습니다.'
+                },
+                defaultColumnMapping: {
+                    align:'center'
+                },
+                wrapCellContent:'cellVerticalMiddle',
+                grouping: {
+                    by: ['lv1','lv2','lv3','lv4','lv5'],
+                    useGrouping: true,
+                    useGroupRowspan: true,
+                },
+                columnMapping : [
+                    { key: 'no', width:150, title: 'NO', },
+                    { key: 'title', width:350, title: '제목', },
+                    { key: 'author', width:150, title: '출처', },
+                    { key: 'createdAt', width:150, title: '등록일', render: { type: 'timeStamp', format: 'yyyy.MM.dd' }},
+                ], // (E) columnMapping
+                data : []
+            });
+        }
+    });
+
+</script>
+    
+        </div>
+
+        <footer class="footer__container">
+    <div class="wrap">
+        <ul class="site">
+            <li><a href="">SK 홈페이지</a></li>
+            <li><a href="">사회적가치연구원</a></li>
+            <li><a href="">경영경제연구소</a></li>
+        </ul>
+        <small>COPYRIGHT&copy;2020 BY SK HOLDINGS CO., LTD. ALL RIGHTS RESERVED</small>
+    </div>
+</footer>
+    </div>
+</body>
+</html>

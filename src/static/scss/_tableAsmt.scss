@@ -1,0 +1,104 @@
+/* [ Page ] _table.scss : 'Table' 표준 */
+
+// Alopex Table component 공통 Override
+.af-table-wrapper.af-default.Table-wrapper {
+    overflow: visible!important;
+    .af-table-scroller.Table-scroller  { overflow: visible }
+}
+.Table {
+    border:0;
+    th, td {padding:0;text-align: left;}    
+    tbody {
+        border:0;
+        tr {
+            border:0;
+            th, td {border:0;background-color:#fff;}
+            &:nth-child(odd) {background-color: transparent}
+        }
+    }
+}
+
+// table__priamry : 기본 Table
+.table__primary {    
+    width:100%;
+    th, td {
+        padding:0;
+        text-align:left;
+        vertical-align: top;
+    }
+    th {        
+        padding-bottom:15px;
+        color:#1b1d1f;
+        font: {
+            size:#{$font-size + 1}px;
+            weight:400;
+        }
+        &.req {
+            &::after {
+                position: relative;top:7px;
+                display:inline-block;content:"";
+                width:4px;height:4px;
+                margin-left:6px;
+                border-radius: 2px;
+                background-color:#e63d3d;
+                vertical-align: top;
+            }
+        }
+    }
+    td {
+        padding: {
+            bottom:30px;
+            right:10px;
+        }
+        font-size:#{$font-size}px;        
+        &:last-child {padding-right: 0;}
+    }
+
+    tr:last-child {
+        td {padding-bottom:0;}
+    }
+
+    .forms {
+        display:block;
+        padding-bottom:10px;
+        &:last-child {padding-bottom:0;}
+    }
+
+    .divide { // td 내부 input 요소 분할
+        display: flex;
+        padding-bottom:10px;
+        &:last-child {padding-bottom: 0;}        
+
+        .col {
+            flex:1;
+            padding:0 5px;
+            &:first-child {padding-left:0;}
+            &:last-child {padding-right:0;}
+        }
+    }
+}
+
+// 가로형 Table
+.table__horz {
+    margin-bottom:20px;
+    th {
+        padding-right:20px;
+        font: {
+            size:#{$font-size + 1}px;
+            weight: 400;
+        }
+    }
+    td {
+        padding-right: 60px;
+        &:last-child {padding-right: 0;}
+    }
+
+}
+
+
+.box__tbl { // Table wrapper box - 회색배경 박스
+    padding:30px;
+    margin-bottom:59px;
+    background-color:#f7f8f9;
+    border-radius: 5px;
+}

@@ -1,0 +1,215 @@
+// 파일업로드
+.fileupload__primary {
+    position: relative;
+    margin-bottom:30px;
+
+    & + .fileupload__primary {margin-top:35px;}
+
+    &.notitle {
+        .volume-total {padding-left:10px}
+        .volume-heading {display:none}
+    }
+    
+    
+    &[data-filestatus="attach"] { // 파일첨부가능
+        .attach-list {display:none}
+        .dragndrop {display:block}
+    }
+    
+    &[data-filestatus="download"] { // 파일첨부불가(다운로드)
+        .dragndrop {display:none}
+        .attach-list {display:block}
+    }
+    
+    .dropbox { // drag and drop 영역
+        position: relative;
+        box-sizing:border-box;
+        width:100%;height:86px;margin-top:9px;
+        border:1px dashed #cfcfcf;
+        border-radius:5px;
+        background-color:#fff;
+        .message { // '여러개의 파일을 마우스로 끌어 놓으세요' 문구
+            position: absolute;left:50%;top:50%;
+            transform:translate(-50%,-52%);
+            padding-top:4px; 
+            text-align:center;       
+            p {display:inline-block;color:#888;}
+            &:before {
+                
+                position:relative;top:-1px;margin-right:8px;font-size:16px;
+                color:#777;
+            }
+        }
+    }
+
+
+    // extra-info 첨부파일 heading, 용량, buttons
+    .extra-info {
+        display:flex;
+        .volume-total, .actions {flex:auto}
+        .volume-total {
+            position: relative;top:9px;
+            padding-left:0;
+            i {
+                margin-right:5px;
+                font: { 
+                    family:'SCDream';
+                    size:13px;
+                }
+                letter-spacing: 0;
+                color:#888;
+            }
+            .volume-heading {
+                font: {
+                    size:16px;
+                    weight:400;
+                    letter-spacing: 0;
+                }
+                padding-right:15px;
+                color:#1b1d1f;                
+            }
+        }
+
+        .actions {
+            text-align:right;
+            .Button {
+                padding: {left:10px;right:10px;}
+                margin-left:4px;
+                &.btn__grid.all {
+                    @media all and (-ms-high-contrast:none) {line-height:21px;}
+                }
+            }
+        
+        }
+    }
+
+
+    // attach-list (첨부파일 List)
+    .attach-list {
+        position: relative;
+        padding:0 10px 10px;margin-top:7px;        
+        border-top:1px solid #cacdd2;
+        background-color: #fff;
+
+        li {
+            position: relative;z-index:1;
+            display:flex;
+            width:100%;
+            font-size:14px;
+            line-height:38px;
+            letter-spacing: -.5px;
+            color:#1b1d1f;
+
+            .i-file-img {
+                display:inline-block;
+                @include sprite(270,114);
+                width:12px;height:11px;
+
+
+            }
+            
+            > div {                
+                > * {position: relative;z-index:1;}
+                &.filename {
+                    flex-grow:1;
+                }
+                
+                &.action { // 파일삭제
+                    flex-basis: 50px;               
+                    text-align: center;
+
+                    .btn__delete { // 파일 삭제            
+                        position: relative;top:4px;
+                        display: inline-block;
+                        padding:0;
+                        width:30px;height:30px;            
+                        font-size:0;                        
+                        @include sprite(230,105);
+                        background-color: transparent;
+
+                        vertical-align: top;
+                        transition:transform ease .3s;
+            
+                        &:hover{
+                            transform:rotate(180deg)
+                        }
+                    }
+                } // (E) 파일삭제 
+
+                &.success .name:after { // 업로드 완료                    
+                    position:absolute;right:0;top:50%;transform:translateY(-50%);
+                    padding-right:42px;
+                    font-size:12px;
+                    background-color:transparent;
+                    color:#333;
+                }
+            }
+
+            &:hover { // 파일목록 hover - Orange border
+                > div:after {
+                    content:"";display:block;
+                    position:absolute;left:-19px;right:-25px;top:0;bottom:1px;
+                    z-index:0;
+                    
+                }
+            }
+
+            // 파일 마지막 Li
+            // &:first-child {
+            //     &:hover > div:after {top:1px;border-radius:5px 5px 0 0;}
+            // }
+            // &:last-child {
+            //     > div:before {display: none}
+            //     &:hover > div:after {border-radius:0 0 5px 5px;}
+            // }
+            // &:first-child:last-child {
+            //     &:hover > div:after { border-radius: 5px }
+            // }
+
+
+            .name {
+                display:inline-block;
+                width:100%;
+                padding-left:5px;
+                color:#333;
+    
+                // file icon
+                .icon {
+                    top:-1px;
+                    margin-right:10px;
+                    font-size:16px;
+                    
+                }
+            }
+        }
+
+
+
+
+        
+        .info {
+            font: {
+                family:'SCDream';
+                weight:300;
+                size:12px;
+            }
+            letter-spacing: normal;
+
+            text-align: right;white-space: nowrap;
+            color:#888;
+            span {
+                position: relative;
+                padding-left:15px;margin-left:15px;
+                &:before { // bar (|)
+                    display:inline-block;content:"";
+                    position: absolute;left:0;top:50%;
+                    width:1px;height:12px;
+                    transform: translateY(-50%);
+                    background-color:#ddd;
+                }
+                &:first-child {padding-left:0;margin-left: 0; &::before{display:none}}
+            }
+            
+        }
+    }
+} // (E) 파일업로드

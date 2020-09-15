@@ -1,0 +1,187 @@
+/**
+ * Alopex Grid Grouper Plugin v1.0.1
+ * http://grid.alopex.io
+ *
+ * Copyright (c) 2018 SK Holdings C&C. All rights reserved.
+ * 
+ * This software is the confidential and proprietary information of SK Holdings C&C.
+ * You shall not disclose such confidential information and shall use it only in
+ * accordance with the terms of the license agreement you entered into with SK Holdings C&C.
+ *
+ * Date : 2019-04-25 15:26:02 GMT+0900 (대한민국 표준시)
+ **/
+@charset "UTF-8";
+/* grouper의 headercell 왼쪽 key 값을 형성하는 style */
+.alopexgrid.alopexgrid-grouper .headercell.alopexgrid-grouper-group-key {
+	height: 30px;
+	line-height: 26px;
+	font-weight: normal;
+	color: #282828;
+	border-top: 2px solid #515257;
+	border-right: 1px solid #d1d2d7;
+	border-bottom: 1px solid #b0b1b7;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell.alopexgrid-grouper-group-key.alopexgrid-grouper-group-vertical {
+	background: #f8f8fa;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell.alopexgrid-grouper-group-key.alopexgrid-grouper-group-horizontal {
+	background: #f1f2f5;
+	border-top: 0;
+	border-bottom: 1px solid #b0b1b7;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell.alopexgrid-grouper-group-key.alopexgrid-grouper-group-horizontal.cell-header-firstrow {
+	border-top: 2px solid #515257;
+}
+
+/* grouper의 headercell 오른쪽 value 값을 형성하는 style*/
+.alopexgrid.alopexgrid-grouper .headercell.alopexgrid-grouper-group-value {
+	background-color: #e8e9ef;
+	border-top: 0;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell.alopexgrid-grouper-group-value.cell-header-firstrow {
+	background-color: #e8e9ef;
+	color: #282828;
+	border-top: 2px solid #515257;
+}
+
+/* grouper의 headercell 오른쪽 value 값 중 최종 value 값을 형성하는 style*/
+.alopexgrid.alopexgrid-grouper .headercell.cell-header-lastrow.alopexgrid-grouper-fact {
+	background-color: #dcdde4;
+	border-top: 0;
+}
+
+/* grouper headercell의 button에 대한 style*/
+.alopexgrid.alopexgrid-grouper .headercell.cell-fixcol-lastcolumn {
+	background: #f1f2f5;
+	border-right: 1px solid #d1d2d7;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell.cell-fixcol-lastcolumn.alopexgrid-grouper-fact-dropdown-button {
+	cursor: pointer;
+	border-top: 0;
+	border-bottom: 1px solid #b0b1b7;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell.cell-fixcol-lastcolumn.alopexgrid-grouper-fact-dropdown-button .column-title {
+	cursor: pointer;
+	margin: 0;
+	padding: 2px 4px;
+	color: #f6f6f6;
+	font-size: 11px;
+	line-height: 10px;
+	background: #454545;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell.alopexgrid-grouper-dblclick-to {
+	cursor: pointer;
+}
+
+/* grouper의 bodycell을 형성하는 style */
+.alopexgrid.alopexgrid-grouper .bodycell.cell-grouping {
+	border-top: 0;
+	border-right: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-left: 0;
+}
+
+/* grouper의 bodycell의 base cell style */
+.alopexgrid.alopexgrid-grouper .bodycell.alopexgrid-grouper-group-value {
+	background-color: #f7f7f7;
+}
+
+.alopexgrid.alopexgrid-grouper .bodycell.cell-groupmeta.cell-groupfooter {
+	color: #000000;
+	border-top: 0;
+	border-right: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
+	border-left: 0;
+}
+
+.alopexgrid.alopexgrid-grouper .bodycell.cell-groupmeta.cell-groupfooter.alopexgrid-grouper-summary-value.row-even {
+	background-color: #f7f7f7;
+}
+
+.alopexgrid.alopexgrid-grouper .bodycell.cell-groupmeta.cell-groupfooter.alopexgrid-grouper-summary-value.row-odd {
+	background-color: #ffffff;
+}
+
+.alopexgrid.alopexgrid-grouper .bodycell.cell-groupmeta.cell-groupfooter.alopexgrid-grouper-group-horizontal {
+	background-color: #ffffff;
+}
+
+.alopexgrid.alopexgrid-grouper .bodycell.cell-groupmeta.cell-groupfooter.alopexgrid-grouper-fact-assist-column {
+	background-color: #ffffff;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell .column-title,
+.alopexgrid.alopexgrid-grouper .bodycell,
+.alopexgrid.alopexgrid-grouper .bodycell span {
+	font-size: 11px;
+}
+
+/* grouper의 dropdown 영역을 표현하는 style*/
+.alopexgrid-grouper-fact-dropdown {
+	position: absolute;
+	padding: 5px;
+	text-align: center;
+	background-color: #ffffff;
+	border: 1px solid #9f9fa4;
+	z-index: 100;
+}
+
+.alopexgrid-grouper-fact-dropdown .alopexgrid-grouper-fact-dropdown-gridsection .wrapper {
+	border: 1px solid #dddddd;
+}
+
+.alopexgrid-grouper-fact-dropdown .alopexgrid-grouper-fact-dropdown-action-button {
+	cursor: pointer;
+	min-width: 40px;
+	margin: 2px;
+	padding: 4px;
+	vertical-align: middle;
+	font-size: 12px;
+	color: #62698c;
+	background: #e7e6ec;
+	border: 0;
+}
+
+.alopexgrid-grouper-fact-dropdown .alopexgrid-grouper-fact-dropdown-action-button:hover {
+	color: #ffffff;
+	background: #62698c;
+}
+
+/* grouper의 columehiddenarea를 형성하는 style로 grid의 기본 columehiddenarea와 같은 style을 유지한다. */
+.alopexgrid.alopexgrid-grouper .columnhiddenarea .headercell .header-dragdrop-handle,
+.alopexgrid.alopexgrid-grouper .headerdragdrop .header-dragdrop-handle {
+	width: 100%;
+	height: 100%;
+}
+
+.alopexgrid.alopexgrid-grouper .columnhiddenarea {
+	/*height : 40px;*/
+}
+
+.alopexgrid.alopexgrid-grouper .columnhiddenarea .headercell {
+	height: 22px;
+	line-height: 22px;
+}
+
+.alopexgrid.alopexgrid-grouper .columnhiddenarea .headercell .column-title {
+	font-size: 11px;
+}
+
+.alopexgrid.alopexgrid-grouper .headercell .multi-sorting-order {
+	display: none;
+}
+
+.alopexgrid-proxy.alopexgrid-dragdrop-header .bodycell {
+	display: none;
+}

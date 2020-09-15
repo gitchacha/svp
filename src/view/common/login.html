@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{view/layout/layout-login-asmt}">
+<head>
+	<title>로그인</title>	
+</head>
+<body>
+	
+    <section class="login-asmt">
+        <div class="welcome">            
+            <h1 class="logo-asmt"><i>SV</i><b>평가모델</b></h1>
+            <div class="copy">
+                <strong>SV 평가 플랫폼</strong>에<br />
+                <span>오신 것을 환영 합니다!</span>
+            </div>
+            <i class="bg"></i>
+        </div>
+        <div class="contents">
+            <div class="form">
+                <p class="copy">로그인 후 평가를 시작하세요!</p>
+                <input name="username" id="username" class="Textinput form-control" autofocus="autofocus" placeholder="이메일 아이디 입력" />
+                <input name="password" id="password" type="password" class="Textinput form-control" placeholder="비밀번호 입력" />
+                <button id="login-submit" class="btn__login">로그인</button>
+
+                <div class="utils">
+                    <a href="">회원가입</a>
+                    <a href="">아이디 찾기</a>
+                    <a href="">비밀번호 찾기</a>
+                </div>
+            </div>
+        </div>
+    </section>	
+</body>
+</html>
+<script>
+    $(function(){
+        // 회원가입/ ID찾기 / 비밀번호 찾기
+			$('.utils a').on('click',function(e){
+                e.preventDefault();
+				$sv.alert('준비중 입니다.');
+			});
+
+    });
+</script>

@@ -1,0 +1,213 @@
+    <!--/* [ Page ]
+    @menu   : 평가모델 > 평가 Dashboard
+    @page   : 평가 Dashboard
+    */-->
+    <div class="asmt-header">
+        <div class="utils">
+            <button id="" class="Button btn__logout">로그아웃</button>
+        </div>
+    </div>
+    
+    <h1 class="page__title">DASHBOARD</h1>
+
+    <div class="flex__column pageAsmtBoard"><!--/* 전체 Wrap(S) */-->
+
+
+        <div class="scroll-wrap">
+            <div class="contents"><!--/* 업무화면 (S) */-->
+
+            
+                <div class="msmt-history"><!--/* 평가이력 */-->
+                    <div class="select__form small historySelect"><!-- 2020년 V1.0 ... -->
+                        <button id="" class="Dropdownbutton button" data-bind-option="" data-bind="">2020년 V1.0</button>
+                        <ul class="option" data-open-trigger="mouseover" data-close-trigger="mouseleave"></ul>
+                    </div>
+                    <button class="Button btn__unit emphasis">전체 평가 이력</button>
+                </div>                    
+                
+
+                <div class="company-info"><!--/* 평가기본정보(회사정보) */-->
+                    <ul class="list-primary">
+                        <li><strong>회사명</strong>SK C&amp;C</li>
+                        <li><strong>기업분류</strong>중소기업</li>
+                        <li><strong>산업군</strong>유통/물류</li>
+                        <li><strong>구성원수</strong>500명</li>
+                    </ul>
+                </div>
+                
+
+                <div class="box-self-asmt"><!--/* 평가 Wrap(S) */-->
+                    <div class="heading-area">
+                        <h2 class="title-section">SELF ASSESSMENT
+                            <!--/* 진행 상태 : 작성중/평가요청/평가완료
+                                    작성중 : <span class="badge wrk">작성중</span>                                    
+                                    평가완료 : <span class="badge done">평가완료</span>
+                            */-->
+                            <span class="badge wrk">작성중</span>
+                        </h2>
+                        <ul class="result-summary">
+                            <li class="sv">
+                                <span>SV성과</span>
+                                <strong>53,229,300</strong>
+                                <i>원</i>
+                            </li>
+                            <li class="prd">
+                                <span>제품/서비스 성과</span>
+                                <strong>1,234,234</strong>
+                                <i>원</i>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="total-score">
+                        <!--/* 최종 등급 : 관리자 평가 종결 후 표기, 등급 나오기 전엔 hyphen(-) 으로 표기 */-->
+                        <ul class="grade">
+                            <li><strong>최종 등급</strong>-</li>
+                            <li><strong>전체 진행률</strong>0%</li>
+                            <li><strong>정성 SCORE</strong>0점</li>
+                            <li><strong>정량 SCORE</strong>0점</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="grp-asmt biz"><!--/* 비즈니스 성과 평가(S) */-->
+                        <div class="rating-area column">
+                            <span class="heading">
+                                <strong class="title">비즈니스 성과 평가</strong>
+                                <em class="per">100%</em>
+                            </span>
+
+                            <div class="rating biz">
+                                <span class="bar"><i class="fill" style="width:100%"></i></span>
+                                <i class="due">25/45</i>
+                            </div>
+                        </div>
+
+                        <div class="total-area column">
+                            <ul class="list">
+                                <li>
+                                    <i>정성 SCORE</i>
+                                    <span><em>10</em>점</span>
+                                </li>
+                                <li>
+                                    <i>SV성과</i>
+                                    <span><em>4,123,000</em>원</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="utils column">
+                            <button id="" class="Button btn__section emphasis">평가완료</button>
+                        </div>
+                    </div><!--/* 비즈니스 성과 평가(E) */-->
+
+                    <div class="grp-asmt social"><!--/* 사회공헌 성과 평가(S) */-->
+                        <div class="rating-area column">
+                            <span class="heading">
+                                <strong class="title">사회공헌 성과 평가</strong>
+                                <em class="per">70%</em>
+                            </span>
+
+                            <div class="rating biz">
+                                <span class="bar"><i class="fill" style="width:70%"></i></span>
+                                <i class="due">25/45</i>
+                            </div>
+                        </div>
+
+                        <div class="total-area column">
+                            <ul class="list">
+                                <li>
+                                    <i>정성 SCORE</i>
+                                    <span><em>10</em>점</span>
+                                </li>
+                                <li>
+                                    <i>SV성과</i>
+                                    <span><em>4,123,000</em>원</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="utils column">
+                            <button id="" class="Button btn__section strong">이어하기</button>
+                        </div>
+                    </div><!--/* 사회공헌 성과 평가(E) */-->
+
+                    <div class="grp-asmt economy"><!--/* 경제기여 성과 평가(S) */-->
+                        <div class="rating-area column">
+                            <span class="heading">
+                                <strong class="title">경제기여 성과 평가</strong>
+                                <em class="per">0%</em>
+                            </span>
+
+                            <div class="rating biz">
+                                <span class="bar"><i class="fill" style="width:0%"></i></span>
+                                <i class="due">0/45</i>
+                            </div>
+                        </div>
+
+                        <div class="total-area column">
+                            <ul class="list">
+                                <li>
+                                    <i>정성 SCORE</i>
+                                    <span><em>10</em>점</span>
+                                </li>
+                                <li>
+                                    <i>SV성과</i>
+                                    <span><em>4,123,000</em>원</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="utils column">
+                            <button id="" class="Button btn__section strong">시작하기</button>
+                        </div>
+                    </div><!--/* 경제기여 성과 평가(E) */-->
+                    
+                    <div class="grp-asmt prd"><!--/* 제품/서비스 지표 관리(S) */-->
+                        <div class="rating-area column">
+                            <span class="heading">
+                                <strong class="title">제품/서비스 지표 관리</strong>
+                                <em class="per">0%</em>
+                            </span>
+
+                            <div class="rating biz">
+                                <span class="bar"><i class="fill" style="width:0%"></i></span>
+                                <i class="due">45/45</i>                                
+                            </div>
+                        </div>
+
+                        <div class="total-area column">
+                            <ul class="list">
+                                <li>
+                                    <i>SV성과</i>
+                                    <span><em>4,123,000</em>원</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="utils column">
+                            <button id="" class="Button btn__section strong">시작하기</button>
+                        </div>
+                    </div><!--/* 제품/서비스 지표 관리(E) */-->
+
+                </div><!--/* 평가 Wrap(E) */-->
+
+                <p class="copy-req">· 평가 요청은 설문응답이 모두 완료되어야 가능합니다.</p>
+
+                <div id="divisionSticky" class="division__btn">
+                    <div class="actions">
+                        <div class="center">
+                            <!--/* 평가요청 버튼 : 관리자 평가 종결 이전에만 Show */-->
+                            <button id="" class="Button btn__page-task strong btnReq" disabled><i>평가요청</i></button>
+
+                            <!--/* 부정적평가/평판 list : 관리자 권한에만 Show */-->
+                            <button style="display:none" id="" class="Button btn__page-task"><i>부정적평가 List</i></button>
+                            <button style="display:none" id="" class="Button btn__page-task"><i>평판 List</i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--/* 업무화면 (E) */-->
+
+        </div>
+    </div><!--/*  전체 Wrap(E) */-->
